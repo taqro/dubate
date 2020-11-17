@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
 
-  root 'rooms#index'
+  root 'home#index'
 
-  resources :rooms, only: %i[show]
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
+
+  resources :rooms, only: [:show, :new]
 end

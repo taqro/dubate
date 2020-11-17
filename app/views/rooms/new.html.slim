@@ -1,0 +1,9 @@
+h1 Roomの新規作成
+
+.nav.justify-content-end
+  =link_to 'Room 一覧', rooms_path, class: 'nav-link'
+= form_with model: @room, local: true do |f|
+  .form-group
+     = f.label :name
+     =f.text_field :name, class: 'form-control', id: 'Room_name'
+  = f.submit nil , class: 'btn btn-primary'
