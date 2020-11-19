@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  get 'static_pages/show'
+  get 'users/show'
+  root 'static_pages#home'
 
   devise_for :users, controllers: {
+    confirmations: 'users/confirmations',
+    passwords: 'users/passwords',
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
 
-  resources :rooms, only: [:show, :new]
+  resources :users, only: [:show]
+
+  resources :rooms, only: [:show, :new, :index]
 end
