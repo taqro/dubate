@@ -13,9 +13,12 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
+    @room = current_user.rooms.new(room_params)
     @room.save!
-    redirect_to rooms_url, notice: "Room「#{@room.name}を作成しました。」"
+    redirect_to room_path(@room), notice: "Room「#{@room.name}を作成しました。」"
+  end
+
+  def delete
   end
 
   private

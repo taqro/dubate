@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  resources :rooms, only: [:show, :new, :index]
+  resources :rooms, except: [:update, :edit]
 end

@@ -1,6 +1,6 @@
 h1 Chat room
 h2 User : #{current_user.email}
-h2 Room : #{@room.id}
+h2 Room  : #{@room.name}
 #messages data-room_id="#{@room.id}"
   = render @messages
 = label_tag :content, 'Say something:'
