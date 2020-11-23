@@ -1,6 +1,8 @@
 h1 Chat room
-= link_to 'このRoomのスレッドへ', room_boards_path(@room), method: :post
-= link_to 'このRoomを削除する', room_path(@room), method: :delete
+p = link_to 'このRoomのスレッドへ(議論終了)', room_boards_path(@room), method: :post
+- if current_user.id == @room.user_id
+ p = link_to 'このRoomを削除する', room_path(@room), method: :delete
+
 h2 User : #{current_user.username}
 h2 Room  : #{@room.name}
 #messages data-room_id="#{@room.id}"
