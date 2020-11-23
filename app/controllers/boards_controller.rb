@@ -1,12 +1,23 @@
 class BoardsController < ApplicationController
   def show
-
+    @board = Board.find_by(room_id: params[:room_id])
   end
+
+  # def create
+  #   @room = Room.find(params[:room_id])
+  #   @board = @room.build_board(user_id: current_user.id)
+  #   @board.save
+  #   redirect_to room_boards_path(@room, @board)
+  # end
 
   def create
     @room = Room.find(params[:room_id])
-    @board = @room.build_board(user_id: current_user.id)
-    @board.save
+    if Board.find_by(room_id: params[:room_id])
+      @board = Board.find_by(room_id: params[:room_id])
+    else
+      @board = @room.build_board(user_id: current_user.id)
+      @board.save
+    end
     redirect_to room_boards_path(@room, @board)
   end
 end

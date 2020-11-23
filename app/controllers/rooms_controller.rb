@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
-  
+
 
   private
 
