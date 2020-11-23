@@ -1,5 +1,15 @@
-h1 Boards#show
+h1 Board
 p =link_to 'このスレッドのRoomへ', room_path(id: @board.room_id)
-p User_id: #{@board.user_id}
-p Room_id: #{@board.room_id}
-p Board_id:#{@board.id}
+h2 User_id: #{@board.user_id}
+h2 Room_id: #{@board.room_id}
+h2 Room: #{@board.room.name}
+h2 Board_id: #{@board.id}
+
+#posts data-board_id="#{@board.id}"
+  = render @posts
+= label_tag :content, 'Say something:'
+= text_field_tag :content, nil, data: { behavior: 'board_speaker' }
+
+
+
+

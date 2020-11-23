@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
-  # get 'boards/show'
-  # post 'boards/create'
   get 'static_pages/show'
-  get 'users/show'
+  # get 'users/show'
   root 'static_pages#home'
 
   devise_for :users, controllers: {
@@ -16,6 +14,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :rooms, except: [:update, :edit] do
-    resource :boards
+    resource :boards, only: [:show, :create]
   end
 end

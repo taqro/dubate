@@ -4,6 +4,7 @@ p = link_to 'このRoomのスレッドへ(議論終了)', room_boards_path(@room
  p = link_to 'このRoomを削除する', room_path(@room), method: :delete
 
 h2 User : #{current_user.username}
+h2 Opponent : #{@room.opponent}
 h2 Room  : #{@room.name}
 #messages data-room_id="#{@room.id}"
   = render @messages
