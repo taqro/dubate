@@ -1,3 +1,14 @@
+= link_to 'Roomの新規作成', new_room_path
 ul
   = @rooms. each do |room|
     li= link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+    - if room.board.nil?
+      - if room.opponent_id.nil?
+        p 議論相手探し中 相手になる
+      - else
+        - if  (current_user.id == room.user_id) or (current_user.id == room.opponent_id)
+          p あなたは議論中です
+        - else
+          p 議論中　観戦する
+    - else
+      p 決着済み　スレへ

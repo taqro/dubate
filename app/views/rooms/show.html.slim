@@ -1,12 +1,19 @@
 h1 Chat room
-p = link_to 'このRoomのスレッドへ(議論終了)', room_boards_path(@room), method: :post
+- if @room.board.nil?
+  - if opener? or opponent?
+    p = link_to 'サレンダーして、このRoomのスレッドでさらに議論する', room_boards_path(@room), method: :post
+- else
+  p = link_to 'このRoomのスレッドへ', room_boards_path(@room), method: :post
 - if current_user.id == @room.user_id
- p = link_to 'このRoomを削除する', room_path(@room), method: :delete
+  p = link_to 'このRoomを削除する', room_path(@room), method: :delete
 
-h2 User : #{current_user.username}
-h2 Opponent : #{@room.opponent}
+h2 Opener : #{@room.user_id}
+h2 Opponent : #{@room.opponent_id}
 h2 Room  : #{@room.name}
 #messages data-room_id="#{@room.id}"
   = render @messages
-= label_tag :content, 'Say something:'
-= text_field_tag :content, nil, data: { behavior: 'room_speaker' }
+
+- if @room.board.nil?
+  - if opener? or opponent?
+    = label_tag :content, 'Say something:'
+    = text_field_tag :content, nil, data: { behavior: 'room_speaker' }

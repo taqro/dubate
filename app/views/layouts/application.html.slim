@@ -15,7 +15,6 @@ html
           = link_to 'プロフィール変更', edit_user_registration_path
           = link_to 'ログアウト', destroy_user_session_path , method: :delete
           = link_to 'Room一覧', rooms_path
-          = link_to 'Roomの新規作成', new_room_path
         - else
           = link_to 'サインアップ', new_user_registration_path
           = link_to 'ログイン', new_user_session_path
