@@ -37,7 +37,10 @@ table.table.table-hover
           td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
           - if room.board.nil?
             - if room.opponent_id.nil?
-              td 議論相手探し中 相手になる
+              - if room.user_id == current_user.id
+                td  議論相手を探しています。　気長にお待ちくださいませ
+              - else
+                td #{User.find(room.user_id).username}さんは議論相手を探しています。 相手になる
             - else
               - if  (current_user.id == room.user_id) or (current_user.id == room.opponent_id)
                 td あなたは議論中です

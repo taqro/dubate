@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
     else
       @board = @room.build_board(user_id: current_user.id)
       @board.save
-      flash.now[:success] = "Boardを作成しました"
+      flash[:success] = "Boardを作成しました"
     end
     redirect_to room_boards_path(@room, @board)
   end
