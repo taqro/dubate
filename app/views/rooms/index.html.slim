@@ -1,14 +1,47 @@
-= link_to 'Roomの新規作成', new_room_path
-ul
-  = @rooms. each do |room|
-    li= link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
-    - if room.board.nil?
-      - if room.opponent_id.nil?
-        p 議論相手探し中 相手になる
-      - else
-        - if  (current_user.id == room.user_id) or (current_user.id == room.opponent_id)
-          p あなたは議論中です
-        - else
-          p 議論中　観戦する
-    - else
-      p 決着済み　スレへ
+h1 Room一覧
+= link_to 'Roomの新規作成', new_room_path, class: 'btn btn-primary'
+
+= search_form_for @q, class: 'mb-5' do |f|
+  .form-group.row
+    = f.label :name_cont, 'Room_Name', class: 'col-sm-2 col-form-label'
+    .col-sm-10
+      = f.search_field :name_cont, class: 'form-control'
+  .form-group
+    = f.submit class: 'btn btn-outline-primary'
+
+/ ul
+/   - @rooms.each do |room|
+/     li= link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+/     - if room.board.nil?
+/       - if room.opponent_id.nil?
+/         p 議論相手探し中 相手になる
+/       - else
+/         - if  (current_user.id == room.user_id) or (current_user.id == room.opponent_id)
+/           p あなたは議論中です
+/         - else
+/           p 議論中　観戦する
+/     - else
+/       p 決着済み　スレへ
+
+.mb-3
+table.table.table-hover
+  thread.thread-default
+    tr
+      th = 'Room作成者'
+      th = 'Room_Name'
+      th = 'Room_Status'
+    tbody
+      - @rooms.each do |room|
+        tr
+          td = link_to "#{room.user.username}",user_path(room.user)
+          td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+          - if room.board.nil?
+            - if room.opponent_id.nil?
+              td 議論相手探し中 相手になる
+            - else
+              - if  (current_user.id == room.user_id) or (current_user.id == room.opponent_id)
+                td あなたは議論中です
+              - else
+                td 議論中　観戦する
+          - else
+            td 決着済み　スレへ

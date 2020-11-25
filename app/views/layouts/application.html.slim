@@ -8,15 +8,20 @@ html
     = stylesheet_link_tag 'application', media: 'all', '-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', '-turbolinks-track': 'reload'
   body
-    header
-      nav
+    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
+      .navbar-brand Dubate
+
+      ul.navbar-nav.ml-auto
         - if user_signed_in?
-          strong =link_to current_user.username, static_pages_show_path
-          = link_to 'プロフィール変更', edit_user_registration_path
-          = link_to 'ログアウト', destroy_user_session_path , method: :delete
-          = link_to 'Room一覧', rooms_path
+          li.nav-item=link_to current_user.username, user_path(current_user)
+          li.nav-item= link_to 'プロフィール変更', edit_user_registration_path
+          li.nav-item= link_to 'ログアウト', destroy_user_session_path , method: :delete
+          li.nav-item= link_to 'Room一覧', rooms_path
         - else
-          = link_to 'サインアップ', new_user_registration_path
-          = link_to 'ログイン', new_user_session_path
+          li.nav-item= link_to 'サインアップ', new_user_registration_path
+          li.nav-item= link_to 'ログイン', new_user_session_path
+      .container
+        - if flash.notice.present?
+          .alert.alert-success = flash.notice
 
     = yield
