@@ -5,8 +5,64 @@ p プロフィール #{@user.profile}
 h2 総対戦数：#{@matched_number}
 h2 勝数：#{@win_number}
 h2 負数：#{@lose_number}
+h2 相手を探し中のRoom数：#{waiting_number}
 h2 議論中のRoom数：#{debating_number}
-p 作成したRoom一覧
+p あなたが作成したRoom一覧
 ul
   - @rooms.each do |room|
     li = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+
+
+/  試し書き
+
+p あなたが作成し、相手を探し中のRoom一覧
+.mb-3
+table.table.table-hover
+  thread.thread-default
+    tr
+      th = 'Room_Name'
+    tbody
+      - @rooms.each do |room|
+        tr
+          - if room.opponent_id.nil?
+            td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+
+p 議論中のRoom一覧
+.mb-3
+table.table.table-hover
+  thread.thread-default
+    tr
+      th = 'Room_Name'
+    tbody
+      - participated_rooms.each do |room|
+        tr
+          - if !(room.opponent_id.nil?) and room.board.nil?
+            td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+p 決着済みのRoom一覧
+.mb-3
+table.table.table-hover
+  thread.thread-default
+    tr
+      th = 'Room_Name'
+      th = 'Result'
+    tbody
+      - participated_rooms.each do |room|
+        tr
+          - if !(room.opponent_id.nil?) and !(room.board.nil?)
+            td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+            - if room.board.user_id == @user.id
+              td 負け
+            - else
+              td 勝ち
+
+
+/ - if room.opponent_id.nil?
+/   td =  # 相手を探し中
+/ - else
+/   - if　room.board.nil?
+/     td =  # 議論中
+/   -else
+/     - if room.board.room_id == @user.id
+/     td = # 負け
+/     - else
+/     td = # 勝ち
