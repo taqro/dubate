@@ -27,7 +27,7 @@ table.table.table-hover
           - if room.opponent_id.nil?
             td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
 
-p 議論中のRoom一覧
+p あなたが議論中のRoom一覧
 .mb-3
 table.table.table-hover
   thread.thread-default
@@ -38,7 +38,7 @@ table.table.table-hover
         tr
           - if !(room.opponent_id.nil?) and room.board.nil?
             td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
-p 決着済みのRoom一覧
+p あなたが議論し、決着済みのRoom一覧
 .mb-3
 table.table.table-hover
   thread.thread-default
