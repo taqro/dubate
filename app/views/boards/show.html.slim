@@ -1,7 +1,8 @@
 h1 Board
 p =link_to 'このスレッドのRoomへ', room_path(id: @board.room_id)
-h2 Opener: #{@board.room.user_id}
-h2 Opponent: #{@board.room.opponent_id}
+/ Winner Loser に変える
+h2 Winner: #{winner}
+h2 Loser: #{@board.user_id}
 h2 Room_id: #{@board.room_id}
 h2 Room: #{@board.room.name}
 h2 Board_id: #{@board.id}

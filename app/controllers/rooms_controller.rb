@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:index, :create, :destroy]
   before_action :correct_user, only: :destroy
   helper_method :opener?, :opponent?, :opponent_nil?
 
@@ -66,6 +66,12 @@ class RoomsController < ApplicationController
   def opponent_nil?
     @room = Room.find(params[:id])
     @room.opponent_id.nil?
+  end
+
+  # 勝者を定義
+  def winner
+    @room = Room.find(params[:id])
+    @winner_id = @room.board.user_id == @room.opponent_id ? @room.user_id : @room.opponent_id
   end
 
 end
