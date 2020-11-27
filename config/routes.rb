@@ -10,9 +10,15 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :following, :followers
+    end
+  end
 
   resources :rooms, except: [:update, :edit] do
     resource :boards, only: [:show, :create]
   end
+
+  resources :relationships, only: [:create, :destroy]
 end
