@@ -2,7 +2,7 @@ class PostBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(post)
-    Actioncable.server.broadcast 'board_channel_#{post.board_id}', post: render_post(post)
+    ActionCable.server.broadcast 'board_channel_#{post.board_id}', post: render_post(post)
   end
 
   private

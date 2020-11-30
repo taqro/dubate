@@ -11,22 +11,22 @@ $(document).on('turbolinks:load', function() {
     },
 
     received: function(data) {
-      return $('#post').append(data['post'])
+      return $('#post').append(data['post']);
     },
 
     speak: function(post) {
       return this.perform('speak', {
         post: post
-      })
+      });
     }
-  })
+  });
 
 // data-behaviorがboard_speakerである場所でkeypressすると...
   $(document).on('keypress', '[data-behavior~=board_speaker]', function(event) {
     if (event.keyCode === 13) {
-      chatChannel.speak(event.target.value)
-      event.target.value = ''
-      return event.preventDefault()
+      chatChannel.speak(event.target.value);
+      event.target.value = '';
+      return event.preventDefault();
     }
-  })
-})
+  });
+});

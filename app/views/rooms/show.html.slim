@@ -9,7 +9,10 @@ h1 Chat room
 
 / 勝敗が決まったあとはWinner Loser を表示する
 - if @room.board.nil?
-  h2 Room_Status : 議論中
+  - if @room.opponent_id.nil?
+    h2 Room_Status : 議論相手探し中。少々お待ちくださいませ。
+  - else
+    h2 Room_Status : 議論中
   h2 Opener : #{@room.user_id}
   h2 Opponent : #{@room.opponent_id}
 - else
@@ -18,6 +21,7 @@ h1 Chat room
   h2 Loser : #{@room.board.user_id}
 
 h2 Room_Name  : #{@room.name}
+
 #messages data-room_id="#{@room.id}"
   = render @messages
 
