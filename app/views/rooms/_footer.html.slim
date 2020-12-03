@@ -1,0 +1,6 @@
+footer#footer.fixed-bottom
+  = form_with model: @message, url: room_messages_path(@room) do |f|
+    .form-group
+      = f.text_area :content, class: 'form-control',rows: 5
+    .form-group
+      = f.submit '送信', class: 'btn btn-primary btn-block', id: 'message-button'

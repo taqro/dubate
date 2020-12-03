@@ -1,32 +1,26 @@
 import consumer from "./consumer"
 
-$(document).on('turbolinks:load', function() {
-  const chatChannel = consumer.subscriptions.create({ channel: 'RoomChannel', room: $('#messages').data('room_id') }, {
-    connected() {
-      // Called when the subscription is ready for use on the server
-    },
+// turbolinks の読み込みが終わった後にidを取得しないと，エラーが出ます。
+document.addEventListener('turbolinks:load', () => {
 
-    disconnected() {
-      // Called when the subscription has been terminated by the server
-    },
+  // js.erb 内で使用できるように変数を定義しておく
+  window.messageContainer = document.getElementById('message-container')
 
-    received: function(data) {
-      return $('#messages').append(data['message']);
-    },
+  // 以下のプログラムが他のページで動作しないようにしておく
+  if (messageContainer === null) {
+      return
+  }
 
-    speak: function(message) {
-      return this.perform('speak', {
-        message: message
-      });
-    }
-  });
+  consumer.subscriptions.create({ channel: 'RoomChannel', room: $('#messages').data('room_id') }, {
+      connected() {
+      },
 
-// data-behaviorがroom_speakerである場所でkeypressすると...
-  $(document).on('keypress', '[data-behavior~=room_speaker]', function(event) {
-    if (event.keyCode === 13) {
-      chatChannel.speak(event.target.value);
-      event.target.value = '';
-      return event.preventDefault();
-    }
-  });
-});
+      disconnected() {
+      },
+
+      received(data) {
+          // サーバー側から受け取ったHTMLを一番最後に加える
+          messageContainer.insertAdjacentHTML('beforeend', data['message'])
+      }
+  })
+})

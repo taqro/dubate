@@ -25,7 +25,7 @@ h2 Room_Name  : #{@room.name}
 #messages data-room_id="#{@room.id}"
   = render @messages
 
-- if @room.board.nil?
-  - if opener? or opponent?
-    = label_tag :content, 'Say something:'
-    = text_field_tag :content, nil, data: { behavior: 'room_speaker' }
+- if @room.board.nil? and (opener? or opponent?) and !(@room.opponent_id.nil?)
+  = label_tag :content, 'Say something:'
+    / = text_field_tag :content, nil, data: { behavior: 'room_speaker' }
+  = render 'footer'
