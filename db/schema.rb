@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_27_002628) do
+ActiveRecord::Schema.define(version: 2020_12_04_004859) do
 
   create_table "boards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2020_11_27_002628) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_boards_on_room_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_likes_on_room_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -77,6 +86,8 @@ ActiveRecord::Schema.define(version: 2020_11_27_002628) do
   end
 
   add_foreign_key "boards", "users"
+  add_foreign_key "likes", "rooms"
+  add_foreign_key "likes", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "posts", "boards"
