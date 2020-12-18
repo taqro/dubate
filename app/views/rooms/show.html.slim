@@ -7,6 +7,10 @@ h1 Chat room
 - if current_user.id == @room.user_id
   p = link_to 'このRoomを削除する', room_path(@room), method: :delete
 
+/ いいね
+#likes_buttons
+  = render 'likes/like', post: :@room
+
 / 勝敗が決まったあとはWinner Loser を表示する
 - if @room.board.nil?
   - if @room.opponent_id.nil?

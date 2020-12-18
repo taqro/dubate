@@ -35,4 +35,9 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  #既にいいねしているか
+  def already_liked?(room)
+    self.likes.exists?(room_id: room.id)
+  end
 end

@@ -59,6 +59,18 @@ table.table.table-hover
             - else
               td 勝ち
 
+p あなたがいいねしたRoom一覧
+.mb-3
+table.table.table-hover
+  thread.thread-default
+    tr
+      th = 'Room_Name'
+    tbody
+      - @likes.each do |like|
+        - room = Room.find(like.room_id)
+        tr
+          td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+
 
 / - if room.opponent_id.nil?
 /   td =  # 相手を探し中

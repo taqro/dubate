@@ -4,11 +4,12 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = User.find(params[:id]) ? User.find(params[:id]) : current_user
+    @user = User.find(params[:id]) ? User.find(params[:id]) : current_user #なにやってんのかわからん。あとで解読
     @rooms = @user.rooms.order(:id)
     @lose_number = @user.boards.count
     @win_number = match_number - @lose_number - debating_number-waiting_number-debating_number
     @matched_number = match_number - debating_number-waiting_number #総対戦数
+    @likes = Like.where(user_id: @user.id) 
   end
 
   # 議論中のRoom数

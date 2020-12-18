@@ -1,0 +1,9 @@
+/ いいね
+- if current_user.already_liked?(@room)
+  = link_to room_likes_path(@room), method: :delete do
+    span.fa.fa-heart.like-btn-unlike
+  = @room.likes.count
+- else
+  = link_to room_likes_path(@room), method: :post do
+    span.fa.fa-heart.like-btn
+  = @room.likes.count
