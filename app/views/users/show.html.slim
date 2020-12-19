@@ -1,4 +1,10 @@
-h1 こんにちは、#{@user.username} さん
+
+if current_user.id == @user.id
+  h1 こんにちは、#{@user.username} さん
+else
+  h1 #{@user.username}さんのページです。
+end
+
 h2 ID : #{@user.id}
 p ユーザープロフィールページです。
 p プロフィール #{@user.profile}
