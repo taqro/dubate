@@ -77,14 +77,3 @@ table.table.table-hover
         tr
           td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
 
-
-/ - if room.opponent_id.nil?
-/   td =  # 相手を探し中
-/ - else
-/   - if　room.board.nil?
-/     td =  # 議論中
-/   -else
-/     - if room.board.room_id == @user.id
-/     td = # 負け
-/     - else
-/     td = # 勝ち

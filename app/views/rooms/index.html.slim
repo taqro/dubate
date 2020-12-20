@@ -24,6 +24,8 @@ h1 Room一覧
 /       p 決着済み　スレへ
 
 .mb-3
+  = paginate @rooms
+  = page_entries_info @rooms
 table.table.table-hover
   thread.thread-default
     tr

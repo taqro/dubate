@@ -6,14 +6,17 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @rooms = @user.rooms.order(:id)
-    @lose_number = @user.boards.count　#負け数
-    @win_number = match_number - @lose_number - debating_number-waiting_number-debating_number　#勝数
-    @matched_number = match_number - debating_number-waiting_number #総対戦数
-
+    # 負け数
+    @lose_number = @user.boards.count
+    # 勝数
+    @win_number = win_number
+    # 総対戦数
+    @matched_number = match_number - debating_number-waiting_number
+    # いいねした数
     @likes = Like.where(user_id: @user.id)
   end
 
-  # 議論中のRoom数
+  # 議論中のRoom数、つまりまだboardが作成されていない、かつroom.opponent_idが存在する
   def debating_number
     @debating_number = 0
     participated_rooms.each do |room|
@@ -24,7 +27,7 @@ class UsersController < ApplicationController
     return @debating_number
   end
 
-  # 相手を探し中のRoom数
+  # 相手を探し中のRoom数、つまりroom.opponent_idが存在しない
   def waiting_number
     open_rooms = @user.rooms
     @waiting_number = 0
@@ -36,14 +39,25 @@ class UsersController < ApplicationController
     return @waiting_number
   end
 
-  # 参加したRoom
+  # 参加したRoom、つまりroomのuser_idかopponent_idに自分のidが入っている
   def participated_rooms
     participated_rooms = Room.where(user_id: @user.id) + Room.where(opponent_id: @user.id)
   end
 
-  #参加したRoom数
+  # 参加したRoom数
   def match_number
     match_number = participated_rooms.count
+  end
+
+  #勝数、つまり参加しているかつboardが作成されていて、そのuser_idが相手のもの
+  def win_number
+    @win_number = 0
+    participated_rooms.each do |room|
+      if !(room.board.nil?) and room.board.user_id != @user.id
+        @win_number += 1
+      end
+    end
+    return @win_number
   end
 
   def following

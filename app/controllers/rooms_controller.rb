@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
 
   def index
     @q = Room.all.ransack(params[:q])
-    @rooms = @q.result(distinct: true)
+    @rooms = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
   def show
@@ -37,19 +37,6 @@ class RoomsController < ApplicationController
     redirect_to rooms_path, notice: "Room「#{@room.name}を削除しました。」"
   end
 
-
-
-  private
-
-  def room_params
-    params.require(:room).permit(:name)
-  end
-
-  def correct_user
-    @room = current_user.rooms.find_by(id: params[:id])
-    redirect_to root_url if @room.nil?
-  end
-
   # 議題作成者かどうか
   def opener?
     @room = Room.find(params[:id])
@@ -68,10 +55,27 @@ class RoomsController < ApplicationController
     @room.opponent_id.nil?
   end
 
-  # 勝者を定義
+  # 勝者を定義、つまり@room.board.user_idにidが入っている方が負け
   def winner
     @room = Room.find(params[:id])
     @winner_id = @room.board.user_id == @room.opponent_id ? @room.user_id : @room.opponent_id
+  end
+
+  # def winnername
+  #   @room = Room.find(params[:id])
+  #   @winner_id = @room.board.user_id == @room.opponent_id ? @room.user_id : @room.opponent_id
+  #   @winner = @user.find(@winner_id)
+  # end
+
+  private
+
+  def room_params
+    params.require(:room).permit(:name)
+  end
+
+  def correct_user
+    @room = current_user.rooms.find_by(id: params[:id])
+    redirect_to root_url if @room.nil?
   end
 
 end
