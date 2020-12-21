@@ -1,0 +1,24 @@
+current directory: /Users/saitotakuro/Desktop/application/dubate/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20201221-19726-1d7krxk.rb extconf.rb
+creating Makefile
+
+current directory: /Users/saitotakuro/Desktop/application/dubate/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make "DESTDIR=" clean
+
+current directory: /Users/saitotakuro/Desktop/application/dubate/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make "DESTDIR="
+compiling adj_matrix.c
+compiling codepoints.c
+compiling jaro.c
+compiling jaro_winkler.c
+linking shared-object jaro_winkler/jaro_winkler_ext.bundle
+ld: warning: directory not found for option '-L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.Internal.sdk/usr/local/lib'
+ld: warning: ignoring file adj_matrix.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
+ld: warning: ignoring file codepoints.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
+ld: warning: ignoring file jaro.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
+ld: warning: ignoring file jaro_winkler.o, building for macOS-arm64e but attempting to link with file built for unknown-x86_64
+ld: warning: directory not found for option '-L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.Internal.sdk/usr/local/lib'
+
+current directory: /Users/saitotakuro/Desktop/application/dubate/vendor/bundle/ruby/2.6.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 jaro_winkler_ext.bundle ./.gem.20201221-19726-1eg3u7h/jaro_winkler
