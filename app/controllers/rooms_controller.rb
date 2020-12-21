@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
     @messages = @room.messages
     @opener = User.find(@room.user_id)
 
-    if (@room.opponent_id.nil?) and (current_user.id != @room.user_id)
+    if @room.opponent_id.nil? && current_user.id != @room.user_id
       @room.opponent_id = current_user.id
       @room.save!
     end
@@ -49,7 +49,7 @@ class RoomsController < ApplicationController
     current_user.id == @room.opponent_id
   end
 
-  #opponentが空かどうか 使うかわからん
+  # opponentが空かどうか 使うかわからん
   def opponent_nil?
     @room = Room.find(params[:id])
     @room.opponent_id.nil?
