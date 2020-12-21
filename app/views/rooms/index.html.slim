@@ -24,8 +24,6 @@ h1 Room一覧
 /       p 決着済み　スレへ
 
 .mb-3
-  = paginate @rooms
-  = page_entries_info @rooms
 table.table.table-hover
   thread.thread-default
     tr
@@ -50,3 +48,5 @@ table.table.table-hover
                 td 議論中　観戦する
           - else
             td 決着済み　スレへ
+= paginate @rooms
+= page_entries_info @rooms
