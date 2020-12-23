@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     @likes = Like.where(user_id: @user.id)
     # 相手との総対戦数（他のユーザーのプロフィールページで表示）
     @matched_to_you_number = matched_to_you_number
+    # 相手に勝った数（他のユーザーのプロフィールページで表示）
+    @win_you_number = win_you_number
+    # 相手に負けた数（他のユーザーのプロフィールページで表示）
+    @lose_you_number = lose_you_number
   end
 
   # 議論中のRoom数、つまりまだboardが作成されていない、かつroom.opponent_idが存在する
@@ -62,7 +66,7 @@ class UsersController < ApplicationController
     @win_number
   end
 
-  def matched_to_you_number #? 相手との対戦数 表示されないのはなぜ？
+  def matched_to_you_number #? 相手との対戦数 表示されないのはなぜ？ 後で消す
     matche_to_you_rooms = Room.where(user_id: @user.id, opponent_id: current_user.id) + Room.where(user_id: current_user.id, opponent_id: @user.id)
     @mathed_to_you_number = 0
     matche_to_you_rooms.each do |room|
@@ -72,6 +76,29 @@ class UsersController < ApplicationController
     end
     # @matched_to_you_number
     matche_to_you_rooms.count
+  end
+
+  def win_you_number
+    win_you_number = 0
+    @boards = @user.boards # 相手が作成したboards
+    @boards.each do |board|
+      if board.room.user_id == current_user.id || board.room.opponent_id == current_user.id
+        win_you_number += 1
+      end
+    end
+    win_you_number
+  end
+
+  def lose_you_number
+    lose_you_number = 0
+    @boards = current_user.boards # 自分が作成したboards
+    @boards.each do |board|
+      if board.room.user_id == @user.id || board.room.opponent_id == @user.id
+        lose_you_number += 1
+      end
+    end
+    lose_you_number
+
   end
 
 

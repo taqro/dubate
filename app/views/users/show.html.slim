@@ -9,8 +9,8 @@ h2 ID : #{@user.id}
 p ユーザープロフィールページです。
 p プロフィール #{@user.profile}
 - if current_user.id != @user.id
-  h2 あなたとの対戦数：#{@matched_to_you_number}
-/ h2 #{current_user.username} は #{@user.username} に対して、#{}勝#{}敗です。
+  h2 あなたとの対戦数：#{@win_you_number + @lose_you_number}
+  h2 #{current_user.username} は #{@user.username} に対して、#{@win_you_number}勝#{@lose_you_number}敗です。
 
 = render 'shared/stats'
 = render 'follow_form'
