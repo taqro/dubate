@@ -14,8 +14,6 @@ class UsersController < ApplicationController
     @matched_number = match_number - debating_number - waiting_number
     # いいねした数
     @likes = Like.where(user_id: @user.id)
-    # 相手との総対戦数（他のユーザーのプロフィールページで表示）
-    @matched_to_you_number = matched_to_you_number
     # 相手に勝った数（他のユーザーのプロフィールページで表示）
     @win_you_number = win_you_number
     # 相手に負けた数（他のユーザーのプロフィールページで表示）
@@ -64,18 +62,6 @@ class UsersController < ApplicationController
       end
     end
     @win_number
-  end
-
-  def matched_to_you_number #? 相手との対戦数 表示されないのはなぜ？ 後で消す
-    matche_to_you_rooms = Room.where(user_id: @user.id, opponent_id: current_user.id) + Room.where(user_id: current_user.id, opponent_id: @user.id)
-    @mathed_to_you_number = 0
-    matche_to_you_rooms.each do |room|
-      if !room.board.nil?
-        @mathed_to_you_number += 1
-      end
-    end
-    # @matched_to_you_number
-    matche_to_you_rooms.count
   end
 
   def win_you_number
