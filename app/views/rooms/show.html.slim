@@ -17,8 +17,10 @@ h1 Chat room
     h2 Room_Status : 議論相手探し中。少々お待ちくださいませ。
   - else
     h2 Room_Status : 議論中
-  h2 Opener : #{@room.user_id}
-  h2 Opponent : #{@room.opponent_id}
+  h2 Opener_id : #{@room.user_id}
+  h2 Opener_name : #{User.find(@room.user_id).username}
+  h2 Opponent_id : #{@room.opponent_id}
+  h2 Opponent_name : #{User.find(@room.opponent_id).username}
 - else
   h2 Room_Status : 決着済み
   h2 Winner_id : #{winner}

@@ -14,6 +14,8 @@ class UsersController < ApplicationController
     @matched_number = match_number - debating_number - waiting_number
     # いいねした数
     @likes = Like.where(user_id: @user.id)
+    # 相手との総対戦数（他のユーザーのプロフィールページで表示）
+    @matched_to_you_number = matched_to_you_number
   end
 
   # 議論中のRoom数、つまりまだboardが作成されていない、かつroom.opponent_idが存在する
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
     @waiting_number
   end
 
-  # 参加したRoom、つまりroomのuser_idかopponent_idに自分のidが入っている
+  #? 参加したRoom、つまりroomのuser_idかopponent_idに自分のidが入っている まだ決着がついていないつまり議論中のものもカウントしてしまっている？
   def participated_rooms
     participated_rooms = Room.where(user_id: @user.id) + Room.where(opponent_id: @user.id)
   end
@@ -59,6 +61,19 @@ class UsersController < ApplicationController
     end
     @win_number
   end
+
+  def matched_to_you_number #? 相手との対戦数 表示されないのはなぜ？
+    matche_to_you_rooms = Room.where(user_id: @user.id, opponent_id: current_user.id) + Room.where(user_id: current_user.id, opponent_id: @user.id)
+    @mathed_to_you_number = 0
+    matche_to_you_rooms.each do |room|
+      if !room.board.nil?
+        @mathed_to_you_number += 1
+      end
+    end
+    # @matched_to_you_number
+    matche_to_you_rooms.count
+  end
+
 
   def following
     @title = "Following"
