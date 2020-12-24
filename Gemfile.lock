@@ -82,6 +82,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.2)
+      devise (>= 4.7.1)
     diff-lcs (1.4.4)
     erubi (1.10.0)
     ffi (1.13.1)
@@ -292,6 +294,7 @@ DEPENDENCIES
   byebug
   capybara
   devise
+  devise-i18n
   html2slim
   jbuilder (~> 2.7)
   kaminari
