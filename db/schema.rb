@@ -10,15 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_004859) do
+ActiveRecord::Schema.define(version: 2021_02_18_055403) do
 
   create_table "boards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "winner"
+    t.integer "loser"
     t.index ["room_id"], name: "index_boards_on_room_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_favorites_on_room_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -68,6 +79,8 @@ ActiveRecord::Schema.define(version: 2020_12_04_004859) do
     t.text "name", null: false
     t.bigint "user_id", null: false
     t.integer "opponent_id"
+    t.integer "winner"
+    t.integer "loser"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
@@ -86,6 +99,8 @@ ActiveRecord::Schema.define(version: 2020_12_04_004859) do
   end
 
   add_foreign_key "boards", "users"
+  add_foreign_key "favorites", "rooms"
+  add_foreign_key "favorites", "users"
   add_foreign_key "likes", "rooms"
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "rooms"
