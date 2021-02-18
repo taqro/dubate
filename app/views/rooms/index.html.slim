@@ -20,7 +20,11 @@ table.table.table-hover
       - @rooms.each do |room|
         tr
           td = link_to "#{room.user.username}",user_path(room.user)
-          td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+          - if room.opponent_id.nil? && room.user_id == current_user.id　# 自分で作って、かつまだ議論相手がいないroomには入れないようにしている。（リンクが出ない）
+            td = "ID:#{room.id}, RoomName:#{room.name}"
+          - else
+            td = link_to "ID:#{room.id}, RoomName:#{room.name}", room_path(room)
+
           - if room.board.nil?
             - if room.opponent_id.nil?
               - if room.user_id == current_user.id

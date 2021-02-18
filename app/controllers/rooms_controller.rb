@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
     @room = current_user.rooms.new(room_params)
     @room.save!
     flash[:success] = "Room.created!"
-    redirect_to room_path(@room), notice: "Room「#{@room.name}を作成しました。」"
+    redirect_to rooms_path, notice: "Room「'#{@room.name}'を作成しました。」"
   end
 
   def destroy
