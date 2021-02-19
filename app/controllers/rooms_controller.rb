@@ -55,17 +55,13 @@ class RoomsController < ApplicationController
     @room.opponent_id.nil?
   end
 
-  # 勝者を定義、つまり@room.board.user_idにidが入っている方が負け
+  # 勝者を定義、つまり@room.board.user_idにidが入っている方が負け もう必要ない
   def winner
     @room = Room.find(params[:id])
     @winner_id = @room.board.user_id == @room.opponent_id ? @room.user_id : @room.opponent_id
   end
 
-  # def winnername
-  #   @room = Room.find(params[:id])
-  #   @winner_id = @room.board.user_id == @room.opponent_id ? @room.user_id : @room.opponent_id
-  #   @winner = @user.find(@winner_id)
-  # end
+  
 
   private
 

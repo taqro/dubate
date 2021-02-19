@@ -23,10 +23,11 @@ h1 Chat room
   h2 Opponent_name : #{User.find(@room.opponent_id).username}
 - else
   h2 Room_Status : 決着済み
-  h2 Winner_id : #{winner}
-  h2 Winner_name : #{User.find(winner).username}
-  h2 Loser_id : #{@room.board.user_id}
-  h2 Loser_name : #{User.find(@room.board.user_id).username}
+  h2 Winner_id : #{@room.winner}
+  h2 Winner_name : #{User.find(@room.winner).username}
+  h2 Loser_id : #{@room.loser}
+  h2 Loser_name : #{User.find(@room.loser).username}
+  
 
 h2 Room_Name  : #{@room.name}
 

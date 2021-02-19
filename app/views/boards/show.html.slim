@@ -1,13 +1,15 @@
 h1 Board
 p =link_to 'このスレッドのRoomへ', room_path(id: @board.room_id)
 / Winner Loser に変える
-h2 Winner_id: #{winner}
-h2 Winner_name: #{User.find(winner).username}
-h2 Loser_id: #{@board.user_id}
-h2 Loser_name: #{User.find(@board.user_id).username}
+h2 Winner_id: #{@board.winner}
+h2 Winner_name: #{User.find(@board.winner).username}
+h2 Loser_id: #{@board.loser}
+h2 Loser_name: #{User.find(@board.loser).username}
 h2 Room_id: #{@board.room_id}
 h2 Room: #{@board.room.name}
 h2 Board_id: #{@board.id}
+
+
 
 #posts data-board_id="#{@board.id}"
   = render @posts

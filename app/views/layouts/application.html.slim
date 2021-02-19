@@ -17,12 +17,12 @@ html
 
       ul.navbar-nav.ml-auto
         - if user_signed_in?
+          li.nav-item= link_to current_user.username, user_path(current_user)
           - if current_user.email != 'guest@example.com'
-            li.nav-item= link_to current_user.username, user_path(current_user)
             li.nav-item= link_to 'プロフィール変更', edit_user_registration_path
-            li.nav-item= link_to 'ログアウト', destroy_user_session_path , method: :delete
-            li.nav-item= link_to 'Room一覧', rooms_path
-            li.nav-item= link_to '詭弁の技術', 'https://ja.wikipedia.org/wiki/%E8%A9%AD%E5%BC%81', target: :_blank, rel: "noopener noreferrer"
+          li.nav-item= link_to 'ログアウト', destroy_user_session_path , method: :delete
+          li.nav-item= link_to 'Room一覧', rooms_path
+          li.nav-item= link_to '詭弁の技術', 'https://ja.wikipedia.org/wiki/%E8%A9%AD%E5%BC%81', target: :_blank, rel: "noopener noreferrer"
         - else
           li.nav-item= link_to 'サインアップ', new_user_registration_path
           li.nav-item= link_to 'ログイン', new_user_session_path
