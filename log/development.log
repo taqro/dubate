@@ -63,3 +63,139 @@ Entrypoint application = js/application-3dd0dc24d9c39bc09227.js js/application-3
 Completed 200 OK in 14755ms (Views: 14705.0ms | ActiveRecord: 0.0ms | Allocations: 24571)
 
 
+Started GET "/" for 127.0.0.1 at 2022-02-21 19:31:43 +0900
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 32.1ms | Allocations: 401)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+internal/modules/cjs/loader.js:1032
+  throw err;
+  ^
+
+Error: Cannot find module 'resolve-from'
+Require stack:
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/resolve-cwd/index.js
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/import-local/index.js
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack-cli/bin/cli.js
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack/bin/webpack.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1029:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:898:27)
+    at Module.require (internal/modules/cjs/loader.js:1089:19)
+    at require (internal/modules/cjs/helpers.js:73:18)
+    at Object.<anonymous> (/Users/saitotakuro/Desktop/dev/dubate/node_modules/resolve-cwd/index.js:2:21)
+    at Module._compile (internal/modules/cjs/loader.js:1200:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1220:10)
+    at Module.load (internal/modules/cjs/loader.js:1049:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:937:14)
+    at Module.require (internal/modules/cjs/loader.js:1089:19) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/resolve-cwd/index.js',
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/import-local/index.js',
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack-cli/bin/cli.js',
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack/bin/webpack.js'
+  ]
+}
+
+  Rendered layout layouts/application.html.erb (Duration: 8109.5ms | Allocations: 22753)
+Completed 500 Internal Server Error in 8407ms (ActiveRecord: 0.0ms | Allocations: 29727)
+
+
+  
+ActionView::Template::Error (Webpacker can't find application.js in /Users/saitotakuro/Desktop/dev/dubate/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+):
+     7:     <%= csp_meta_tag %>
+     8: 
+     9:     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    10:     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    11:   </head>
+    12: 
+    13:   <body>
+  
+app/views/layouts/application.html.erb:10
+Started GET "/" for 127.0.0.1 at 2022-02-21 19:31:56 +0900
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 37)
+[Webpacker] Compiling...
+Started GET "/favicon.ico" for 127.0.0.1 at 2022-02-21 19:31:57 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+[Webpacker] Compilation failed:
+internal/modules/cjs/loader.js:1032
+  throw err;
+  ^
+
+Error: Cannot find module 'resolve-from'
+Require stack:
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/resolve-cwd/index.js
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/import-local/index.js
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack-cli/bin/cli.js
+- /Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack/bin/webpack.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:1029:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:898:27)
+    at Module.require (internal/modules/cjs/loader.js:1089:19)
+    at require (internal/modules/cjs/helpers.js:73:18)
+    at Object.<anonymous> (/Users/saitotakuro/Desktop/dev/dubate/node_modules/resolve-cwd/index.js:2:21)
+    at Module._compile (internal/modules/cjs/loader.js:1200:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1220:10)
+    at Module.load (internal/modules/cjs/loader.js:1049:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:937:14)
+    at Module.require (internal/modules/cjs/loader.js:1089:19) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/resolve-cwd/index.js',
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/import-local/index.js',
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack-cli/bin/cli.js',
+    '/Users/saitotakuro/Desktop/dev/dubate/node_modules/webpack/bin/webpack.js'
+  ]
+}
+
+  Rendered layout layouts/application.html.erb (Duration: 7462.4ms | Allocations: 47997)
+Completed 500 Internal Server Error in 7467ms (ActiveRecord: 0.0ms | Allocations: 51112)
+
+
+  
+ActionView::Template::Error (Webpacker can't find application.js in /Users/saitotakuro/Desktop/dev/dubate/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+):
+     7:     <%= csp_meta_tag %>
+     8: 
+     9:     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    10:     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    11:   </head>
+    12: 
+    13:   <body>
+  
+app/views/layouts/application.html.erb:10
+Started GET "/" for 127.0.0.1 at 2022-02-21 19:32:47 +0900
+  [1m[35m (8.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 3.5ms | Allocations: 238)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 95.8ms | Allocations: 6333)
+Completed 200 OK in 181ms (Views: 114.8ms | ActiveRecord: 0.0ms | Allocations: 11820)
+
+
