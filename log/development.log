@@ -1893,3 +1893,438 @@ Processing by UsersController#following as HTML
 Completed 200 OK in 96ms (Views: 72.0ms | ActiveRecord: 17.4ms | Allocations: 12253)
 
 
+Started GET "/" for 127.0.0.1 at 2022-02-25 14:23:44 +0900
+  [1m[35m (9.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 9.4ms | Allocations: 238)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 254.5ms | Allocations: 14690)
+Completed 200 OK in 343ms (Views: 242.0ms | ActiveRecord: 35.0ms | Allocations: 18329)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2022-02-25 14:23:54 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (6.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 123.8ms | Allocations: 9031)
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  Rendered users/_follow_form.html.erb (Duration: 3.0ms | Allocations: 233)
+  Rendered users/show.html.erb within layouts/application (Duration: 137.4ms | Allocations: 10742)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 150.6ms | Allocations: 14463)
+Completed 200 OK in 178ms (Views: 141.5ms | ActiveRecord: 20.8ms | Allocations: 16300)
+
+
+Started GET "/users/3/following" for 127.0.0.1 at 2022-02-25 14:23:56 +0900
+Processing by UsersController#following as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (5.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:8:in `following'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show_follow.html.erb within layouts/application
+  [1m[35m (7.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (5.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 21.0ms | Allocations: 2007)
+  [1m[36mUser Exists? (9.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:14
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3[0m
+  ↳ app/views/users/show_follow.html.erb:20
+  Rendered users/show_follow.html.erb within layouts/application (Duration: 63.0ms | Allocations: 5432)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 93.5ms | Allocations: 10140)
+Completed 200 OK in 109ms (Views: 64.3ms | ActiveRecord: 36.4ms | Allocations: 11830)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2022-02-25 14:24:37 +0900
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 110ms (ActiveRecord: 4.6ms | Allocations: 4983)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-25 14:24:37 +0900
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 37)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 55.0ms | Allocations: 3930)
+Completed 200 OK in 59ms (Views: 57.0ms | ActiveRecord: 0.0ms | Allocations: 4320)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2022-02-25 14:24:39 +0900
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 13.5ms | Allocations: 239)
+  Rendered devise/shared/_links.html.erb (Duration: 8.7ms | Allocations: 564)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 94.5ms | Allocations: 3564)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 120.0ms | Allocations: 7399)
+Completed 200 OK in 209ms (Views: 206.5ms | ActiveRecord: 0.0ms | Allocations: 9185)
+
+
+Started POST "/users" for 127.0.0.1 at 2022-02-25 14:24:49 +0900
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"aaa", "email"=>"aaa@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (8.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'aaa@example.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[31mROLLBACK[0m
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.8ms | Allocations: 631)
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | Allocations: 102)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 6.8ms | Allocations: 2503)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 34.7ms | Allocations: 6315)
+Completed 200 OK in 478ms (Views: 35.9ms | ActiveRecord: 12.0ms | Allocations: 13662)
+
+
+Started POST "/users" for 127.0.0.1 at 2022-02-25 14:25:06 +0900
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"aaa", "email"=>"a@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (15.2ms)[0m  [1m[32mINSERT INTO `users` (`email`, `encrypted_password`, `name`, `created_at`, `updated_at`) VALUES ('a@example.com', '$2a$12$dE18a/9U1je.28ehrMbu0OARkN5rq/HGeqexYWtWGt8BOKqCqxqC.', 'aaa', '2022-02-25 05:25:06.934785', '2022-02-25 05:25:06.934785')[0m
+  [1m[36mTRANSACTION (5.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://127.0.0.1:3000/
+Completed 302 Found in 345ms (ActiveRecord: 23.5ms | Allocations: 5841)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-25 14:25:06 +0900
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 37)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 39.6ms | Allocations: 4771)
+Completed 200 OK in 41ms (Views: 38.8ms | ActiveRecord: 1.4ms | Allocations: 5167)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2022-02-25 14:25:16 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (4.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (5.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 17.7ms | Allocations: 2234)
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  Rendered users/_follow_form.html.erb (Duration: 0.1ms | Allocations: 40)
+  Rendered users/show.html.erb within layouts/application (Duration: 28.4ms | Allocations: 3343)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 74.2ms | Allocations: 7158)
+Completed 200 OK in 81ms (Views: 59.2ms | ActiveRecord: 18.5ms | Allocations: 8164)
+
+
+Started GET "/users/4/following" for 127.0.0.1 at 2022-02-25 14:25:18 +0900
+Processing by UsersController#following as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (11.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:8:in `following'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show_follow.html.erb within layouts/application
+  [1m[35m (13.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (10.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 28.1ms | Allocations: 2007)
+  [1m[36mUser Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:14
+  Rendered users/show_follow.html.erb within layouts/application (Duration: 36.9ms | Allocations: 2861)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (9.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 67.6ms | Allocations: 7552)
+Completed 200 OK in 90ms (Views: 29.4ms | ActiveRecord: 51.0ms | Allocations: 8910)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2022-02-25 14:25:24 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (5.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 1[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (9.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 1[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 20.7ms | Allocations: 2225)
+  [1m[36mUser Load (5.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  [1m[36mUser Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 AND `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:30:in `following?'
+  Rendered users/_follow.html.erb (Duration: 14.4ms | Allocations: 3216)
+  Rendered users/_follow_form.html.erb (Duration: 22.8ms | Allocations: 4538)
+  Rendered users/show.html.erb within layouts/application (Duration: 52.2ms | Allocations: 7830)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 66.2ms | Allocations: 11640)
+Completed 200 OK in 87ms (Views: 38.4ms | ActiveRecord: 33.5ms | Allocations: 12629)
+
+
+Started POST "/relationships" for 127.0.0.1 at 2022-02-25 14:25:27 +0900
+Processing by RelationshipsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "followed_id"=>"1", "commit"=>"Follow"}
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/relationships_controller.rb:4:in `create'
+  [1m[36mUser Load (8.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/relationships_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:20:in `follow'
+  [1m[36mUser Load (5.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/models/user.rb:20:in `follow'
+  [1m[36mRelationship Create (6.7ms)[0m  [1m[32mINSERT INTO `relationships` (`follower_id`, `followed_id`, `created_at`, `updated_at`) VALUES (4, 1, '2022-02-25 05:25:27.286358', '2022-02-25 05:25:27.286358')[0m
+  ↳ app/models/user.rb:20:in `follow'
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:20:in `follow'
+Redirected to http://127.0.0.1:3000/users/1
+Completed 302 Found in 69ms (ActiveRecord: 32.2ms | Allocations: 6382)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2022-02-25 14:25:27 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 1[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (7.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 1[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 16.2ms | Allocations: 2227)
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  [1m[36mUser Exists? (8.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 AND `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/models/user.rb:30:in `following?'
+  [1m[36mRelationship Load (3.0ms)[0m  [1m[34mSELECT `relationships`.* FROM `relationships` WHERE `relationships`.`follower_id` = 4 AND `relationships`.`followed_id` = 1 LIMIT 1[0m
+  ↳ app/views/users/_unfollow.html.erb:1
+  Rendered users/_unfollow.html.erb (Duration: 10.5ms | Allocations: 1342)
+  Rendered users/_follow_form.html.erb (Duration: 23.4ms | Allocations: 2657)
+  Rendered users/show.html.erb within layouts/application (Duration: 46.3ms | Allocations: 5951)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 78.7ms | Allocations: 9761)
+Completed 200 OK in 91ms (Views: 60.0ms | ActiveRecord: 25.8ms | Allocations: 10752)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2022-02-25 14:25:31 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (5.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (3.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 13.6ms | Allocations: 2228)
+  [1m[36mUser Load (5.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  [1m[36mUser Exists? (9.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 AND `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/models/user.rb:30:in `following?'
+  Rendered users/_follow.html.erb (Duration: 2.3ms | Allocations: 390)
+  Rendered users/_follow_form.html.erb (Duration: 15.0ms | Allocations: 1573)
+  Rendered users/show.html.erb within layouts/application (Duration: 36.1ms | Allocations: 4868)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 60.8ms | Allocations: 8670)
+Completed 200 OK in 69ms (Views: 39.4ms | ActiveRecord: 26.3ms | Allocations: 9660)
+
+
+Started POST "/relationships" for 127.0.0.1 at 2022-02-25 14:25:32 +0900
+Processing by RelationshipsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "followed_id"=>"3", "commit"=>"Follow"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/relationships_controller.rb:4:in `create'
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/relationships_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:20:in `follow'
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/models/user.rb:20:in `follow'
+  [1m[36mRelationship Create (3.8ms)[0m  [1m[32mINSERT INTO `relationships` (`follower_id`, `followed_id`, `created_at`, `updated_at`) VALUES (4, 3, '2022-02-25 05:25:32.697319', '2022-02-25 05:25:32.697319')[0m
+  ↳ app/models/user.rb:20:in `follow'
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:20:in `follow'
+Redirected to http://127.0.0.1:3000/users/3
+Completed 302 Found in 36ms (ActiveRecord: 18.2ms | Allocations: 5771)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2022-02-25 14:25:32 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (5.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (4.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 3[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 14.1ms | Allocations: 2224)
+  [1m[36mUser Load (4.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  [1m[36mUser Exists? (7.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 AND `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/models/user.rb:30:in `following?'
+  [1m[36mRelationship Load (4.9ms)[0m  [1m[34mSELECT `relationships`.* FROM `relationships` WHERE `relationships`.`follower_id` = 4 AND `relationships`.`followed_id` = 3 LIMIT 1[0m
+  ↳ app/views/users/_unfollow.html.erb:1
+  Rendered users/_unfollow.html.erb (Duration: 8.2ms | Allocations: 1180)
+  Rendered users/_follow_form.html.erb (Duration: 19.9ms | Allocations: 2364)
+  Rendered users/show.html.erb within layouts/application (Duration: 41.7ms | Allocations: 5655)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 146.8ms | Allocations: 9457)
+Completed 200 OK in 158ms (Views: 125.3ms | ActiveRecord: 28.6ms | Allocations: 10446)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2022-02-25 14:25:36 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (4.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 12.9ms | Allocations: 2225)
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:6
+  Rendered users/_follow_form.html.erb (Duration: 0.2ms | Allocations: 39)
+  Rendered users/show.html.erb within layouts/application (Duration: 20.9ms | Allocations: 3331)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 42.1ms | Allocations: 7135)
+Completed 200 OK in 58ms (Views: 31.3ms | ActiveRecord: 15.0ms | Allocations: 8126)
+
+
+Started GET "/users/4/following" for 127.0.0.1 at 2022-02-25 14:25:38 +0900
+Processing by UsersController#following as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:8:in `following'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show_follow.html.erb within layouts/application
+  [1m[35m (5.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 17.2ms | Allocations: 2005)
+  [1m[36mUser Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:14
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/users/show_follow.html.erb:20
+  Rendered users/show_follow.html.erb within layouts/application (Duration: 62.0ms | Allocations: 7188)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 81.0ms | Allocations: 11892)
+Completed 200 OK in 102ms (Views: 61.9ms | ActiveRecord: 26.1ms | Allocations: 13246)
+
+
+Started GET "/users/4/following?page=2" for 127.0.0.1 at 2022-02-25 14:25:40 +0900
+Processing by UsersController#following as HTML
+  Parameters: {"page"=>"2", "id"=>"4"}
+  [1m[36mUser Load (9.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:8:in `following'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show_follow.html.erb within layouts/application
+  [1m[35m (5.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (4.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 16.3ms | Allocations: 2007)
+  [1m[36mUser Exists? (6.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 1[0m
+  ↳ app/views/users/show_follow.html.erb:14
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 1[0m
+  ↳ app/views/users/show_follow.html.erb:16
+  [1m[35mCACHE  (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/users/show_follow.html.erb:20
+  Rendered users/show_follow.html.erb within layouts/application (Duration: 58.5ms | Allocations: 6205)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 85.4ms | Allocations: 10907)
+Completed 200 OK in 101ms (Views: 61.4ms | ActiveRecord: 33.9ms | Allocations: 12260)
+
+
+Started GET "/users/4/following" for 127.0.0.1 at 2022-02-25 14:25:41 +0900
+Processing by UsersController#following as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (6.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:8:in `following'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show_follow.html.erb within layouts/application
+  [1m[35m (4.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (9.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 19.5ms | Allocations: 2007)
+  [1m[36mUser Exists? (13.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:14
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/users/show_follow.html.erb:20
+  Rendered users/show_follow.html.erb within layouts/application (Duration: 58.8ms | Allocations: 5444)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 94.3ms | Allocations: 10135)
+Completed 200 OK in 116ms (Views: 59.0ms | ActiveRecord: 42.9ms | Allocations: 11490)
+
+
+Started GET "/users/4/following" for 127.0.0.1 at 2022-02-25 14:25:54 +0900
+Processing by UsersController#following as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:8:in `following'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show_follow.html.erb within layouts/application
+  [1m[35m (6.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:5
+  [1m[35m (6.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 4[0m
+  ↳ app/views/shared/_stats.html.erb:11
+  Rendered shared/_stats.html.erb (Duration: 16.6ms | Allocations: 2018)
+  [1m[36mUser Exists? (11.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 1 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:14
+  [1m[36mUser Load (88.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4 LIMIT 2 OFFSET 0[0m
+  ↳ app/views/users/show_follow.html.erb:16
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 4[0m
+  ↳ app/views/users/show_follow.html.erb:20
+  Rendered users/show_follow.html.erb within layouts/application (Duration: 133.2ms | Allocations: 4425)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 178.1ms | Allocations: 9108)
+Completed 200 OK in 235ms (Views: 63.8ms | ActiveRecord: 137.6ms | Allocations: 19130)
+
+
