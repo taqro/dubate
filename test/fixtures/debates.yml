@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  created_user_id: 1
+  joined_user_id: 1
+  agenda: MyText
+  wanted: false
+  started_at: 2022-03-20 21:17:58
+  finished_at: 2022-03-20 21:17:58
+
+two:
+  created_user_id: 1
+  joined_user_id: 1
+  agenda: MyText
+  wanted: false
+  started_at: 2022-03-20 21:17:58
+  finished_at: 2022-03-20 21:17:58

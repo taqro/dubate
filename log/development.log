@@ -2328,3 +2328,279 @@ Processing by UsersController#following as HTML
 Completed 200 OK in 235ms (Views: 63.8ms | ActiveRecord: 137.6ms | Allocations: 19130)
 
 
+  [1m[35m (7.8ms)[0m  [1m[34mSELECT GET_LOCK('3166266828006542295', 0)[0m
+  [1m[35m (31.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateDebates (20220320121758)
+  [1m[35m (767.4ms)[0m  [1m[35mCREATE TABLE `debates` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `created_user_id` int, `joined_user_id` int, `agenda` text, `wanted` tinyint(1), `started_at` datetime, `finished_at` datetime, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (170.5ms)[0m  [1m[35mCREATE INDEX `index_debates_on_created_user_id` ON `debates` (`created_user_id`)[0m
+  [1m[35m (69.9ms)[0m  [1m[35mCREATE INDEX `index_debates_on_joined_user_id` ON `debates` (`joined_user_id`)[0m
+  [1m[35m (63.8ms)[0m  [1m[35mCREATE INDEX `index_debates_on_created_user_id_and_created_at` ON `debates` (`created_user_id`, `created_at`)[0m
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (7.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20220320121758')[0m
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.5ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('3166266828006542295')[0m
+  [1m[35m (8.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/" for 127.0.0.1 at 2022-03-21 11:23:16 +0900
+  [1m[35m (10.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 12.2ms | Allocations: 238)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (15.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 499.1ms | Allocations: 30638)
+Completed 200 OK in 595ms (Views: 471.4ms | ActiveRecord: 48.5ms | Allocations: 34291)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-21 11:23:24 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/debates"):
+  
+Started GET "/debates/index" for 127.0.0.1 at 2022-03-21 11:23:42 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  Rendered debates/index.html.erb within layouts/application (Duration: 5.5ms | Allocations: 118)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (6.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 55.9ms | Allocations: 5185)
+Completed 200 OK in 66ms (Views: 56.5ms | ActiveRecord: 6.2ms | Allocations: 6359)
+
+
+Started GET "/debates/index" for 127.0.0.1 at 2022-03-21 11:51:12 +0900
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  Rendered debates/index.html.erb within layouts/application (Duration: 7.4ms | Allocations: 234)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 288.2ms | Allocations: 18854)
+Completed 500 Internal Server Error in 361ms (ActiveRecord: 30.0ms | Allocations: 22481)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_debate_path' for #<ActionView::Base:0x007fa50050fa80>
+Did you mean?  new_user_path):
+    17:             <strong><%= link_to current_user.name, pages_show_path %></strong>
+    18:             <%= link_to 'プロフィール変更', edit_user_registration_path %>
+    19:             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    20:             <%= link_to '議論作成', new_debate_path, class: 'btn btn-default'%>
+    21:           <% else %>
+    22:             <%= link_to 'サインアップ', new_user_registration_path %>
+    23:             <%= link_to 'ログイン', new_user_session_path %>
+  
+app/views/layouts/application.html.erb:20
+Started GET "/debates/index" for 127.0.0.1 at 2022-03-21 11:56:47 +0900
+  [1m[35m (12.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  Rendered debates/index.html.erb within layouts/application (Duration: 6.5ms | Allocations: 234)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (21.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 251.4ms | Allocations: 19071)
+Completed 500 Internal Server Error in 348ms (ActiveRecord: 47.0ms | Allocations: 22697)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `debates_new' for #<ActionView::Base:0x007fe410122f90>
+Did you mean?  debates_new_url):
+    17:             <strong><%= link_to current_user.name, pages_show_path %></strong>
+    18:             <%= link_to 'プロフィール変更', edit_user_registration_path %>
+    19:             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    20:             <%= link_to '議論作成', debates_new, class: 'btn btn-default'%>
+    21:           <% else %>
+    22:             <%= link_to 'サインアップ', new_user_registration_path %>
+    23:             <%= link_to 'ログイン', new_user_session_path %>
+  
+app/views/layouts/application.html.erb:20
+Started GET "/debates/index" for 127.0.0.1 at 2022-03-21 11:57:10 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  Rendered debates/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 115)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 43.3ms | Allocations: 5620)
+Completed 200 OK in 50ms (Views: 45.1ms | ActiveRecord: 3.0ms | Allocations: 7042)
+
+
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 11:57:12 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 54ms (ActiveRecord: 2.9ms | Allocations: 3410)
+
+
+  
+NameError (uninitialized constant User::Debates):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:00:34 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 167ms (ActiveRecord: 41.8ms | Allocations: 15262)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'created_user_id_id' for Debate.):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:00:56 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 16.1ms | Allocations: 8485)
+
+
+  
+NameError (uninitialized constant User::Debates):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:01:34 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 102ms (ActiveRecord: 47.8ms | Allocations: 13952)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'created_user_id_id' for Debate.):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:02:01 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 23.7ms | Allocations: 13573)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'created_user' for Debate.):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:02:12 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 86ms (ActiveRecord: 30.7ms | Allocations: 13971)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'created_user_id_id' for Debate.):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:03:01 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 59ms (ActiveRecord: 22.4ms | Allocations: 13549)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'created_user' for Debate.):
+  
+app/controllers/debates_controller.rb:9:in `new'
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:03:11 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+Completed 500 Internal Server Error in 86ms (ActiveRecord: 39.9ms | Allocations: 13992)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'created_user_id_id' for Debate.):
+  
+app/controllers/debates_controller.rb:9:in `new'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:11:37 +0900
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (32.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/new.html.erb within layouts/application (Duration: 39.4ms | Allocations: 3782)
+  Rendered layout layouts/application.html.erb (Duration: 40.2ms | Allocations: 3857)
+Completed 500 Internal Server Error in 368ms (ActiveRecord: 85.3ms | Allocations: 23434)
+
+
+  
+ActionView::Template::Error (undefined method `debates_path' for #<ActionView::Base:0x007fe42bf88d30>
+Did you mean?  debates_new_path):
+    1: <h1> 議論の新規登録</h1>
+    2: 
+    3: <%= form_with model: @debate, local: true do |f| %>
+    4:   <%= f.label :agenda %>
+    5:   <%= f.text_area :agenda, class: 'form-control', id: 'debate_agenda' %>
+    6:   <%= f.submit nil, class: 'btn btn-default' %>
+  
+app/views/debates/new.html.erb:3
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:12:11 +0900
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 119)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (5.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 98.2ms | Allocations: 8639)
+Completed 200 OK in 131ms (Views: 122.3ms | ActiveRecord: 5.0ms | Allocations: 9829)
+
+
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:12:12 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/new.html.erb within layouts/application (Duration: 21.7ms | Allocations: 3205)
+  Rendered layout layouts/application.html.erb (Duration: 22.7ms | Allocations: 3276)
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 6.3ms | Allocations: 4715)
+
+
+  
+ActionView::Template::Error (undefined method `debates_path' for #<ActionView::Base:0x007fe42f929ad0>
+Did you mean?  debates_new_path):
+    1: <h1> 議論の新規登録</h1>
+    2: 
+    3: <%= form_with model: @debate, local: true do |f| %>
+    4:   <%= f.label :agenda %>
+    5:   <%= f.text_area :agenda, class: 'form-control', id: 'debate_agenda' %>
+    6:   <%= f.submit nil, class: 'btn btn-default' %>
+  
+app/views/debates/new.html.erb:3
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:19:42 +0900
+  [1m[35m (17.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 13.5ms | Allocations: 236)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 311.7ms | Allocations: 15161)
+Completed 200 OK in 431ms (Views: 292.2ms | ActiveRecord: 38.6ms | Allocations: 18815)
+
+
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-21 12:19:45 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (7.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:9:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/new.html.erb within layouts/application (Duration: 72.9ms | Allocations: 4009)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 85.5ms | Allocations: 7804)
+Completed 200 OK in 215ms (Views: 89.5ms | ActiveRecord: 14.6ms | Allocations: 18945)
+
+

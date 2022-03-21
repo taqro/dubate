@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_012501) do
+ActiveRecord::Schema.define(version: 2022_03_20_121758) do
+
+  create_table "debates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "created_user_id"
+    t.integer "joined_user_id"
+    t.text "agenda"
+    t.boolean "wanted"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_user_id", "created_at"], name: "index_debates_on_created_user_id_and_created_at"
+    t.index ["created_user_id"], name: "index_debates_on_created_user_id"
+    t.index ["joined_user_id"], name: "index_debates_on_joined_user_id"
+  end
 
   create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "follower_id"

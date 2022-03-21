@@ -15,6 +15,16 @@ class User < ApplicationRecord
 
   has_many :followers, through: :passive_relationships, source: :follower
 
+  #debate
+  has_many :create_debates, class_name: "Debate",
+                            foreign_key: "created_user",
+                            dependent: :destroy
+
+  has_many :join_debates, class_name: "Debate",
+                          foreign_key: "joined_user_id",
+                          dependent: :destroy
+
+  #以下、フォロー関連のメソッド
   #ユーザーをフォローする
   def follow(other_user)
     following << other_user
