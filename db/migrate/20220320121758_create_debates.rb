@@ -10,8 +10,5 @@ class CreateDebates < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :debates, :created_user_id
-    add_index :debates, :joined_user_id
-    add_index :debates, [:created_user_id, :created_at]
   end
 end

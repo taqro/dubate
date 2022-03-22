@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
   #暫定的 debate
-  get 'debates/index'
-  get 'debates/show'
-  get 'debates/new'
-  get 'debates/create'
-  get 'debates/destroy'
-  get 'debates/edit'
+  resources :debates
 
   devise_for :users
   root 'pages#index'

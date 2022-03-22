@@ -21,7 +21,7 @@ class User < ApplicationRecord
                             dependent: :destroy
 
   has_many :join_debates, class_name: "Debate",
-                          foreign_key: "joined_user_id",
+                          foreign_key: "joined_user",
                           dependent: :destroy
 
   #以下、フォロー関連のメソッド
