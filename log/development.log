@@ -3725,3 +3725,178 @@ Processing by DebatesController#index as HTML
 Completed 200 OK in 65ms (Views: 56.7ms | ActiveRecord: 5.4ms | Allocations: 7529)
 
 
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:40:27 +0900
+  [1m[35m (5.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (14.1ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 79.5ms | Allocations: 7271)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (14.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 280.8ms | Allocations: 21720)
+Completed 200 OK in 374ms (Views: 219.9ms | ActiveRecord: 79.7ms | Allocations: 26267)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:47:06 +0900
+  [1m[35m (8.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (7.3ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 76.9ms | Allocations: 7272)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (6.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 209.3ms | Allocations: 21721)
+Completed 200 OK in 299ms (Views: 159.5ms | ActiveRecord: 67.8ms | Allocations: 26271)
+
+
+Started DELETE "/debates/1" for 127.0.0.1 at 2022-03-23 11:47:10 +0900
+Processing by DebatesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+  [1m[36mDebate Load (4.6ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (13.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mDebate Destroy (108.3ms)[0m  [1m[31mDELETE FROM `debates` WHERE `debates`.`id` = 1[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mTRANSACTION (33.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+Redirected to http://127.0.0.1:3000/debates
+Completed 302 Found in 178ms (ActiveRecord: 159.4ms | Allocations: 2957)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:47:10 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (3.2ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1114)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 55.2ms | Allocations: 5900)
+Completed 200 OK in 58ms (Views: 51.1ms | ActiveRecord: 5.1ms | Allocations: 6302)
+
+
+Started DELETE "/debates/2" for 127.0.0.1 at 2022-03-23 11:47:14 +0900
+Processing by DebatesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"2"}
+  [1m[36mDebate Load (2.7ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mDebate Destroy (6.6ms)[0m  [1m[31mDELETE FROM `debates` WHERE `debates`.`id` = 2[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mTRANSACTION (11.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+Redirected to http://127.0.0.1:3000/debates
+Completed 302 Found in 33ms (ActiveRecord: 23.6ms | Allocations: 2767)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:47:14 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (3.4ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 9.4ms | Allocations: 1050)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (5.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 41.5ms | Allocations: 5837)
+Completed 200 OK in 43ms (Views: 33.7ms | ActiveRecord: 8.9ms | Allocations: 6238)
+
+
+Started DELETE "/debates/3" for 127.0.0.1 at 2022-03-23 11:47:16 +0900
+Processing by DebatesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"3"}
+  [1m[36mDebate Load (3.3ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (9.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mDebate Destroy (11.6ms)[0m  [1m[31mDELETE FROM `debates` WHERE `debates`.`id` = 3[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mTRANSACTION (16.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+Redirected to http://127.0.0.1:3000/debates
+Completed 302 Found in 62ms (ActiveRecord: 41.0ms | Allocations: 2766)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:47:16 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (2.8ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 6.5ms | Allocations: 988)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 33.5ms | Allocations: 5774)
+Completed 200 OK in 35ms (Views: 29.3ms | ActiveRecord: 5.3ms | Allocations: 6175)
+
+
+Started DELETE "/debates/4" for 127.0.0.1 at 2022-03-23 11:47:18 +0900
+Processing by DebatesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"4"}
+  [1m[36mDebate Load (3.9ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mDebate Destroy (7.6ms)[0m  [1m[31mDELETE FROM `debates` WHERE `debates`.`id` = 4[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mTRANSACTION (16.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+Redirected to http://127.0.0.1:3000/debates
+Completed 302 Found in 61ms (ActiveRecord: 32.8ms | Allocations: 2751)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:47:18 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (4.5ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 13.2ms | Allocations: 925)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 78.6ms | Allocations: 5711)
+Completed 200 OK in 88ms (Views: 78.7ms | ActiveRecord: 7.4ms | Allocations: 6109)
+
+
+Started DELETE "/debates/5" for 127.0.0.1 at 2022-03-23 11:47:21 +0900
+Processing by DebatesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"5"}
+  [1m[36mDebate Load (8.7ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 5 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mDebate Destroy (12.2ms)[0m  [1m[31mDELETE FROM `debates` WHERE `debates`.`id` = 5[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+  [1m[36mTRANSACTION (9.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/debates_controller.rb:22:in `destroy'
+Redirected to http://127.0.0.1:3000/debates
+Completed 302 Found in 58ms (ActiveRecord: 34.3ms | Allocations: 2750)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 11:47:21 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (9.1ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 16.5ms | Allocations: 863)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (6.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 107.3ms | Allocations: 5646)
+Completed 200 OK in 111ms (Views: 93.1ms | ActiveRecord: 16.1ms | Allocations: 6044)
+
+

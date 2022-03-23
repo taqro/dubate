@@ -20,6 +20,9 @@
         <td>
           <%= debate.created_user_id %>
         </td>
+        <td>
+          <%= link_to '削除', debate, method: :delete, data: {confirm: "議論「#{debate.agenda}」を削除しますか？"}, class: 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
