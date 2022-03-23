@@ -1,7 +1,2 @@
 <h1> 議論の新規登録</h1>
-
-<%= form_with model: @debate, local: true do |f| %>
-  <%= f.label :agenda %>
-  <%= f.text_area :agenda, class: 'form-control', id: 'debate_agenda' %>
-  <%= f.submit nil, class: 'btn btn-default' %>
-<% end%>
+<%= render partial: 'form', locals: {debate: @debate} %>

@@ -4538,3 +4538,137 @@ Processing by DebatesController#show as HTML
 Completed 200 OK in 73ms (Views: 54.2ms | ActiveRecord: 16.1ms | Allocations: 7116)
 
 
+Started GET "/debates" for 127.0.0.1 at 2022-03-23 13:52:08 +0900
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (5.5ms)[0m  [1m[34mSELECT `debates`.* FROM `debates`[0m
+  ↳ app/views/debates/index.html.erb:15
+  Rendered debates/index.html.erb within layouts/application (Duration: 78.0ms | Allocations: 7091)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (8.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 240.1ms | Allocations: 21540)
+Completed 200 OK in 360ms (Views: 226.4ms | ActiveRecord: 34.6ms | Allocations: 26087)
+
+
+Started GET "/debates/7/edit" for 127.0.0.1 at 2022-03-23 13:52:10 +0900
+Processing by DebatesController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mDebate Load (10.9ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:28:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/edit.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 61.7ms | Allocations: 3311)
+  Rendered debates/edit.html.erb within layouts/application (Duration: 65.7ms | Allocations: 3641)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 98.4ms | Allocations: 8437)
+Completed 200 OK in 120ms (Views: 95.2ms | ActiveRecord: 15.1ms | Allocations: 10307)
+
+
+Started GET "/debates/7/edit" for 127.0.0.1 at 2022-03-23 13:52:14 +0900
+Processing by DebatesController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mDebate Load (3.3ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:28:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/edit.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 4.4ms | Allocations: 557)
+  Rendered debates/edit.html.erb within layouts/application (Duration: 5.8ms | Allocations: 651)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (6.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 50.1ms | Allocations: 6053)
+Completed 200 OK in 60ms (Views: 45.0ms | ActiveRecord: 9.9ms | Allocations: 7051)
+
+
+Started GET "/debates/8/edit" for 127.0.0.1 at 2022-03-23 13:52:16 +0900
+Processing by DebatesController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mDebate Load (6.7ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:28:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/edit.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 5.4ms | Allocations: 557)
+  Rendered debates/edit.html.erb within layouts/application (Duration: 6.2ms | Allocations: 651)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 51.4ms | Allocations: 5438)
+Completed 200 OK in 81ms (Views: 55.4ms | ActiveRecord: 10.6ms | Allocations: 7053)
+
+
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-23 13:52:21 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (9.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 5.2ms | Allocations: 563)
+  Rendered debates/new.html.erb within layouts/application (Duration: 8.0ms | Allocations: 810)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 32.8ms | Allocations: 4723)
+Completed 200 OK in 109ms (Views: 36.3ms | ActiveRecord: 9.7ms | Allocations: 9107)
+
+
+Started GET "/debates/7/edit" for 127.0.0.1 at 2022-03-23 13:52:44 +0900
+Processing by DebatesController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mDebate Load (17.3ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:28:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/edit.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 20.7ms | Allocations: 844)
+  Rendered debates/edit.html.erb within layouts/application (Duration: 35.7ms | Allocations: 1204)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 76.8ms | Allocations: 6371)
+Completed 200 OK in 119ms (Views: 79.3ms | ActiveRecord: 19.8ms | Allocations: 8760)
+
+
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-23 13:52:46 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (5.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 31.2ms | Allocations: 542)
+  Rendered debates/new.html.erb within layouts/application (Duration: 35.6ms | Allocations: 1267)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 68.4ms | Allocations: 5253)
+Completed 200 OK in 84ms (Views: 70.7ms | ActiveRecord: 5.6ms | Allocations: 6781)
+
+
+Started GET "/debates/7/edit" for 127.0.0.1 at 2022-03-23 13:53:18 +0900
+Processing by DebatesController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mDebate Load (6.3ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:28:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/edit.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 1.5ms | Allocations: 558)
+  Rendered debates/edit.html.erb within layouts/application (Duration: 1.9ms | Allocations: 652)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (19.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:16
+  Rendered layout layouts/application.html.erb (Duration: 59.5ms | Allocations: 6059)
+Completed 200 OK in 79ms (Views: 41.7ms | ActiveRecord: 26.0ms | Allocations: 7042)
+
+
+Started GET "/debates/new" for 127.0.0.1 at 2022-03-23 13:53:21 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (7.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 1.6ms | Allocations: 534)
+  Rendered debates/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 628)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 37.9ms | Allocations: 5027)
+Completed 200 OK in 55ms (Views: 40.7ms | ActiveRecord: 7.5ms | Allocations: 6436)
+
+
