@@ -15,13 +15,16 @@
     <% @debates.each do |debate| %>
       <tr>
         <td>
-          <%= debate.agenda %>
+          <%= link_to debate.agenda, debate %>
         </td>
         <td>
           <%= debate.created_user_id %>
         </td>
         <td>
           <%= link_to '削除', debate, method: :delete, data: {confirm: "議論「#{debate.agenda}」を削除しますか？"}, class: 'btn btn-danger' %>
+        </td>
+        <td>
+          <%= link_to '編集', edit_debate_path(debate), class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

@@ -1,2 +1,7 @@
-<h1>Debates#show</h1>
-<p>Find me in app/views/debates/show.html.erb</p>
+<div>
+  <%= User.find(@debate.created_user_id).name %>
+</div>
+<div>
+  <%= @debate.agenda %>
+</div>
+

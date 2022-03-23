@@ -4,6 +4,7 @@ class DebatesController < ApplicationController
   end
 
   def show
+    @debate = Debate.find(params[:id])
   end
 
   def new
@@ -24,6 +25,13 @@ class DebatesController < ApplicationController
   end
 
   def edit
+    @debate = Debate.find(params[:id])
+  end
+
+  def update
+    debate = Debate.find(params[:id])
+    debate.update!(debate_params)
+    redirect_to debates_url
   end
 
   private
