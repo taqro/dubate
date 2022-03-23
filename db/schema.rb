@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_121758) do
+ActiveRecord::Schema.define(version: 2022_03_23_060331) do
 
   create_table "debates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "created_user_id"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 2022_03_20_121758) do
     t.datetime "finished_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "debate_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["debate_id", "user_id"], name: "index_likes_on_debate_id_and_user_id", unique: true
+    t.index ["debate_id"], name: "index_likes_on_debate_id"
+    t.index ["user_id", "created_at"], name: "index_likes_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -47,4 +58,6 @@ ActiveRecord::Schema.define(version: 2022_03_20_121758) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "likes", "debates"
+  add_foreign_key "likes", "users"
 end

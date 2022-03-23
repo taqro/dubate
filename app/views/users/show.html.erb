@@ -1,6 +1,20 @@
 <h1>こんにちは<%= @user.name %>さん</h1>
-<p>ユーザー用ページ</p>
 <section class="stas">
   <%= render 'shared/stats' %>
 </section>
 <%= render 'follow_form' if user_signed_in?  %>
+<%# これらはタブにする %>
+<%# likeした議論一覧 %>
+<h2>likeした議論一覧</h2>
+<% @user.liked_debates.each do |debate| %>
+  <tr>
+    <td>
+      <%= link_to debate.agenda, debate %>
+    </td>
+    <td>
+      <%= debate.created_user_id %>
+    </td>
+  </tr>
+<% end %>
+<%# 作成した議論一覧 %>
+<%# 参加した議論一覧 %>

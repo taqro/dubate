@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find_by(id: params[:id])
+    #暫定的に自分だけのページを表示できるようにしておく
+    @user = current_user
   end
 
   def following

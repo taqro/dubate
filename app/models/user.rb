@@ -24,6 +24,15 @@ class User < ApplicationRecord
                           foreign_key: "joined_user",
                           dependent: :destroy
 
+  #like
+  has_many :likes, dependent: :destroy
+  has_many :liked_debates, through: :likes, source: :debate
+
+  #既にlikeしたか
+  def liked?(debate)
+    self.likes.exists?(debate_id: debate.id)
+  end
+
   #以下、フォロー関連のメソッド
   #ユーザーをフォローする
   def follow(other_user)
