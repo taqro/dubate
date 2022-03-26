@@ -2,7 +2,13 @@
 <section class="stas">
   <%= render 'shared/stats' %>
 </section>
+<div>
+  <p>user_id</p>
+  <%= @user.id %>
+</div>
 <%= render 'follow_form' if user_signed_in?  %>
+
+
 <%# これらはタブにする %>
 <%# likeした議論一覧 %>
 <h2>likeした議論一覧</h2>

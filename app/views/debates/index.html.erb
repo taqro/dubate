@@ -9,6 +9,9 @@
       <th>
         created_user_id
       </th>
+      <th>
+        joined_user_id
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +22,9 @@
         </td>
         <td>
           <%= debate.created_user_id %>
+        </td>
+        <td>
+          <%= debate.joined_user_id %>
         </td>
         <td>
           <%= link_to '削除', debate, method: :delete, data: {confirm: "議論「#{debate.agenda}」を削除しますか？"}, class: 'btn btn-danger' %>

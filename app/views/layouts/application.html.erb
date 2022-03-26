@@ -18,6 +18,7 @@
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
             <%= link_to '議論作成', new_debate_path %>
+            <%= link_to '議論一覧', debates_path %>
           <% else %>
             <%= link_to 'サインアップ', new_user_registration_path %>
             <%= link_to 'ログイン', new_user_session_path %>

@@ -1,7 +1,20 @@
 <div>
+  <p>created_user_name</p>
   <%= User.find(@debate.created_user_id).name %>
 </div>
 <div>
+  <p>joined_user_name</p>
+  <% if @debate.joined_user_id != nil %>
+    <%= User.find(@debate.joined_user_id).name %>
+  <% end %>
+</div>
+<div>
+  <p>agenda</p>
   <%= @debate.agenda %>
+</div>
+<div>
+  <% if @debate.WinOrLose.nil? %>
+    <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
+  <% end %>
 </div>
 
