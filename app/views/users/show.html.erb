@@ -1,3 +1,4 @@
+<%# 暫定的に自分のページしか表示できない 後で直す %>
 <h1>こんにちは<%= @user.name %>さん</h1>
 <%# フォロー数、フォロワー数 %>
 <section class="stas">
@@ -33,4 +34,28 @@
   </tr>
 <% end %>
 <%# 作成した議論一覧 %>
+<h2>作成した議論一覧</h2>
+<% Debate.where(created_user_id: @user.id).each do |debate| %>
+  <tr>
+    <td>
+      <%= link_to debate.agenda, debate %>
+    </td>
+    <td>
+      <%= debate.created_user_id %>
+    </td>
+  </tr>
+<% end %>
 <%# 参加した議論一覧 %>
+<h2>参加した議論一覧</h2>
+<% Debate.where(joined_user_id: @user.id).each do |debate| %>
+  <tr>
+    <td>
+      <%= link_to debate.agenda, debate %>
+    </td>
+    <td>
+      <%= debate.created_user_id %>
+    </td>
+  </tr>
+<% end %>
+<%# 参加中の議論一覧（created_user_idかjoinned_user_idにidがあって、かつ、finished_atがnilのdebateの集合） %>
+

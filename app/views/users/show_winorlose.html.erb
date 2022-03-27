@@ -14,7 +14,7 @@
     <% if @debates.any? %>
       <ul class="users winorlose">
         <% @debates.each do |debate| %>
-          <li><%= debate.agenda %></li>
+          <%= link_to debate.agenda, debate %>
         <% end %>
       </ul>
       <%= paginate @debates %>

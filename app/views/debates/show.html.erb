@@ -1,20 +1,31 @@
 <div>
-  <p>created_user_name</p>
-  <%= User.find(@debate.created_user_id).name %>
+  <p>議論作成者</p>
+  <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id) %>
 </div>
 <div>
-  <p>joined_user_name</p>
+  <p>議論参加者</p>
   <% if @debate.joined_user_id != nil %>
-    <%= User.find(@debate.joined_user_id).name %>
+    <%= link_to User.find(@debate.joined_user_id).name, User.find(@debate.joined_user_id) %>
   <% end %>
 </div>
 <div>
   <p>agenda</p>
   <%= @debate.agenda %>
 </div>
+
 <div>
   <% if @debate.WinOrLose.nil? %>
+    <%# 降参ボタン %>
     <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
+    <%# 投票開始ボタン %>
+    
+  <% else %>
+    <%# 勝者と敗者の表示 %>
+    <h2>Winner</h2>
+    <%= User.find(@debate.WinOrLose.winner_id).name %>
+    <h2>Loser</h2>
+    <%= User.find(@debate.WinOrLose.loser_id).name %>
   <% end %>
 </div>
+
 
