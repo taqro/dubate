@@ -1,11 +1,21 @@
 <h1>こんにちは<%= @user.name %>さん</h1>
+<%# フォロー数、フォロワー数 %>
 <section class="stas">
-  <%= render 'shared/stats' %>
+  <%= render 'shared/follow_stats' %>
 </section>
+
+<%# ユーザーID %>
 <div>
   <p>user_id</p>
   <%= @user.id %>
 </div>
+
+<%# 勝敗数（それぞれを勝った議論一覧と負けた議論一覧へのリンクにする） %>
+<section class="stas">
+  <%= render 'shared/winorlose_stats' %>
+</section>
+
+<%# フォロー関係 %>
 <%= render 'follow_form' if user_signed_in?  %>
 
 
