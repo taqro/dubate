@@ -14,12 +14,20 @@
   <%= @debate.agenda %>
 </div>
 
+<% if @vote != nil %>
+  <%= @vote.status %>
+<% end %>
 <div>
-  <% if @debate.WinOrLose.nil? %>
+<%# 参加者が揃っているときに表示 %>
+<% if @debate.joined_user_id != nil %>
+  <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
+  <% if @debate.WinOrLose.nil? and @vote.status == 'before_vote' %>
     <%# 降参ボタン %>
     <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
     <%# 投票開始ボタン %>
     <%= button_to "投票", debates_vote_start_path(@debate), method: :get %>
+  <% elsif @vote.status != 'before_vote' %>
+    <%# なにも表示しない %>
   <% else %>
     <%# 勝者と敗者の表示 %>
     <h2>Winner</h2>
@@ -27,21 +35,28 @@
     <h2>Loser</h2>
     <%= User.find(@debate.WinOrLose.loser_id).name %>
   <% end %>
+<% end %>
 </div>
 
-<%# 投票開始ボタンを押したら表示される %>
-<% if true%>
+<%# 投票中 以下ボタン表示 %>
+<% if @vote.status == 'voting' %>
   <%# 議論参加者と観戦者で表示を分ける %>
   <% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id %>
-  <h2>投票中</h2>
+    <h2>投票中</h2>
   <% else %>
-  <%# 参加者のどちらかへの投票ボタン と途中経過グラフ%>
-  <h1>a</h1>
+    <%# 参加者のどちらかへの投票ボタン %>
+    <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get %>
+    <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get %>
   <% end %>
 <% end %>
 
-<%# 投票終了後 グラフ表示 %>
-<% if true %>
+<%# 投票終了後 途中経過グラフ表示 %>
+<% if @vote.status == 'voted' %>
+  <%= pie_chart [['赤', 50], ['青', 50]]%>
+<% end %>
+
+<%# 全体の投票終了後 グラフ表示 %>
+<% if @vote.status == 'after_vote' %>
   <%= pie_chart [['赤', 50], ['青', 50]]%>
 <% end %>
 

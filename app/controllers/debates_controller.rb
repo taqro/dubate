@@ -9,6 +9,7 @@ class DebatesController < ApplicationController
     if @debate.joined_user_id.nil? and @debate.created_user_id != current_user.id
       @debate.update!(joined_user_id: current_user.id, wanted: false, started_at: Time.now)
     end
+    @vote = Vote.find_by(debate_id: @debate.id)
   end
 
   def new
@@ -58,11 +59,30 @@ class DebatesController < ApplicationController
 
   #投票を開始する
   def vote_start
+    debate = Debate.find(params[:id])
+    vote = debate.build_Vote(status: 'voting')
+    vote.save!
+    redirect_back fallback_location: root_path
+  end
+
+  #投票を終了する
+  def vote_finish
 
   end
-  #観戦者がどちらかの議論参加者に投票する
-  def vote
 
+  #観戦者が議論作成者に投票する
+  def vote_created_user
+    debate = Debate.find(params[:id])
+    @vote = debate.build_Vote(voted_user_id: current_user.id, debating_user_id: debate.created_user_id, status: 'voted')
+    @vote.save!
+    redirect_back fallback_location: root_path
+  end
+  #観戦者が議論参加者に投票する
+  def vote_joined_user
+    debate = Debate.find(params[:id])
+    @vote = debate.build_Vote(voted_user_id: current_user.id, debating_user_id: joined_user_id, status: 'voted')
+    @vote.save!
+    redirect_back fallback_location: root_path
   end
 
   private

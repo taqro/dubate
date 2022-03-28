@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_110511) do
     t.bigint "debate_id"
     t.bigint "voted_user_id"
     t.bigint "debating_user_id"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["debate_id"], name: "index_votes_on_debate_id"

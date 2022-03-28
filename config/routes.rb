@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "debates/:id/surrender" => "debates#surrender", as: 'debates_surrender'
   #投票開始
   get "debates/:id/vote_start" => "debates#vote_start", as: 'debates_vote_start'
+  #議論作成者に投票する
+  get "debates/:id/vote_created_user" => "debates#vote_created_user", as: 'debates_vote_created'
+  #議論参加者に投票する
+  get "debates/:id/vote_joined_user" => "debates#vote_joined_user", as: 'debates_vote_joined'
 
   devise_for :users
   root 'pages#index'
