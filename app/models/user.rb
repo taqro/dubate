@@ -23,6 +23,14 @@ class User < ApplicationRecord
   has_many :win_debates, through: :wins, source: :Debate
   has_many :lose_debates, through: :loses, source: :Debate
 
+  #投票関連
+  has_many :voting, class_name: "Vote",
+                  foreign_key: "voted_user_id",
+                  dependent: :destroy
+  has_many :voted, class_name: "Vote",
+                  foreign_key: "debating_user_id",
+                  dependent: :destroy
+
   #debate
   has_many :create_debates, class_name: "Debate",
                             foreign_key: "created_user",

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_055918) do
+ActiveRecord::Schema.define(version: 2022_03_27_110511) do
 
   create_table "debates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "created_user_id"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 2022_03_24_055918) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "debate_id"
+    t.bigint "voted_user_id"
+    t.bigint "debating_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["debate_id"], name: "index_votes_on_debate_id"
+    t.index ["debating_user_id"], name: "index_votes_on_debating_user_id"
+    t.index ["voted_user_id"], name: "index_votes_on_voted_user_id"
+  end
+
   create_table "win_or_loses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "debate_id"
     t.bigint "winner_id"
@@ -71,4 +82,5 @@ ActiveRecord::Schema.define(version: 2022_03_24_055918) do
 
   add_foreign_key "likes", "debates"
   add_foreign_key "likes", "users"
+  add_foreign_key "votes", "debates"
 end

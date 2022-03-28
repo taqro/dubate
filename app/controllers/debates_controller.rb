@@ -39,7 +39,7 @@ class DebatesController < ApplicationController
 
   #降参する
   def surrender
-    debate = Debate.find(params[:debate_id])
+    debate = Debate.find(params[:id])
     #降参したユーザーが議論を作成したユーザーの場合
     if current_user.id == debate.created_user_id
       winorlose = debate.build_WinOrLose(loser_id: debate.created_user_id, winner_id: debate.joined_user_id)
@@ -54,6 +54,15 @@ class DebatesController < ApplicationController
       debate.update!(finished_at: Time.now)
       redirect_back fallback_location: root_path
     end
+  end
+
+  #投票を開始する
+  def vote_start
+
+  end
+  #観戦者がどちらかの議論参加者に投票する
+  def vote
+
   end
 
   private

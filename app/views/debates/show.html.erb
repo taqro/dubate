@@ -2,6 +2,7 @@
   <p>議論作成者</p>
   <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id) %>
 </div>
+
 <div>
   <p>議論参加者</p>
   <% if @debate.joined_user_id != nil %>
@@ -18,7 +19,7 @@
     <%# 降参ボタン %>
     <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
     <%# 投票開始ボタン %>
-    
+    <%= button_to "投票", debates_vote_start_path(@debate), method: :get %>
   <% else %>
     <%# 勝者と敗者の表示 %>
     <h2>Winner</h2>
@@ -27,5 +28,23 @@
     <%= User.find(@debate.WinOrLose.loser_id).name %>
   <% end %>
 </div>
+
+<%# 投票開始ボタンを押したら表示される %>
+<% if true%>
+  <%# 議論参加者と観戦者で表示を分ける %>
+  <% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id %>
+  <h2>投票中</h2>
+  <% else %>
+  <%# 参加者のどちらかへの投票ボタン と途中経過グラフ%>
+  <h1>a</h1>
+  <% end %>
+<% end %>
+
+<%# 投票終了後 グラフ表示 %>
+<% if true %>
+  <%= pie_chart [['赤', 50], ['青', 50]]%>
+<% end %>
+
+
 
 
