@@ -73,15 +73,15 @@ class DebatesController < ApplicationController
   #観戦者が議論作成者に投票する
   def vote_created_user
     debate = Debate.find(params[:id])
-    @vote = debate.build_Vote(voted_user_id: current_user.id, debating_user_id: debate.created_user_id, status: 'voted')
-    @vote.save!
+    @vote = Vote.find_by(debate_id: params[:id])
+    @vote.update!(voted_user_id: current_user.id, debating_user_id: debate.created_user_id, status: 'voted')
     redirect_back fallback_location: root_path
   end
   #観戦者が議論参加者に投票する
   def vote_joined_user
     debate = Debate.find(params[:id])
-    @vote = debate.build_Vote(voted_user_id: current_user.id, debating_user_id: joined_user_id, status: 'voted')
-    @vote.save!
+    @vote = Vote.find_by(debate_id: params[:id])
+    @vote.update!(voted_user_id: current_user.id, debating_user_id: debate.joined_user_id, status: 'voted')
     redirect_back fallback_location: root_path
   end
 

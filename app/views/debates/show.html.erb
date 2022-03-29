@@ -15,18 +15,26 @@
 </div>
 
 <% if @vote != nil %>
+  <h2>vote_status</h2>
   <%= @vote.status %>
+<% else %>
+  <h2>nil</h2>
 <% end %>
 <div>
 <%# 参加者が揃っているときに表示 %>
 <% if @debate.joined_user_id != nil %>
   <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
-  <% if @debate.WinOrLose.nil? and @vote.status == 'before_vote' %>
+  <% if @debate.WinOrLose.nil? and @vote&.status == nil %>
     <%# 降参ボタン %>
     <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
-    <%# 投票開始ボタン %>
+    <%# 投票開始ボタン（制限時間を選べる） %>
     <%= button_to "投票", debates_vote_start_path(@debate), method: :get %>
-  <% elsif @vote.status != 'before_vote' %>
+    <select name="time-limit">
+      <option value="">制限時間を選択</option>
+      <option value="1">1分</option>
+      <option value="5">5分</option>
+    </select>
+  <% elsif @vote&.status != 'before_vote' %>
     <%# なにも表示しない %>
   <% else %>
     <%# 勝者と敗者の表示 %>
@@ -39,7 +47,7 @@
 </div>
 
 <%# 投票中 以下ボタン表示 %>
-<% if @vote.status == 'voting' %>
+<% if @vote&.status == 'voting' %>
   <%# 議論参加者と観戦者で表示を分ける %>
   <% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id %>
     <h2>投票中</h2>
@@ -50,13 +58,13 @@
   <% end %>
 <% end %>
 
-<%# 投票終了後 途中経過グラフ表示 %>
-<% if @vote.status == 'voted' %>
+<%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
+<% if @vote&.status == 'voted' and  current_user.id != @debate.created_user_id and current_user.id != @debate.joined_user_id%>
   <%= pie_chart [['赤', 50], ['青', 50]]%>
 <% end %>
 
 <%# 全体の投票終了後 グラフ表示 %>
-<% if @vote.status == 'after_vote' %>
+<% if @vote&.status == 'after_vote' %>
   <%= pie_chart [['赤', 50], ['青', 50]]%>
 <% end %>
 
