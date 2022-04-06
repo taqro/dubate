@@ -14,17 +14,24 @@
   <%= @debate.agenda %>
 </div>
 
-<% if @vote != nil %>
-  <h2>vote_status</h2>
-  <%= @vote.status %>
-<% else %>
-  <h2>nil</h2>
-<% end %>
+<h1>議論</h1>
+<div id='conversations', data-debate_id="<%= @debate.id %>" >
+  <%= render partial: 'debates/conversation', collection: @conversations %>
+</div>
+<form>
+  <label>Say something:</label><br>
+  <input type="text" data-behavior="debate_speaker">
+</form>
+
+<h2>
+<%= @debate.status %>
+</h2>
+
 <div>
 <%# 参加者が揃っているときに表示 %>
 <% if @debate.joined_user_id != nil %>
   <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
-  <% if @debate.WinOrLose.nil? and @vote&.status == nil %>
+  <% if @debate.WinOrLose.nil? and @debate.status == "before_vote" %>
     <%# 降参ボタン %>
     <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
     <%# 投票開始ボタン（制限時間を選べる） %>
@@ -34,7 +41,7 @@
       <option value="1">1分</option>
       <option value="5">5分</option>
     </select>
-  <% elsif @vote&.status != 'before_vote' %>
+  <% elsif @debate.status != "before_vote" %>
     <%# なにも表示しない %>
   <% else %>
     <%# 勝者と敗者の表示 %>
@@ -47,7 +54,7 @@
 </div>
 
 <%# 投票中 以下ボタン表示 %>
-<% if @vote&.status == 'voting' %>
+<% if @debate.status == 'voting' %>
   <%# 議論参加者と観戦者で表示を分ける %>
   <% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id %>
     <h2>投票中</h2>
@@ -59,14 +66,16 @@
 <% end %>
 
 <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
-<% if @vote&.status == 'voted' and  current_user.id != @debate.created_user_id and current_user.id != @debate.joined_user_id%>
+<% if !(@vote.nil?) and  current_user.id != @debate.created_user_id and current_user.id != @debate.joined_user_id and @debate.status != 'after_vote' %>
   <%= pie_chart [['赤', 50], ['青', 50]]%>
 <% end %>
 
 <%# 全体の投票終了後 グラフ表示 %>
-<% if @vote&.status == 'after_vote' %>
+<% if @debate.status == 'after_vote' %>
   <%= pie_chart [['赤', 50], ['青', 50]]%>
 <% end %>
+
+<%= pie_chart @data %>
 
 
 

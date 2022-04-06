@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'conversations/create'
+  get 'conversations/destroy'
+
+  #ActionCable
+  mount ActionCable.server => '/cable'
+
   #暫定的 debate とlike
   resources :debates do
     resource :likes, only: [:create, :destroy]

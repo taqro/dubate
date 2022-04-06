@@ -73,4 +73,7 @@ gem 'kaminari'
 #chartkick
 gem 'chartkick'
 
+#gon
+gem 'gon'
+
 

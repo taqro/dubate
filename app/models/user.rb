@@ -39,6 +39,9 @@ class User < ApplicationRecord
                           foreign_key: "joined_user",
                           dependent: :destroy
 
+  #conversation
+  has_many :Conversations
+
   #like
   has_many :likes, dependent: :destroy
   has_many :liked_debates, through: :likes, source: :debate

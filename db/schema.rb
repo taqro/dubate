@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_110511) do
+ActiveRecord::Schema.define(version: 2022_04_03_101252) do
+
+  create_table "conversations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "debate_id"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["debate_id"], name: "index_conversations_on_debate_id"
+    t.index ["user_id"], name: "index_conversations_on_user_id"
+  end
 
   create_table "debates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "created_user_id"
@@ -21,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_110511) do
     t.datetime "finished_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
   end
 
   create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -62,7 +73,6 @@ ActiveRecord::Schema.define(version: 2022_03_27_110511) do
     t.bigint "debate_id"
     t.bigint "voted_user_id"
     t.bigint "debating_user_id"
-    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["debate_id"], name: "index_votes_on_debate_id"
@@ -81,6 +91,8 @@ ActiveRecord::Schema.define(version: 2022_03_27_110511) do
     t.index ["winner_id"], name: "index_win_or_loses_on_winner_id"
   end
 
+  add_foreign_key "conversations", "debates"
+  add_foreign_key "conversations", "users"
   add_foreign_key "likes", "debates"
   add_foreign_key "likes", "users"
   add_foreign_key "votes", "debates"

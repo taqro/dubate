@@ -9,7 +9,17 @@ class DebatesController < ApplicationController
     if @debate.joined_user_id.nil? and @debate.created_user_id != current_user.id
       @debate.update!(joined_user_id: current_user.id, wanted: false, started_at: Time.now)
     end
-    @vote = Vote.find_by(debate_id: @debate.id)
+    #投票
+    @vote = Vote.find_by(debate_id: @debate.id, voted_user_id: current_user.id) #観戦者が投票したときのみ存在する
+    @votes = Vote.where(debate_id: @debate.id)
+    #converstions
+    @conversations = @debate.Conversations
+
+    #円グラフ用データ
+    @data = {@debate.created_user.name => @votes.where(debating_user_id: @debate.created_user.id).count, @debate.joined_user.name => @votes.where(debating_user_id: @debate.joined_user.id).count}
+
+    #gon
+    gon.debate = @debate
   end
 
   def new
@@ -57,10 +67,11 @@ class DebatesController < ApplicationController
     end
   end
 
-  #投票を開始する
+  #投票を開始する（投票ボタンを押したときに、voteが作成される）
   def vote_start
     debate = Debate.find(params[:id])
-    vote = debate.build_Vote(status: 'voting')
+    debate.update!(status: "voting") #投票開始状態
+    vote = debate.build_Vote
     vote.save!
     redirect_back fallback_location: root_path
   end
@@ -74,14 +85,14 @@ class DebatesController < ApplicationController
   def vote_created_user
     debate = Debate.find(params[:id])
     @vote = Vote.find_by(debate_id: params[:id])
-    @vote.update!(voted_user_id: current_user.id, debating_user_id: debate.created_user_id, status: 'voted')
+    @vote.update!(voted_user_id: current_user.id, debating_user_id: debate.created_user_id)
     redirect_back fallback_location: root_path
   end
   #観戦者が議論参加者に投票する
   def vote_joined_user
     debate = Debate.find(params[:id])
     @vote = Vote.find_by(debate_id: params[:id])
-    @vote.update!(voted_user_id: current_user.id, debating_user_id: debate.joined_user_id, status: 'voted')
+    @vote.update!(voted_user_id: current_user.id, debating_user_id: debate.joined_user_id)
     redirect_back fallback_location: root_path
   end
 
