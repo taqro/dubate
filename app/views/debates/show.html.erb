@@ -20,7 +20,7 @@
 </div>
 <%# 議論入力フォーム（議論中、議論参加者にしか表示されない） フッターに表示する %>
 <% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id and @debate.finished_at == nil %>
-  <form name="conversationform" id="conversation_form">
+  <form name="conversationform" id="conversation-form">
     <label>Say something:</label><br>
     <div>
       <input type="text" id="conversation-text">
