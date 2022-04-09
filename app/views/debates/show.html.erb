@@ -15,13 +15,21 @@
 </div>
 
 <h1>議論</h1>
-<div id='conversations', data-debate_id="<%= @debate.id %>" >
+<div id='conversations' data-debate_id="<%= @debate.id %>" >
   <%= render partial: 'debates/conversation', collection: @conversations %>
 </div>
-<form>
-  <label>Say something:</label><br>
-  <input type="text" data-behavior="debate_speaker">
-</form>
+<%# 議論入力フォーム（議論中、議論参加者にしか表示されない） フッターに表示する %>
+<% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id and @debate.finished_at == nil %>
+  <form name="conversationform" id="conversation_form">
+    <label>Say something:</label><br>
+    <div>
+      <input type="text" id="conversation-text">
+    </div>
+    <div>
+      <input type="button" id="conversation-btn" value="送信">
+    </div>
+  </form>
+<% end %>
 
 <h2>
 <%= @debate.status %>
@@ -71,8 +79,10 @@
 <% end %>
 
 <%# 全体の投票終了後 グラフ表示 %>
-<% if @debate.status == 'after_vote' %>
-  <%= pie_chart [['赤', 50], ['青', 50]]%>
+<% if @debate.status == "after_vote" and @debate.finished_at != nil %>
+  <% if @debate.status == 'after_vote' %>
+    <%= pie_chart [['赤', 50], ['青', 50]]%>
+  <% end %>
 <% end %>
 
 <%= pie_chart @data %>

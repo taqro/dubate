@@ -23,10 +23,29 @@ const appRoom = consumer.subscriptions.create({channel: "DebateChannel", debate_
   }
 });
 
-window.addEventListener("keypress", function(e) {
-  if (e.key === 'Enter') {
-    appRoom.speak(e.target.value);
-    e.target.value = '';
+// 入力フォームの送信ボタンを押したら発火するように修正する
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("conversation-btn").addEventListener('click', function(e){
+    const conversationText = document.getElementById('conversation-text');
+    appRoom.speak(conversationText.value);
+    conversationText.value = '';
     e.preventDefault();
-  }
-})
+  });
+}, false);
+
+// window.addEventListener("keypress", function(e) {
+//   if (e.key === 'Enter') {
+//     appRoom.speak(e.target.value);
+//     e.target.value = '';
+//     e.preventDefault();
+//   }
+// })
+
+//議論を離れる直前に行う処理
+//明示的に購読を解除する
+window.onbeforeunload = function(){
+  let subscriptions = consumer.subscriptions['subscriptions'];
+  subscriptions.forEach(function(subscription){
+    consumer.subscriptions.remove(subscription);
+  });
+}
