@@ -1,0 +1,27 @@
+<td>
+  <%= link_to debate.agenda, debate %>
+</td>
+<td>
+  <%= debate.created_user_id %>
+</td>
+<td>
+  <%= debate.joined_user_id %>
+</td>
+<td>
+  <%= link_to '削除', debate, method: :delete, data: {confirm: "議論「#{debate.agenda}」を削除しますか？"}, class: 'btn btn-danger' %>
+</td>
+<td>
+  <%= link_to '編集', edit_debate_path(debate), class: 'btn btn-danger' %>
+</td>
+<% if current_user.liked?(debate) %>
+  <td>
+    <%= button_to 'いいねを取り消す', debate_likes_path(debate), method: :delete, remote: true %>
+  </td>
+<% else %>
+  <td>
+    <%= button_to 'いいね', debate_likes_path(debate), remote: true %>
+  </td>
+<% end%>
+<td>
+  <%= debate.liked_users.count %>
+</td>
