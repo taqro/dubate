@@ -40,11 +40,20 @@ class User < ApplicationRecord
                           dependent: :destroy
 
   #conversation
-  has_many :Conversations
+  has_many :Conversations, dependent: :destroy
+
+  #comment
+  has_many :Comments, dependent: :destroy
 
   #like
   has_many :likes, dependent: :destroy
   has_many :liked_debates, through: :likes, source: :debate
+
+  #議論関連のメソッド
+  #その議論に参加中のユーザーならtrueを返す
+  def debating_user?(debate)
+    self.id == debate.created_user_id or self.id == debate.joined_user_id
+  end
 
   #like関連のメソッド
   #既にlikeしたか

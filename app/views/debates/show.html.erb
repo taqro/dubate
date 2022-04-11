@@ -19,7 +19,7 @@
   <%= render partial: 'debates/conversation', collection: @conversations %>
 </div>
 <%# 議論入力フォーム（議論中、議論参加者にしか表示されない） フッターに表示する %>
-<% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id and @debate.finished_at == nil %>
+<% if current_user.debating_user?(@debate) and @debate.finished_at == nil %>
   <form name="conversationform" id="conversation-form">
     <label>Say something:</label><br>
     <div>
@@ -64,7 +64,7 @@
 <%# 投票中 以下ボタン表示 %>
 <% if @debate.status == 'voting' %>
   <%# 議論参加者と観戦者で表示を分ける %>
-  <% if current_user.id == @debate.created_user_id or current_user.id == @debate.joined_user_id %>
+  <% if current_user.debating_user?(@debate) %>
     <h2>投票中</h2>
   <% else %>
     <%# 参加者のどちらかへの投票ボタン %>
@@ -74,7 +74,7 @@
 <% end %>
 
 <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
-<% if !(@vote.nil?) and  current_user.id != @debate.created_user_id and current_user.id != @debate.joined_user_id and @debate.status != 'after_vote' %>
+<% if !(@vote.nil?) and current_user.debating_user?(@debate) and @debate.status != 'after_vote' %>
   <%= pie_chart [['赤', 50], ['青', 50]]%>
 <% end %>
 

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_101252) do
+ActiveRecord::Schema.define(version: 2022_04_09_113226) do
+
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "debate_id"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["debate_id"], name: "index_comments_on_debate_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "conversations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
@@ -91,6 +101,8 @@ ActiveRecord::Schema.define(version: 2022_04_03_101252) do
     t.index ["winner_id"], name: "index_win_or_loses_on_winner_id"
   end
 
+  add_foreign_key "comments", "debates"
+  add_foreign_key "comments", "users"
   add_foreign_key "conversations", "debates"
   add_foreign_key "conversations", "users"
   add_foreign_key "likes", "debates"
