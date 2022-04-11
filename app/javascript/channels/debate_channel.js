@@ -36,15 +36,17 @@ document.addEventListener('turbolinks:load', () => {
       e.preventDefault();
   });
   }
+})
 
-  //議論を離れる直前に行う処理
-  //明示的に購読を解除する
-  window.onbeforeunload = function(){
-    let subscriptions = consumer.subscriptions['subscriptions'];
-    subscriptions.forEach(function(subscription){
-      consumer.subscriptions.remove(subscription);
+//議論を離れる直前に行う処理
+//明示的に購読を解除する
+document.addEventListener('turbolinks:before-render', () => {
+      let subscriptions = consumer.subscriptions['subscriptions'];
+      subscriptions.forEach(function(subscription){
+        consumer.subscriptions.remove(subscription);
     });
   }
-})
+)
+
 
 
