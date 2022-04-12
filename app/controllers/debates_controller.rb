@@ -1,6 +1,8 @@
 class DebatesController < ApplicationController
   def index
-    @debates = Debate.all
+    # @debates = Debate.all
+    @q = Debate.ransack(params[:q])
+    @debates = @q.result(distinct: true).recent
   end
 
   def show

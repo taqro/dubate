@@ -1,10 +1,19 @@
 <h1>議論一覧</h1>
 
+<%# 検索 %>
+<%= search_form_for @q do |f| %>
+  <%= f.label :name, "Keyword" %>
+  <%= f.search_field :agenda_cont, placeholder: '議題' %>
+
+  <%= f.submit "検索" %>
+<% end %>
+
+
 <table>
   <thead>
     <tr>
       <th>
-        agenda
+        <%= sort_link(@q, :agenda, "agenda") %>
       </th>
       <th>
         created_user_id

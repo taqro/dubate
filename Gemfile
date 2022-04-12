@@ -76,4 +76,7 @@ gem 'chartkick'
 #gon
 gem 'gon'
 
+#ransack
+gem 'ransack'
+
 

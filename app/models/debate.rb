@@ -8,6 +8,9 @@ class Debate < ApplicationRecord
   belongs_to :created_user, class_name: "User"
   belongs_to :joined_user, class_name: "User", optional: true
 
+  #scope
+  scope :recent, -> {order(created_at: :desc)}
+
   #デフォルト値設定
   attribute :wanted, :boolean, default: true
   attribute :status, :string, default: 'before_vote'
