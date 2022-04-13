@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/create'
+  get 'comments/destroy'
   get 'conversations/create'
   get 'conversations/destroy'
 
@@ -28,6 +30,8 @@ Rails.application.routes.draw do
       get :following, :followers
       #勝負数関連
       get :wins, :loses
+      #コメント関連
+      resources :comments, only: [:create, :destroy]
     end
   end
   #フォロー関係

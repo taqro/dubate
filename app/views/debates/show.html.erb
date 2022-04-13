@@ -31,6 +31,19 @@
   </form>
 <% end %>
 
+<%# comment欄、comment入力フォーム(議論終了後にのみ表示) フッターに表示する %>
+<% if @debate.status == "after_vote" %>
+  <%# コメント欄 %>
+  <h1>コメント</h1>
+  <%= render partial: 'debates/comment', collection: @comments %>
+  <%# コメント入力フォーム %>
+  <%= form_with model: @comment, local: true do |f| %>
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'form-control', id: 'comment_content' %>
+    <%= f.submit nil, class: 'btn btn-default' %>
+  <% end%>
+<% end %>
+
 <h2>
 <%= @debate.status %>
 </h2>
@@ -81,11 +94,10 @@
 <%# 全体の投票終了後 グラフ表示 %>
 <% if @debate.status == "after_vote" and @debate.finished_at != nil %>
   <% if @debate.status == 'after_vote' %>
-    <%= pie_chart [['赤', 50], ['青', 50]]%>
+    <%# グラフ %>
+    <%= pie_chart @data %>
   <% end %>
 <% end %>
-
-<%= pie_chart @data %>
 
 
 

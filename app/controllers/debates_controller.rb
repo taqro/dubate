@@ -17,6 +17,11 @@ class DebatesController < ApplicationController
     #converstions
     @conversations = @debate.Conversations
 
+    #コメント関連
+    #comment
+    @comment = current_user.Comments.build
+    @comments = @debate.Comments
+
     #円グラフ用データ
     @data = {@debate.created_user.name => @votes.where(debating_user_id: @debate.created_user.id).count, @debate.joined_user.name => @votes.where(debating_user_id: @debate.joined_user.id).count}
 
