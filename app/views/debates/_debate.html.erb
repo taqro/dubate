@@ -2,10 +2,27 @@
   <%= link_to debate.agenda, debate %>
 </td>
 <td>
-  <%= debate.created_user_id %>
+  <%= debate.created_user_id %> <%= User.find(debate.created_user_id).name%>
 </td>
 <td>
-  <%= debate.joined_user_id %>
+  <% if !debate.joined_user_id.nil? %>
+    <%= debate.joined_user_id %> <%= User.find(debate.joined_user_id).name %>
+  <% end %>
+</td>
+<td>
+  <% if debate.joined_user_id.nil? %>
+    <p>議論開始前</p>
+  <% else %>
+    <% if debate.WinOrLose.nil? and debate.status == "before_vote" %>
+      <p>議論中</p>
+    <% end %>
+    <% if debate.WinOrLose.nil? and debate.status == "voting" %>
+      <p>投票中</p>
+    <% end %>
+    <% if !debate.WinOrLose.nil?%>
+      <p>議論終了</p>
+    <% end %>
+  <% end %>
 </td>
 <td>
   <%= link_to '削除', debate, method: :delete, data: {confirm: "議論「#{debate.agenda}」を削除しますか？"}, class: 'btn btn-danger' %>
@@ -24,4 +41,7 @@
 <% end%>
 <td>
   <%= debate.liked_users.count %>
+</td>
+<%# 何時間前に議論作成したか %>
+<td>
 </td>

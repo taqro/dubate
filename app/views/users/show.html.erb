@@ -1,5 +1,4 @@
-<%# 暫定的に自分のページしか表示できない 後で直す %>
-<h1>こんにちは<%= @user.name %>さん</h1>
+<h1><%= @user.name %>さんのページです。</h1>
 <%# フォロー数、フォロワー数 %>
 <section class="stas">
   <%= render 'shared/follow_stats' %>

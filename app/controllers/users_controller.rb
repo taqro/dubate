@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     #暫定的に自分だけのページを表示できるようにしておく
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   #フォロー関連
