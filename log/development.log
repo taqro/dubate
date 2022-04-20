@@ -51350,3 +51350,194 @@ Processing by LikesController#destroy as JS
 Completed 200 OK in 116ms (Views: 16.7ms | ActiveRecord: 85.4ms | Allocations: 9110)
 
 
+  [1m[36mDebate Load (1.0ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 19 LIMIT 1[0m
+Started GET "/" for 127.0.0.1 at 2022-04-20 19:11:45 +0900
+  [1m[35m (13.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 11.1ms | Allocations: 238)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:19
+  Rendered layout layouts/application.html.erb (Duration: 187.3ms | Allocations: 18741)
+Completed 200 OK in 265ms (Views: 190.0ms | ActiveRecord: 20.0ms | Allocations: 22440)
+
+
+Started GET "/cable" for 127.0.0.1 at 2022-04-20 19:11:46 +0900
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2022-04-20 19:11:47 +0900
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vZHViYXRlL1VzZXIvMQ)
+DebateChannel is transmitting the subscription confirmation
+DebateChannel is streaming from debate_channel_0
+Started GET "/debates" for 127.0.0.1 at 2022-04-20 19:11:48 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (1.4ms)[0m  [1m[34mSELECT DISTINCT `debates`.* FROM `debates` ORDER BY `debates`.`created_at` DESC[0m
+  ↳ app/views/debates/index.html.erb:30
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:33
+  [1m[36mLike Exists? (8.4ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 22 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 22[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 229.2ms | Allocations: 24983)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (6.0ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 21 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (4.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 21[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 18.4ms | Allocations: 2687)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 20 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 20[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 22.3ms | Allocations: 2685)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mUser Load (6.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:9
+  [1m[36mWinOrLose Load (31.5ms)[0m  [1m[34mSELECT `win_or_loses`.* FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` = 19 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:16
+  [1m[36mLike Exists? (3.7ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 19 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 19[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 172.4ms | Allocations: 10691)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:9
+  [1m[36mWinOrLose Load (6.6ms)[0m  [1m[34mSELECT `win_or_loses`.* FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` = 18 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:16
+  [1m[36mLike Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 18 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 18[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 72.4ms | Allocations: 3975)
+  Rendered debates/index.html.erb within layouts/application (Duration: 561.5ms | Allocations: 53070)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 618.6ms | Allocations: 58705)
+Completed 200 OK in 672ms (Views: 506.0ms | ActiveRecord: 121.0ms | Allocations: 65702)
+
+
+Unsubscribing from channel: {"channel":"DebateChannel","debate_id":0}
+DebateChannel stopped streaming from debate_channel_0
+DebateChannel is transmitting the subscription confirmation
+DebateChannel is streaming from debate_channel_0
+Started GET "/debates/new" for 127.0.0.1 at 2022-04-20 19:12:09 +0900
+Processing by DebatesController#new as HTML
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:34:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering debates/new.html.erb within layouts/application
+  Rendered debates/_form.html.erb (Duration: 28.9ms | Allocations: 973)
+  Rendered debates/new.html.erb within layouts/application (Duration: 35.1ms | Allocations: 1300)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 90.3ms | Allocations: 7596)
+Completed 200 OK in 106ms (Views: 91.2ms | ActiveRecord: 4.5ms | Allocations: 10170)
+
+
+Unsubscribing from channel: {"channel":"DebateChannel","debate_id":0}
+DebateChannel stopped streaming from debate_channel_0
+DebateChannel is transmitting the subscription confirmation
+DebateChannel is streaming from debate_channel_0
+Started POST "/debates" for 127.0.0.1 at 2022-04-20 19:12:14 +0900
+Processing by DebatesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "debate"=>{"agenda"=>"test"}, "commit"=>"Create Debate"}
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:38:in `create'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/debates_controller.rb:39:in `create'
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/debates_controller.rb:39:in `create'
+  [1m[36mDebate Create (10.2ms)[0m  [1m[32mINSERT INTO `debates` (`created_user_id`, `agenda`, `wanted`, `created_at`, `updated_at`, `status`) VALUES (1, 'test', TRUE, '2022-04-20 10:12:14.324131', '2022-04-20 10:12:14.324131', 'before_vote')[0m
+  ↳ app/controllers/debates_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (13.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/debates_controller.rb:39:in `create'
+Redirected to http://127.0.0.1:3000/debates
+Completed 302 Found in 66ms (ActiveRecord: 34.4ms | Allocations: 5447)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-04-20 19:12:14 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (2.2ms)[0m  [1m[34mSELECT DISTINCT `debates`.* FROM `debates` ORDER BY `debates`.`created_at` DESC[0m
+  ↳ app/views/debates/index.html.erb:30
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:33
+  [1m[36mLike Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 23 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 23[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 19.0ms | Allocations: 4001)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 22 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 22[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 17.2ms | Allocations: 2685)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 21 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 21[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 24.1ms | Allocations: 2685)
+  [1m[36mCACHE User Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 20 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 20[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 15.9ms | Allocations: 2685)
+  [1m[36mCACHE User Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:9
+  [1m[36mWinOrLose Load (1.9ms)[0m  [1m[34mSELECT `win_or_loses`.* FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` = 19 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:16
+  [1m[36mLike Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 19 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 19[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 31.5ms | Allocations: 4258)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:9
+  [1m[36mWinOrLose Load (1.6ms)[0m  [1m[34mSELECT `win_or_loses`.* FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` = 18 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:16
+  [1m[36mLike Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 18 LIMIT 1[0m
+  ↳ app/models/user.rb:61:in `liked?'
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 18[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 36.8ms | Allocations: 3974)
+  Rendered debates/index.html.erb within layouts/application (Duration: 156.1ms | Allocations: 21862)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 183.2ms | Allocations: 27590)
+Completed 200 OK in 187ms (Views: 151.8ms | ActiveRecord: 33.7ms | Allocations: 28098)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2022-04-20 19:12:14 +0900
+DebateChannel stopped streaming from debate_channel_0
+Started GET "/cable" for 127.0.0.1 at 2022-04-20 19:12:14 +0900
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2022-04-20 19:12:14 +0900
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vZHViYXRlL1VzZXIvMQ)
+DebateChannel is transmitting the subscription confirmation
+DebateChannel is streaming from debate_channel_0
