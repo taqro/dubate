@@ -4,7 +4,7 @@ class Debate < ApplicationRecord
   has_many :Conversations, dependent: :destroy
   has_many :Comments, dependent: :destroy
   has_one :WinOrLose, dependent: :destroy
-  has_one :Vote, dependent: :destroy
+  has_many :Votes, dependent: :destroy
   belongs_to :created_user, class_name: "User"
   belongs_to :joined_user, class_name: "User", optional: true
 

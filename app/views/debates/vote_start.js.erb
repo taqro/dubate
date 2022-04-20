@@ -1,0 +1,58 @@
+
+function countdown(){
+  const now = new Date();//今の時間
+  const time_limit = new Date(parseFloat('<%= @time_limit %>'));//投票開始時刻+制限時間
+  const differ = time_limit.getTime() - now.getTime();//残り計算
+  //残り時間が0以下になったら投票終了
+  if (differ > 0){
+    const sec = Math.floor(differ/1000)%60;//ミリ秒を秒に直してから
+    const min = Math.floor(differ/1000/60)%60;//1時間=60分
+    const hour = Math.floor(differ/1000/60/60);
+
+    //最初の1回だけ
+    if (document.getElementById("hour") == null){
+      //最初の１回だけ発火するように修正する
+      const remaing_time = document.getElementById("remainigtime") //要素を取得
+      const until = document.createElement('p');
+      const timer = document.createElement('p');
+      const Hour = document.createElement('span'); //時間
+      const Minute = document.createElement('span'); //分
+      const Second = document.createElement('span'); //秒
+
+      //IDをセット
+      Hour.setAttribute("id", "hour");
+      Minute.setAttribute("id", "min");
+      Second.setAttribute("id", "sec");
+
+      until.textContent = '残り時間';
+      timer.textContent = 'あと';
+
+      remaing_time.appendChild(until);//要素を挿入
+      timer.appendChild(Hour);
+      timer.appendChild(Minute);
+      timer.appendChild(Second);
+      until.after(timer);
+
+      //制限時間の選択、投票開始ボタンを消す
+      const voteform = document.getElementById("vote-form");
+      voteform.remove();
+    }
+
+
+    document.getElementById("hour").textContent = String(hour).padStart(2,"0"); //一桁になった時0がつくように
+    document.getElementById("min").textContent = String(min).padStart(2,"0");
+    document.getElementById("sec").textContent = String(sec).padStart(2,"0");
+    setTimeout(countdown,1000);//1秒毎に繰り返す
+  } else{
+    //制限時間の表示を消す
+    const remainigtime = document.getElementById("remainigtime");
+    remainigtime.remove();
+
+    // vote_fiishへ遷移する urlは開発環境と本番環境で変える
+    window.location.href = "http://127.0.0.1:3000/debates/<%= @debate.id %>/vote_finish";
+
+    // Debate.find(19).update(status:"before_vote")
+  }
+}
+countdown();
+

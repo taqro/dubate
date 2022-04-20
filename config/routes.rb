@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   #暫定的 debate とlike
   resources :debates do
     resource :likes, only: [:create, :destroy]
+    # get "debates/:id/vote_start" => "debates#vote_start"
   end
   #サレンダー
   get "debates/:id/surrender" => "debates#surrender", as: 'debates_surrender'
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
   get "debates/:id/vote_created_user" => "debates#vote_created_user", as: 'debates_vote_created'
   #議論参加者に投票する
   get "debates/:id/vote_joined_user" => "debates#vote_joined_user", as: 'debates_vote_joined'
+  #投票終了
+  get "debates/:id/vote_finish" => "debates#vote_finish", as: 'debates_vote_finish'
 
   devise_for :users
   root 'pages#index'
