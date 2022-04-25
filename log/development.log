@@ -55824,3 +55824,20 @@ DebateChannel is transmitting the subscription confirmation
 DebateChannel is streaming from debate_channel_18
 DebateChannel is transmitting the subscription confirmation
 DebateChannel is streaming from debate_channel_18
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (11.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mWinOrLose Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` IS NULL LIMIT 1[0m
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mWinOrLose Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` IS NULL LIMIT 1[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mDebate Load (0.9ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`id` = 18 LIMIT 1[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mDebate Update (13.5ms)[0m  [1m[33mUPDATE `debates` SET `debates`.`wanted` = TRUE, `debates`.`updated_at` = '2022-04-25 12:04:38.196842' WHERE `debates`.`id` = 18[0m
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m

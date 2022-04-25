@@ -15,4 +15,8 @@ class Debate < ApplicationRecord
   attribute :wanted, :boolean, default: true
   attribute :status, :string, default: 'before_vote'
 
+  validates :created_user_id, presence: true
+  validates :agenda, presence: true
+  validates :wanted, inclusion: { in: [true, false] }
+
 end
