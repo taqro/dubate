@@ -14,4 +14,5 @@ class Debate < ApplicationRecord
   #デフォルト値設定
   attribute :wanted, :boolean, default: true
   attribute :status, :string, default: 'before_vote'
+
 end

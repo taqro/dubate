@@ -1,9 +1,18 @@
 import consumer from "./consumer"
 
 document.addEventListener('turbolinks:load', () => {
+
+  // 議論ページ以外では動作しないようにしておく
+  const debate_container = document.getElementById('debate-container');
+  if (debate_container === null){
+    return
+  }
+
   let debate_id = 0;
   if (typeof gon != "undefined"){
     debate_id = gon.debate.id;
+  }else{
+    return
   }
 
   const appRoom = consumer.subscriptions.create({channel: "DebateChannel", debate_id: debate_id}, {
@@ -17,9 +26,19 @@ document.addEventListener('turbolinks:load', () => {
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      const conversations = document.getElementById('conversations');
+      alert("test");
+      // data['conversation']がnullでないとき
+      if (data['conversation'] != null ){
+        const conversations = document.getElementById('conversations');
       conversations.insertAdjacentHTML('beforeend', data['conversation']);
-      // return alert(data['conversation']);
+      } else {
+        // 制限時間の処理 (debateのstatusがvotingのとき)
+      let status = gon.debate.status;
+      if (status == "voting") {
+        alert("voting now!");
+      }
+      }
+
     },
 
     speak: function(conversation) {
@@ -36,6 +55,14 @@ document.addEventListener('turbolinks:load', () => {
       e.preventDefault();
   });
   }
+
+  // 投票開始
+  // if (document.getElementById("vote-start-btn") != null){
+  //   document.getElementById("vote-start-btn").addEventListener('click', function(e){
+  //     alert("投票開始");
+  //     e.preventDefault();
+  // });
+  // }
 })
 
 //議論を離れる直前に行う処理
