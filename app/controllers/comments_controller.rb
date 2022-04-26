@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+
+  before_action :authenticate_user!
+
   def create
     comment = current_user.Comments.build(comment_params)
     comment.update!(debate_id: params[:id])

@@ -1,4 +1,7 @@
 class DebatesController < ApplicationController
+
+  before_action :authenticate_user! except: [:index, :show]
+
   def index
     @q = Debate.ransack(params[:q]) #ransack(検索のgem)
     @debates = @q.result(distinct: true).recent

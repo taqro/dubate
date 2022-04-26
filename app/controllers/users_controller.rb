@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
+
   def show
-    #暫定的に自分だけのページを表示できるようにしておく
     @user = User.find(params[:id])
   end
 

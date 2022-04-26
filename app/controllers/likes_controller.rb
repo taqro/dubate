@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :debate_params
 
   def create
