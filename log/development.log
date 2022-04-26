@@ -55841,3 +55841,196 @@ DebateChannel is streaming from debate_channel_18
   [1m[36mTRANSACTION (3.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
   [1m[36mDebate Update (13.5ms)[0m  [1m[33mUPDATE `debates` SET `debates`.`wanted` = TRUE, `debates`.`updated_at` = '2022-04-25 12:04:38.196842' WHERE `debates`.`id` = 18[0m
   [1m[36mTRANSACTION (3.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:19:08 +0900
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+
+ActionController::RoutingError - uninitialized constant PagesController
+Did you mean?  LikesController:
+
+Started POST "/__better_errors/224c6ca08b88651e/variables" for 127.0.0.1 at 2022-04-26 11:19:09 +0900
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:19:53 +0900
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Library/Ruby/Gems/2.6.0/gems/railties-6.1.4.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Library/Ruby/Gems/2.6.0/gems/railties-6.1.4.6/lib/rails/templates/rails/welcome/index.html.erb (Duration: 12.3ms | Allocations: 348)
+Completed 200 OK in 65ms (Views: 17.7ms | ActiveRecord: 0.0ms | Allocations: 2752)
+
+
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:20:44 +0900
+
+ArgumentError - Missing :controller key on routes definition, please check your routes.:
+  config/routes.rb:28:in `block in <main>'
+  config/routes.rb:1:in `<main>'
+
+Started POST "/__better_errors/14fe8ce0b4d2660e/variables" for 127.0.0.1 at 2022-04-26 11:20:45 +0900
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:22:06 +0900
+
+ActionController::RoutingError - uninitialized constant PagesController
+Did you mean?  LikesController:
+
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:07 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:17 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:18 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:19 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:20 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:20 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:21 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:22 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:23 +0900
+Started POST "/__better_errors/d6b06803be7e82c7/variables" for 127.0.0.1 at 2022-04-26 11:22:26 +0900
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:25:32 +0900
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 7.3ms | Allocations: 234)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (12.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:19
+  Rendered layout layouts/application.html.erb (Duration: 248.5ms | Allocations: 18736)
+Completed 200 OK in 319ms (Views: 227.8ms | ActiveRecord: 38.4ms | Allocations: 22435)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-04-26 11:25:35 +0900
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting end
+...tion :authenticate_user! except: [:index, :show]
+...                         ^~~~~~:
+  app/controllers/debates_controller.rb:3:in `'
+
+Started POST "/__better_errors/4223c9a6d13c4857/variables" for 127.0.0.1 at 2022-04-26 11:25:36 +0900
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:25:39 +0900
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 37)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:19
+  Rendered layout layouts/application.html.erb (Duration: 39.7ms | Allocations: 6705)
+Completed 200 OK in 42ms (Views: 37.0ms | ActiveRecord: 4.4ms | Allocations: 7095)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-04-26 11:25:42 +0900
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting end
+...tion :authenticate_user! except: [:index, :show]
+...                         ^~~~~~:
+  app/controllers/debates_controller.rb:3:in `'
+
+Started POST "/__better_errors/0cbdf5ef5c74df12/variables" for 127.0.0.1 at 2022-04-26 11:25:42 +0900
+Started GET "/" for 127.0.0.1 at 2022-04-26 11:26:34 +0900
+Processing by PagesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/index.html.erb within layouts/application
+  Rendered pages/index.html.erb within layouts/application (Duration: 0.1ms | Allocations: 37)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (20.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/application.html.erb:19
+  Rendered layout layouts/application.html.erb (Duration: 106.5ms | Allocations: 6716)
+Completed 200 OK in 109ms (Views: 87.0ms | ActiveRecord: 20.6ms | Allocations: 7104)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2022-04-26 11:26:37 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[35m (16.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = 1[0m
+  ↳ app/views/shared/_follow_stats.html.erb:5
+  [1m[35m (9.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = 1[0m
+  ↳ app/views/shared/_follow_stats.html.erb:11
+  Rendered shared/_follow_stats.html.erb (Duration: 216.9ms | Allocations: 12986)
+  [1m[35m (6.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `win_or_loses` WHERE `win_or_loses`.`winner_id` = 1[0m
+  ↳ app/views/shared/_winorlose_stats.html.erb:5
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `win_or_loses` WHERE `win_or_loses`.`loser_id` = 1[0m
+  ↳ app/views/shared/_winorlose_stats.html.erb:11
+  Rendered shared/_winorlose_stats.html.erb (Duration: 36.4ms | Allocations: 3396)
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/users/show.html.erb:19
+  Rendered users/_follow_form.html.erb (Duration: 13.5ms | Allocations: 228)
+  [1m[36mDebate Load (5.4ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` INNER JOIN `likes` ON `debates`.`id` = `likes`.`debate_id` WHERE `likes`.`user_id` = 1[0m
+  ↳ app/views/users/show.html.erb:25
+  [1m[36mDebate Load (5.1ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`created_user_id` = 1[0m
+  ↳ app/views/users/show.html.erb:37
+  [1m[36mDebate Load (2.5ms)[0m  [1m[34mSELECT `debates`.* FROM `debates` WHERE `debates`.`joined_user_id` = 1[0m
+  ↳ app/views/users/show.html.erb:49
+  Rendered users/show.html.erb within layouts/application (Duration: 386.2ms | Allocations: 39056)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 411.7ms | Allocations: 44690)
+Completed 200 OK in 438ms (Views: 343.7ms | ActiveRecord: 83.0ms | Allocations: 46519)
+
+
+Started GET "/debates" for 127.0.0.1 at 2022-04-26 11:26:40 +0900
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting end
+...tion :authenticate_user! except: [:index, :show]
+...                         ^~~~~~:
+  app/controllers/debates_controller.rb:3:in `'
+
+Started POST "/__better_errors/83bbd5ce11142d35/variables" for 127.0.0.1 at 2022-04-26 11:26:40 +0900
+Started GET "/debates" for 127.0.0.1 at 2022-04-26 11:27:23 +0900
+Processing by DebatesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering debates/index.html.erb within layouts/application
+  [1m[36mDebate Load (2.0ms)[0m  [1m[34mSELECT DISTINCT `debates`.* FROM `debates` ORDER BY `debates`.`created_at` DESC[0m
+  ↳ app/views/debates/index.html.erb:30
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:33
+  [1m[36mLike Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 23 LIMIT 1[0m
+  ↳ app/models/user.rb:65:in `liked?'
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 23[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 190.8ms | Allocations: 26786)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 22 LIMIT 1[0m
+  ↳ app/models/user.rb:65:in `liked?'
+  [1m[35m (5.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 22[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 17.1ms | Allocations: 2687)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (2.8ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 21 LIMIT 1[0m
+  ↳ app/models/user.rb:65:in `liked?'
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 21[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 16.6ms | Allocations: 2685)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mLike Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 20 LIMIT 1[0m
+  ↳ app/models/user.rb:65:in `liked?'
+  [1m[35m (6.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 20[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 18.5ms | Allocations: 2685)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:9
+  [1m[36mWinOrLose Load (1.8ms)[0m  [1m[34mSELECT `win_or_loses`.* FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` = 19 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:16
+  [1m[36mLike Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 19 LIMIT 1[0m
+  ↳ app/models/user.rb:65:in `liked?'
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 19[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 81.7ms | Allocations: 10775)
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:5
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:9
+  [1m[36mWinOrLose Load (4.0ms)[0m  [1m[34mSELECT `win_or_loses`.* FROM `win_or_loses` WHERE `win_or_loses`.`debate_id` = 18 LIMIT 1[0m
+  ↳ app/views/debates/_debate.html.erb:16
+  [1m[36mLike Exists? (3.8ms)[0m  [1m[34mSELECT 1 AS one FROM `likes` WHERE `likes`.`user_id` = 1 AND `likes`.`debate_id` = 18 LIMIT 1[0m
+  ↳ app/models/user.rb:65:in `liked?'
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` INNER JOIN `likes` ON `users`.`id` = `likes`.`user_id` WHERE `likes`.`debate_id` = 18[0m
+  ↳ app/views/debates/_debate.html.erb:43
+  Rendered debates/_debate.html.erb (Duration: 34.8ms | Allocations: 3975)
+  Rendered debates/index.html.erb within layouts/application (Duration: 403.6ms | Allocations: 57709)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layout layouts/application.html.erb (Duration: 426.1ms | Allocations: 63346)
+Completed 200 OK in 467ms (Views: 338.3ms | ActiveRecord: 104.4ms | Allocations: 70257)
+
+
