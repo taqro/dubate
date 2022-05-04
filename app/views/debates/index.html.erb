@@ -9,26 +9,41 @@
 <% end %>
 
 
-<table>
+<table class="table-auto">
   <thead>
     <tr>
-      <th>
+      <th class="border px-4 py-2">
         <%= sort_link(@q, :agenda, "agenda") %>
       </th>
-      <th>
+      <th class="border px-4 py-2">
         created_user_id
       </th>
-      <th>
+      <th class="border px-4 py-2">
         joined_user_id
       </th>
-      <th>
+      <th class="border px-4 py-2">
         status
+      </th>
+      <th class="border px-4 py-2">
+        削除（仮）
+      </th>
+      <th class="border px-4 py-2">
+        編集（仮）
+      </th>
+      <th class="border px-4 py-2">
+        いいね（仮）
+      </th>
+      <th class="border px-4 py-2">
+        いいね数（仮）
+      </th>
+      <th class="border px-4 py-2">
+        投稿からの時間（仮）
       </th>
     </tr>
   </thead>
   <tbody>
     <% @debates.each do |debate| %>
-      <tr id="debate_<%= debate.id %>" >
+      <tr class="border border px-4 py-2" id="debate_<%= debate.id %>">
         <%= render 'debate', debate: debate %>
       </tr>
     <% end %>

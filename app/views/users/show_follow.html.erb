@@ -14,7 +14,9 @@
     <% if @users.any? %>
       <ul class="users follow">
         <% @users.each do |user| %>
-          <%= link_to user.name, user %>
+          <div>
+            <%= link_to user.name, user %>
+          </div>
         <% end %>
       </ul>
       <%= paginate @users %>

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   #勝敗数関連
   def wins
-    @title = "勝数"
+    @title = "勝った議論一覧"
     @user  = User.find(params[:id])
     @winorlose = WinOrLose.where(winner_id: @user.id).page(params[:page])
     @debates = @user.win_debates.page(params[:page])
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def loses
-    @title = "勝数"
+    @title = "負けた議論一覧"
     @user  = User.find(params[:id])
     @winorlose = WinOrLose.where(loser_id: @user.id).page(params[:page])
     @debates = @user.lose_debates.page(params[:page])
