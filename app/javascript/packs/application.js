@@ -11,10 +11,6 @@ import "channels"
 import "chartkick/chart.js"
 
 // tailwindcss
-// import "../css/tailwindcss.css";
-// import "stylesheets/application"
-
-// require("stylesheets/application.scss")
 import '../stylesheets/application.scss'
 
 

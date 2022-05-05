@@ -1,48 +1,48 @@
-<td>
-  <%= link_to debate.agenda, debate %>
-</td>
-<td>
-  <%= debate.created_user_id %> <%= User.find(debate.created_user_id).name%>
-</td>
-<td>
-  <% if !debate.joined_user_id.nil? %>
-    <%= debate.joined_user_id %> <%= User.find(debate.joined_user_id).name %>
-  <% end %>
-</td>
-<td>
-  <% if debate.joined_user_id.nil? %>
-    <p>議論開始前</p>
-  <% else %>
-    <% if debate.WinOrLose.nil? and debate.status == "before_vote" %>
-      <p>議論中</p>
+<div class="max-w-sm w-full lg:max-w-full lg:flex"  id="debate_<%= debate.id %>">
+  <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <%# 作成者 %>
+    <div class="flex items-center">
+      <div class="text-sm">
+        <p class="text-gray-900 leading-none"><%= User.find(debate.created_user_id).name%></p>
+        <p class="text-gray-600"><%= time_ago_in_words(debate.created_at) %></p>
+      </div>
+    </div>
+    <%# 参加者 %>
+    <% if !(debate.joined_user_id.nil?) %>
+    <div class="flex items-center">
+      <div class="text-sm">
+        <p class="text-gray-900 leading-none"><%= User.find(debate.joined_user_id).name %></p>
+        <p class="text-gray-600"><%= time_ago_in_words(debate.started_at) %></p>
+      </div>
+    </div>
     <% end %>
-    <% if debate.WinOrLose.nil? and debate.status == "voting" %>
-      <p>投票中</p>
-    <% end %>
-    <% if !debate.WinOrLose.nil?%>
-      <p>議論終了</p>
-    <% end %>
-  <% end %>
-</td>
-<td>
-  <%= link_to '削除', debate, method: :delete, data: {confirm: "議論「#{debate.agenda}」を削除しますか？"}, class: 'btn btn-danger' %>
-</td>
-<td>
-  <%= link_to '編集', edit_debate_path(debate), class: 'btn btn-danger' %>
-</td>
-<% if current_user.liked?(debate) %>
-  <td>
-    <%= button_to 'いいねを取り消す', debate_likes_path(debate), method: :delete, remote: true %>
-  </td>
-<% else %>
-  <td>
-    <%= button_to 'いいね', debate_likes_path(debate), remote: true %>
-  </td>
-<% end%>
-<td>
-  <%= debate.liked_users.count %>
-</td>
-<%# 何時間前に議論作成したか %>
-<td>
-  <%= time_ago_in_words(debate.created_at) %>
-</td>
+    <%# 議論のステータス %>
+    <div class="flex items-center">
+      <div class="text-sm">
+        <%= debate.status %>
+      </div>
+    </div>
+    <%# 議題 %>
+    <div class="mb-8">
+      <div class="text-gray-900 font-bold text-xl mb-2"><%= debate.agenda %></div>
+    </div>
+    <%# いいね %>
+    <div>
+      <% if current_user.liked?(debate) %>
+        <td>
+          <%= button_to 'いいねを取り消す', debate_likes_path(debate)       , method: :delete, remote: true %>
+        </td>
+      <% else %>
+        <td>
+          <%= button_to 'いいね', debate_likes_path(debate),        remote: true %>
+        </td>
+      <% end%>
+      <td>
+        <%= debate.liked_users.count %>
+      </td>
+      <td>
+        <%= button_to '削除', debate_path(debate), method: :delete %>
+      </td>
+    </div>
+  </div>
+</div>
