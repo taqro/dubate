@@ -1,4 +1,4 @@
-<div id="debate-container">
+<div id="debate-container" class="max-w-screen-sm mx-auto">
   <div>
     <h2>議論作成者</h2>
     <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id) %>
@@ -26,7 +26,7 @@
 
   <%# 議論  %>
   <h2>議論</h2>
-  <div id='conversations' data-debate_id="<%= @debate.id %>" >
+  <div id='conversations' >
     <%= render partial: 'debates/conversation', collection: @conversations %>
   </div>
   <%# 議論入力フォーム（議論中、議論参加者にしか表示されない） フッターに表示する %>

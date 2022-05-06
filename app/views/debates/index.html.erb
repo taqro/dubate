@@ -1,15 +1,18 @@
-<h1>議論一覧</h1>
+<div class="max-w-screen-sm mx-auto">
+  <h1>議論一覧</h1>
+  <%# 検索 %>
+  <%= search_form_for @q do |f| %>
+    <%= f.label :name, "Keyword" %>
+    <%= f.search_field :agenda_cont, placeholder: '議題' %>
 
-<%# 検索 %>
-<%= search_form_for @q do |f| %>
-  <%= f.label :name, "Keyword" %>
-  <%= f.search_field :agenda_cont, placeholder: '議題' %>
+    <%= f.submit "検索" %>
+  <% end %>
 
-  <%= f.submit "検索" %>
-<% end %>
-
-<%# 議論一覧 %>
-<% @debates.each do |debate| %>
-  <%= render 'debate', debate: debate %>
-<% end %>
+  <%# 議論一覧 %>
+  <div class="mx-auto">
+    <% @debates.each do |debate| %>
+      <%= render 'debate', debate: debate %>
+    <% end %>
+  </div>
+</div>
 

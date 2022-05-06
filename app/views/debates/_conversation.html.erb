@@ -1,7 +1,15 @@
-<div class="conversaton">
-  <p>
-  <h3>
-  <%= conversation.content %>
-  </h3>
-  </p>
+<div class="max-w-xl w-full "  id="conversation_<%= conversation.id %>">
+  <div class="border-r border-b border-l border-gray-400  bg-white rounded-b  p-4 flex flex-col justify-between leading-normal mx-auto">
+    <%# 作成者 %>
+    <div class="flex items-center">
+      <div class="text-sm">
+        <p class="text-gray-900 leading-none"><%= User.find(conversation.user_id).name%></p>
+        <p class="text-gray-600"><%= time_ago_in_words(conversation.created_at) %></p>
+      </div>
+    </div>
+    <%# conversation %>
+    <div class="mb-8">
+      <div class="text-gray-900 font-bold text-xl mb-2"><%= conversation.content %></div>
+    </div>
+  </div>
 </div>
