@@ -1,5 +1,5 @@
 <div class="relative">
-  <div class="flex">
+  <div class="flex mb-10">
     <%# 左のサイドバー %>
     <div class="flex-1">
       <p>左のサイドバー</p>
@@ -42,33 +42,57 @@
         <%= render partial: 'debates/conversation', collection: @conversations %>
       </div>
 
-      <%# comment欄、comment入力フォーム(議論終了後にのみ表示) フッターに表示する %>
+      <%# comment欄、comment入力フォーム(議論終了後にのみ表示) conversationの下に表示する %>
       <% if @debate.status == "after_vote" %>
         <%# コメント欄 %>
         <h2>コメント</h2>
         <%= render partial: 'debates/comment', collection: @comments %>
-        
       <% end %>
 
       <h2>
       <%# js側で投票のステージを挿入、削除して管理する %>
       <div id="debate_status">
-      <%= @debate.status %>
+        <%= @debate.status %>
       </div>
       </h2>
 
-      <div>
+      <%# フッター %>
+      <div class=" bottom-0 w-full text-center mb-6">
+        <%# conversationの入力フォーム %>
+        <%# 議論入力フォーム（議論中、議論参加者にしか表示されない %>
+        <% if current_user.debating_user?(@debate) and @debate.finished_at == nil %>
+          <form name="conversationform" id="conversation-form">
+            <div>
+              <input type="text" id="conversation-text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            </div>
+            <div>
+              <input type="button" id="conversation-btn" value="送信">
+            </div>
+          </form>
+        <% end %>
+        <%# コメントの入力フォーム %>
+        <%# comment欄、comment入力フォーム(議論終了後にのみ表示) %>
+        <% if @debate.status == "after_vote" %>
+          <%= form_with model: @comment, local: true do |f| %>
+            <%= f.text_field :content, id: 'comment_content', class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+            <%= f.button "送信", class: 'btn btn-default', type: 'button', onclick: 'submit();' %>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+    <%# 右のサイドバー %>
+    <div class="flex-1">
+      <%# 降参ボタン %>
       <%# 参加者が揃っているときに表示 %>
       <% if !@debate.joined_user_id.nil? %>
         <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
         <% if @debate.WinOrLose.nil? and @debate.status == "before_vote" %>
-          <%# 降参ボタン %>
           <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
         <% elsif @debate.status != "before_vote" %>
           <%# なにも表示しない %>
         <% end %>
       <% end %>
-      </div>
 
       <%# 投票中 以下ボタン表示 %>
       <% if @debate.status == 'voting' %>
@@ -83,7 +107,6 @@
           <% else %>
             <h2>投票済み</h2>
           <% end %>
-
         <% end %>
       <% end %>
 
@@ -124,38 +147,10 @@
           <% end %>
         </div>
       <% end %>
-    </div>
-    <%# 右のサイドバー %>
-    <div class="flex-1">
-      <p>右のサイドバー</p>
+
+
     </div>
 
-  </div>
-
-  <%# フッター %>
-  <div class="fixed bottom-0 w-full text-center ">
-    <%# conversationの入力フォーム %>
-    <%# 議論入力フォーム（議論中、議論参加者にしか表示されない %>
-    <% if current_user.debating_user?(@debate) and @debate.finished_at == nil %>
-      <form name="conversationform" id="conversation-form">
-        <label>Say something:</label><br>
-        <div>
-          <input type="text" id="conversation-text">
-        </div>
-        <div>
-          <input type="button" id="conversation-btn" value="送信">
-        </div>
-      </form>
-    <% end %>
-    <%# コメントの入力フォーム %>
-      <%# comment欄、comment入力フォーム(議論終了後にのみ表示) フッターに表示する %>
-      <% if @debate.status == "after_vote" %>
-        <%= form_with model: @comment, local: true do |f| %>
-          <%= f.label :content %>
-          <%= f.text_area :content, class: 'form-control', id: 'comment_content' %>
-          <%= f.submit nil, class: 'btn btn-default' %>
-        <% end %>
-      <% end %>
   </div>
 </div>
 
