@@ -1,0 +1,18 @@
+<%# なぜかrenderで渡す変数をdebateに統一できないので、仕方無しの処理。解決できたら直す %>
+<% debate = debate %>
+<% @debate = debate if !debate.nil? %>
+
+<div id="debate_<%= @debate.id %>">
+  <% if current_user.liked?(@debate) %>
+    <div>
+      <%= button_to 'いいねを取り消す', debate_likes_path(@debate), method: :delete, remote: true %>
+    </div>
+  <% else %>
+    <div>
+      <%= button_to 'いいね', debate_likes_path(@debate), remote: true %>
+    </div>
+  <% end%>
+  <div>
+    <%= @debate.liked_users.count %>
+  </div>
+</div>
