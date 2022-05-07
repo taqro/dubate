@@ -1,46 +1,141 @@
-<div class="wrapper flex">
-  <%# 左のサイドバー %>
-  <div class="side-left flex-auto fixed">
-    <p>左のサイドバー</p>
-    <%# いいね %>
-    <div id="debate_<%= @debate.id %>">
-      <%= render partial: "likes/like", locals: {debate: @debate} %>
+<div class="relative">
+  <div class="flex">
+    <%# 左のサイドバー %>
+    <div class="flex-1">
+      <p>左のサイドバー</p>
+      <%# いいね %>
+      <div id="debate_<%= @debate.id %>">
+        <%= render partial: "likes/like", locals: {debate: @debate} %>
+      </div>
+      <%# tweet %>
     </div>
-    <%# tweet %>
-  </div>
-  <%# メイン %>
-  <div id="debate-container" class="main flex-auto max-w-screen-sm mx-auto">
-    <div>
-      <h2>議論作成者</h2>
-      <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id) %>
-    </div>
+    <%# メイン %>
+    <div id="debate-container" class="flex-1">
+      <div>
+        <h2>議論作成者</h2>
+        <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id) %>
+      </div>
 
-    <div>
-      <h2>議論参加者</h2>
-      <% if @debate.joined_user_id != nil %>
-        <%= link_to User.find(@debate.joined_user_id).name, User.find(@debate.joined_user_id) %>
+      <div>
+        <h2>議論参加者</h2>
+        <% if @debate.joined_user_id != nil %>
+          <%= link_to User.find(@debate.joined_user_id).name, User.find(@debate.joined_user_id) %>
+        <% end %>
+      </div>
+      <div>
+        <h2>議題</h2>
+        <%= @debate.agenda %>
+      </div>
+
+      <%# 勝敗がついたときのみ表示 %>
+      <% if !@debate.WinOrLose.nil? %>
+      <%# 勝者と敗者の表示 %>
+      <h2>Winner</h2>
+      <%= User.find(@debate.WinOrLose.winner_id).name %>
+      <h2>Loser</h2>
+      <%= User.find(@debate.WinOrLose.loser_id).name %>
+      <% end %>
+
+      <%# 議論  %>
+      <h2>議論</h2>
+      <div id='conversations' >
+        <%= render partial: 'debates/conversation', collection: @conversations %>
+      </div>
+
+      <%# comment欄、comment入力フォーム(議論終了後にのみ表示) フッターに表示する %>
+      <% if @debate.status == "after_vote" %>
+        <%# コメント欄 %>
+        <h2>コメント</h2>
+        <%= render partial: 'debates/comment', collection: @comments %>
+        
+      <% end %>
+
+      <h2>
+      <%# js側で投票のステージを挿入、削除して管理する %>
+      <div id="debate_status">
+      <%= @debate.status %>
+      </div>
+      </h2>
+
+      <div>
+      <%# 参加者が揃っているときに表示 %>
+      <% if !@debate.joined_user_id.nil? %>
+        <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
+        <% if @debate.WinOrLose.nil? and @debate.status == "before_vote" %>
+          <%# 降参ボタン %>
+          <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
+        <% elsif @debate.status != "before_vote" %>
+          <%# なにも表示しない %>
+        <% end %>
+      <% end %>
+      </div>
+
+      <%# 投票中 以下ボタン表示 %>
+      <% if @debate.status == 'voting' %>
+        <%# 議論参加者と観戦者で表示を分ける %>
+        <% if current_user.debating_user?(@debate) %>
+          <h2>投票中</h2>
+        <% else %>
+          <% if !(Vote.where(debate_id: @debate.id, voted_user_id: current_user.id).nil?) %>
+            <%# 参加者のどちらかへの投票ボタン すでに投票した観戦者には表示しない%>
+            <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get %>
+            <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get %>
+          <% else %>
+            <h2>投票済み</h2>
+          <% end %>
+
+        <% end %>
+      <% end %>
+
+      <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
+      <% if !(@vote.nil?) and current_user.debating_user?(@debate) and @debate.status != 'after_vote' %>
+        <%# グラフ %>
+        <%= pie_chart @data%>
+      <% end %>
+
+      <%# 全体の投票終了後 グラフ表示 %>
+      <% if @debate.status == "after_vote" and @debate.finished_at != nil %>
+        <% if @debate.status == 'after_vote' %>
+          <%# グラフ %>
+          <%= pie_chart @data %>
+        <% end %>
+      <% end %>
+
+      <%# 投票後は表示しない %>
+      <% if @debate.status != "after_vote" %>
+        <div id="remainingtime">
+          <%= render 'debates/timelimit'%>
+        </div>
+      <% end %>
+
+      <%# 参加者が揃っているかつ投票前 制限時間の選択 議論参加者のみに表示 %>
+      <% if !@debate.joined_user_id.nil? and current_user.debating_user?(@debate) and @debate.status == 'before_vote' %>
+        <%# 投票の制限時間を選択 %>
+        <div id="vote-form">
+          <%# ajaxを使う場合は、local: false にする %>
+          <%= form_with url: debates_vote_start_path, method: :get, local: true do |f| %>
+            <div class="form-group">
+              <%= f.label '制限時間'%>
+              <%= f.select :limit, [['1分', 60000], ['5分', 300000]],  { include_blank: '制限時間を選択してください'}, { class:   'form-control'  ,    required: true } %>
+            </div>
+            <div>
+              <%= f.submit '投票開始', id: 'vote-start-btn', class: 'btn btn-primary btn-block'%>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
-    <div>
-      <h2>議題</h2>
-      <%= @debate.agenda %>
+    <%# 右のサイドバー %>
+    <div class="flex-1">
+      <p>右のサイドバー</p>
     </div>
 
-    <%# 勝敗がついたときのみ表示 %>
-    <% if !@debate.WinOrLose.nil? %>
-    <%# 勝者と敗者の表示 %>
-    <h2>Winner</h2>
-    <%= User.find(@debate.WinOrLose.winner_id).name %>
-    <h2>Loser</h2>
-    <%= User.find(@debate.WinOrLose.loser_id).name %>
-    <% end %>
+  </div>
 
-    <%# 議論  %>
-    <h2>議論</h2>
-    <div id='conversations' >
-      <%= render partial: 'debates/conversation', collection: @conversations %>
-    </div>
-    <%# 議論入力フォーム（議論中、議論参加者にしか表示されない） フッターに表示する %>
+  <%# フッター %>
+  <div class="fixed bottom-0 w-full text-center ">
+    <%# conversationの入力フォーム %>
+    <%# 議論入力フォーム（議論中、議論参加者にしか表示されない %>
     <% if current_user.debating_user?(@debate) and @debate.finished_at == nil %>
       <form name="conversationform" id="conversation-form">
         <label>Say something:</label><br>
@@ -52,98 +147,15 @@
         </div>
       </form>
     <% end %>
-
-    <%# comment欄、comment入力フォーム(議論終了後にのみ表示) フッターに表示する %>
-    <% if @debate.status == "after_vote" %>
-      <%# コメント欄 %>
-      <h2>コメント</h2>
-      <%= render partial: 'debates/comment', collection: @comments %>
-      <%# コメント入力フォーム %>
-      <%= form_with model: @comment, local: true do |f| %>
-        <%= f.label :content %>
-        <%= f.text_area :content, class: 'form-control', id: 'comment_content' %>
-        <%= f.submit nil, class: 'btn btn-default' %>
-      <% end%>
-    <% end %>
-
-    <h2>
-    <%# js側で投票のステージを挿入、削除して管理する %>
-    <div id="debate_status">
-    <%= @debate.status %>
-    </div>
-    </h2>
-
-    <div>
-    <%# 参加者が揃っているときに表示 %>
-    <% if !@debate.joined_user_id.nil? %>
-      <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
-      <% if @debate.WinOrLose.nil? and @debate.status == "before_vote" %>
-        <%# 降参ボタン %>
-        <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
-      <% elsif @debate.status != "before_vote" %>
-        <%# なにも表示しない %>
-      <% end %>
-    <% end %>
-    </div>
-
-    <%# 投票中 以下ボタン表示 %>
-    <% if @debate.status == 'voting' %>
-      <%# 議論参加者と観戦者で表示を分ける %>
-      <% if current_user.debating_user?(@debate) %>
-        <h2>投票中</h2>
-      <% else %>
-        <% if !(Vote.where(debate_id: @debate.id, voted_user_id: current_user.id).nil?) %>
-          <%# 参加者のどちらかへの投票ボタン すでに投票した観戦者には表示しない%>
-          <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get %>
-          <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get %>
-        <% else %>
-          <h2>投票済み</h2>
+    <%# コメントの入力フォーム %>
+      <%# comment欄、comment入力フォーム(議論終了後にのみ表示) フッターに表示する %>
+      <% if @debate.status == "after_vote" %>
+        <%= form_with model: @comment, local: true do |f| %>
+          <%= f.label :content %>
+          <%= f.text_area :content, class: 'form-control', id: 'comment_content' %>
+          <%= f.submit nil, class: 'btn btn-default' %>
         <% end %>
-
       <% end %>
-    <% end %>
-
-    <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
-    <% if !(@vote.nil?) and current_user.debating_user?(@debate) and @debate.status != 'after_vote' %>
-      <%# グラフ %>
-      <%= pie_chart @data%>
-    <% end %>
-
-    <%# 全体の投票終了後 グラフ表示 %>
-    <% if @debate.status == "after_vote" and @debate.finished_at != nil %>
-      <% if @debate.status == 'after_vote' %>
-        <%# グラフ %>
-        <%= pie_chart @data %>
-      <% end %>
-    <% end %>
-
-    <%# 投票後は表示しない %>
-    <% if @debate.status != "after_vote" %>
-      <div id="remainingtime">
-        <%= render 'debates/timelimit'%>
-      </div>
-    <% end %>
-
-    <%# 参加者が揃っているかつ投票前 制限時間の選択 議論参加者のみに表示 %>
-    <% if !@debate.joined_user_id.nil? and current_user.debating_user?(@debate) and @debate.status == 'before_vote' %>
-      <%# 投票の制限時間を選択 %>
-      <div id="vote-form">
-        <%# ajaxを使う場合は、local: false にする %>
-        <%= form_with url: debates_vote_start_path, method: :get, local: true do |f| %>
-          <div class="form-group">
-            <%= f.label '制限時間'%>
-            <%= f.select :limit, [['1分', 60000], ['5分', 300000]],  { include_blank: '制限時間を選択してください'}, { class: 'form-control'  ,    required: true } %>
-          </div>
-          <div>
-            <%= f.submit '投票開始', id: 'vote-start-btn',class: 'btn btn-primary btn-block'%>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
   </div>
-  <%# 右のサイドバー %>
-  <div class="side-right flex-auto fixed">
-    <p>右のサイドバー</p>
-  </div>
-
 </div>
+
