@@ -11,7 +11,7 @@
   <%# 議論一覧 %>
   <div class="mx-auto">
     <% @debates.each do |debate| %>
-      <%= render 'debate', debate: debate %>
+      <%= render partial: 'debate', locals: {debate: debate} %>
     <% end %>
   </div>
 </div>
