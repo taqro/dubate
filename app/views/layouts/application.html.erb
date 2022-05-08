@@ -21,6 +21,7 @@
         <nav>
           <ul class="md:flex">
             <% if user_signed_in? %>
+              <li class="mt-5 ml-5 border-b md:border-none"><%= image_tag "ayatsuji2.jpg", class: "w-10 h-10 rounded-full"%></li>
               <li class="border-b md:border-none"><strong><%= link_to current_user.name, user_path(current_user), class: "block px-8 py-2   my-4 " %></strong></li>
               <li class="border-b md:border-none"><%= link_to 'プロフィール変更', edit_user_registration_path, class: "block px-8 py-2 my-4   " %></li>
               <li class="border-b md:border-none"><%= link_to '議論作成', new_debate_path, class: "block px-8 py-2 my-4 " %></li>
