@@ -1,13 +1,16 @@
 <div class="relative">
   <div class="flex mb-10">
     <%# 左のサイドバー %>
-    <div class="flex-1">
-      <p>左のサイドバー</p>
-      <%# いいね %>
-      <div id="debate_<%= @debate.id %>">
-        <%= render partial: "likes/like", locals: {debate: @debate} %>
+    <div class="flex-1 ">
+      <div class="float-right">
+        <p>左のサイドバー</p>
+        <%# いいね %>
+        <div id="debate_<%= @debate.id %>">
+          <%= render partial: "likes/like", locals: {debate: @debate} %>
+        </div>
+        <%# tweet（リンクはまだ） %>
+        <i class="fa-brands fa-twitter fa-2x "></i>
       </div>
-      <%# tweet %>
     </div>
     <%# メイン %>
     <div id="debate-container" class="flex-1">
@@ -26,15 +29,6 @@
         <h2>議題</h2>
         <%= @debate.agenda %>
       </div>
-
-      <%# 勝敗がついたときのみ表示 %>
-      <% if !@debate.WinOrLose.nil? %>
-      <%# 勝者と敗者の表示 %>
-      <h2>Winner</h2>
-      <%= User.find(@debate.WinOrLose.winner_id).name %>
-      <h2>Loser</h2>
-      <%= User.find(@debate.WinOrLose.loser_id).name %>
-      <% end %>
 
       <%# 議論  %>
       <h2>議論</h2>
@@ -108,6 +102,15 @@
             <h2>投票済み</h2>
           <% end %>
         <% end %>
+      <% end %>
+
+      <%# 勝敗がついたときのみ表示 %>
+      <% if !@debate.WinOrLose.nil? %>
+        <%# 勝者と敗者の表示 %>
+        <h2>Winner</h2>
+        <%= User.find(@debate.WinOrLose.winner_id).name %>
+        <h2>Loser</h2>
+        <%= User.find(@debate.WinOrLose.loser_id).name %>
       <% end %>
 
       <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
