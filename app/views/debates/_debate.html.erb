@@ -33,9 +33,14 @@
     <%# いいね %>
     <div>
       <%= render partial: "likes/like", locals: {debate: debate} %>
-      <div>
-        <%= button_to '削除', debate_path(debate), method: :delete %>
-      </div>
+    </div>
+    <%# 削除 %>
+    <div>
+      <%= button_to '削除', debate_path(debate), method: :delete %>
+    </div>
+    <%# 共有（機能はまだ） %>
+    <div>
+      <i class="fa-solid fa-share fa-lg"></i>
     </div>
   </div>
 </div>

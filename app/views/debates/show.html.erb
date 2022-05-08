@@ -2,14 +2,19 @@
   <div class="flex mb-10">
     <%# 左のサイドバー %>
     <div class="flex-1 ">
-      <div class="float-right">
-        <p>左のサイドバー</p>
+      <div class="float-right mr-3">
         <%# いいね %>
         <div id="debate_<%= @debate.id %>">
           <%= render partial: "likes/like", locals: {debate: @debate} %>
         </div>
-        <%# tweet（リンクはまだ） %>
-        <i class="fa-brands fa-twitter fa-2x "></i>
+        <%# tweet（機能はまだ） %>
+        <div>
+          <i class="fa-brands fa-twitter fa-2x "></i>
+        </div>
+        <%# 共有（機能はまだ） %>
+        <div>
+          <i class="fa-solid fa-share fa-lg"></i>
+        </div>
       </div>
     </div>
     <%# メイン %>

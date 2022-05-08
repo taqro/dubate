@@ -65,6 +65,8 @@ document.addEventListener('turbolinks:load', () => {
 })
 
 
+
+
 //議論を離れる直前に行う処理
 //明示的に購読を解除する
 document.addEventListener('turbolinks:before-render', () => {
