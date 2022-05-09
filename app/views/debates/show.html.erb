@@ -1,7 +1,7 @@
 <div class="relative">
   <div class="flex mb-10">
     <%# 左のサイドバー %>
-    <div class="flex-1 ">
+    <div class="w-1/4 ">
       <div class="float-right mr-3">
         <%# いいね %>
         <div id="debate_<%= @debate.id %>">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <%# メイン %>
-    <div id="debate-container" class="flex-1">
+    <div id="debate-container" class="w-2/4">
       <div>
         <h2>議論作成者</h2>
         <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id), class: "hover:underline" %>
@@ -81,7 +81,7 @@
 
     </div>
     <%# 右のサイドバー %>
-    <div class="flex-1">
+    <div class="w-1/4">
       <%# 降参ボタン %>
       <%# 参加者が揃っているときに表示 %>
       <% if !@debate.joined_user_id.nil? %>
