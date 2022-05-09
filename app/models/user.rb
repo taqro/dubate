@@ -53,12 +53,6 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
-  #議論関連のメソッド
-  #その議論に参加中のユーザーならtrueを返す
-  def debating_user?(debate)
-    self.id == debate.created_user_id or self.id == debate.joined_user_id
-  end
-
   #like関連のメソッド
   #既にlikeしたか
   def liked?(debate)

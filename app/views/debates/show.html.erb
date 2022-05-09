@@ -21,13 +21,13 @@
     <div id="debate-container" class="w-2/4">
       <div>
         <h2>議論作成者</h2>
-        <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id), class: "hover:underline" %>
+        <%= link_to @debate.createdUser.name, @debate.createdUser, class: "hover:underline" %>
       </div>
 
       <div>
         <h2>議論参加者</h2>
-        <% if @debate.joined_user_id != nil %>
-          <%= link_to User.find(@debate.joined_user_id).name, User.find(@debate.joined_user_id), class: "hover:underline" %>
+        <% if @debate.isStarted? %>
+          <%= link_to @debate.joinnedUser.name, @debate.joinnedUser, class: "hover:underline" %>
         <% end %>
       </div>
       <div>
@@ -59,7 +59,7 @@
       <div class=" bottom-0 w-full text-center mb-6">
         <%# conversationの入力フォーム %>
         <%# 議論入力フォーム（議論中、議論参加者にしか表示されない %>
-        <% if current_user.debating_user?(@debate) and @debate.finished_at == nil %>
+        <% if @debate.debating_user?(current_user) and !@debate.isFinished? %>
           <form name="conversationform" id="conversation-form">
             <div>
               <input type="text" id="conversation-text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -83,10 +83,10 @@
     <%# 右のサイドバー %>
     <div class="w-1/4">
       <%# 降参ボタン %>
-      <%# 参加者が揃っているときに表示 %>
-      <% if !@debate.joined_user_id.nil? %>
+      <%# 参加者が揃っているときに議論参加者のみに表示 %>
+      <% if @debate.isStarted? and @debate.debating_user?(current_user) %>
         <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
-        <% if @debate.WinOrLose.nil? and @debate.status == "before_vote" %>
+        <% if !@debate.isFinished? and @debate.status == "before_vote" %>
           <%= button_to "降参", debates_surrender_path(@debate), method: :get, data: { confirm: '本当に降参しますか？' },
           class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
         <% elsif @debate.status != "before_vote" %>
@@ -97,7 +97,7 @@
       <%# 投票中 以下ボタン表示 %>
       <% if @debate.status == 'voting' %>
         <%# 議論参加者と観戦者で表示を分ける %>
-        <% if current_user.debating_user?(@debate) %>
+        <% if @debate.debating_user?(current_user) %>
           <h2>投票中</h2>
         <% else %>
           <% if !(Vote.where(debate_id: @debate.id, voted_user_id: current_user.id).nil?) %>
@@ -111,22 +111,22 @@
       <% end %>
 
       <%# 勝敗がついたときのみ表示 %>
-      <% if !@debate.WinOrLose.nil? %>
+      <% if @debate.isFinished? %>
         <%# 勝者と敗者の表示 %>
         <h2>Winner</h2>
-        <%= link_to User.find(@debate.WinOrLose.winner_id).name, User.find(@debate.WinOrLose.winner_id), class: "hover:underline" %>
+        <%= link_to @debate.winUser.name, @debate.winUser, class: "hover:underline" %>
         <h2>Loser</h2>
-        <%= link_to User.find(@debate.WinOrLose.loser_id).name, User.find(@debate.WinOrLose.loser_id), class: "hover:underline" %>
+        <%= link_to @debate.loseUser.name, @debate.loseUser, class: "hover:underline" %>
       <% end %>
 
       <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
-      <% if !(@vote.nil?) and current_user.debating_user?(@debate) and @debate.status != 'after_vote' %>
+      <% if !(@vote.nil?) and @debate.debating_user?(current_user) and @debate.status != 'after_vote' %>
         <%# グラフ %>
         <%= pie_chart @data%>
       <% end %>
 
       <%# 全体の投票終了後 グラフ表示 %>
-      <% if @debate.status == "after_vote" and @debate.finished_at != nil %>
+      <% if @debate.status == "after_vote" and @debate.isFinished? %>
         <% if @debate.status == 'after_vote' %>
           <%# グラフ %>
           <%= pie_chart @data %>
@@ -140,8 +140,8 @@
         </div>
       <% end %>
 
-      <%# 参加者が揃っているかつ投票前 制限時間の選択 議論参加者のみに表示 %>
-      <% if !@debate.joined_user_id.nil? and current_user.debating_user?(@debate) and @debate.status == 'before_vote' %>
+      <%# 議論が始まっているかつ投票前 制限時間の選択 議論参加者のみに表示 %>
+      <% if @debate.isStarted? and @debate.debating_user?(current_user) and @debate.status == 'before_vote' %>
         <%# 投票の制限時間を選択 %>
         <div id="vote-form">
           <%# ajaxを使う場合は、local: false にする %>
