@@ -21,13 +21,13 @@
     <div id="debate-container" class="flex-1">
       <div>
         <h2>議論作成者</h2>
-        <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id) %>
+        <%= link_to User.find(@debate.created_user_id).name, User.find(@debate.created_user_id), class: "hover:underline" %>
       </div>
 
       <div>
         <h2>議論参加者</h2>
         <% if @debate.joined_user_id != nil %>
-          <%= link_to User.find(@debate.joined_user_id).name, User.find(@debate.joined_user_id) %>
+          <%= link_to User.find(@debate.joined_user_id).name, User.find(@debate.joined_user_id), class: "hover:underline" %>
         <% end %>
       </div>
       <div>
@@ -87,7 +87,8 @@
       <% if !@debate.joined_user_id.nil? %>
         <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
         <% if @debate.WinOrLose.nil? and @debate.status == "before_vote" %>
-          <%= button_to "降参", debates_surrender_path(@debate), method: :get %>
+          <%= button_to "降参", debates_surrender_path(@debate), method: :get, data: { confirm: '本当に降参しますか？' },
+          class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
         <% elsif @debate.status != "before_vote" %>
           <%# なにも表示しない %>
         <% end %>
@@ -101,8 +102,8 @@
         <% else %>
           <% if !(Vote.where(debate_id: @debate.id, voted_user_id: current_user.id).nil?) %>
             <%# 参加者のどちらかへの投票ボタン すでに投票した観戦者には表示しない%>
-            <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get %>
-            <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get %>
+            <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get, class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
+            <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get, class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
           <% else %>
             <h2>投票済み</h2>
           <% end %>
@@ -113,9 +114,9 @@
       <% if !@debate.WinOrLose.nil? %>
         <%# 勝者と敗者の表示 %>
         <h2>Winner</h2>
-        <%= User.find(@debate.WinOrLose.winner_id).name %>
+        <%= link_to User.find(@debate.WinOrLose.winner_id).name, User.find(@debate.WinOrLose.winner_id), class: "hover:underline" %>
         <h2>Loser</h2>
-        <%= User.find(@debate.WinOrLose.loser_id).name %>
+        <%= link_to User.find(@debate.WinOrLose.loser_id).name, User.find(@debate.WinOrLose.loser_id), class: "hover:underline" %>
       <% end %>
 
       <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
