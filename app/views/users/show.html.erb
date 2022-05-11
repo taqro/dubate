@@ -1,29 +1,33 @@
 <div class="flex justify-center flex-col ">
   <div class="mx-auto w-2/4 h-full">
     <div class="border-r border-b border-l border-gray-400  bg-white">
-      <div class="mr-3 ml-3 mb-3">
-        <%= image_tag "ayatsuji2.jpg", class: "w-10 h-10 p-2 rounded-full"%>
+      <div class="flex flex-col mr-3 ml-3 mb-3">
         <div>
-          <%= @user.name %>さんのページです。
+          <%= image_tag "ayatsuji2.jpg", class: "w-10 h-10 mt-2 p-2 rounded-full"%>
         </div>
-        <%# フォロー数、フォロワー数 %>
-        <div class="stas">
-          <%= render 'shared/follow_stats' %>
+        <div class="text-2xl font-bold">
+          <%= @user.name %>
         </div>
-
-        <%# ユーザーID %>
         <div>
-          <p>user_id</p>
-          <%= @user.id %>
-        </div>
+          <%# フォロー数、フォロワー数 %>
+          <div class="stas">
+            <%= render 'shared/follow_stats' %>
+          </div>
 
-        <%# 勝敗数（それぞれを勝った議論一覧と負けた議論一覧へのリンクにする） %>
-        <div class="stas">
-          <%= render 'shared/winorlose_stats' %>
-        </div>
+          <%# ユーザーID %>
+          <div>
+            <p>user_id</p>
+            <%= @user.id %>
+          </div>
 
-        <%# フォロー関係 %>
-        <%= render 'follow_form' if user_signed_in?  %>
+          <%# 勝敗数（それぞれを勝った議論一覧と負けた議論一覧へのリンクにする） %>
+          <div class="stas">
+            <%= render 'shared/winorlose_stats' %>
+          </div>
+
+          <%# フォロー関係 %>
+          <%= render 'follow_form' if user_signed_in?  %>
+        </div>
       </div>
     </div>
 

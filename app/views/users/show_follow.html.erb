@@ -1,6 +1,6 @@
 <% provide(:title, @title) %>
-<div class="row">
-  <aside class="col-md-4">
+<div class="mx-auto w-2/4">
+  <div class="border-r border-b border-l border-gray-400">
     <section class="user_info">
       <h1><%= @user.name %></h1>
       <span><%= link_to "view my profile", @user %></span>
@@ -8,9 +8,9 @@
     <section class="stats">
       <%= render 'shared/follow_stats' %>
     </section>
-  </aside>
+  </div>
   <div class="col-md-8">
-    <h3><%= @title %></h3>
+    <div><%= @title %></div>
     <% if @users.any? %>
       <ul class="users follow">
         <% @users.each do |user| %>
