@@ -12,10 +12,11 @@
   <div class="col-md-8">
     <h3><%= @title %></h3>
     <% if @debates.any? %>
+      <%# partialにする %>
       <ul class="users winorlose">
         <% @debates.each do |debate| %>
           <div>
-            <%= link_to debate.agenda, debate %>
+            <%= render partial: 'debates/debate', locals: {debate: debate} %>
           </div>
         <% end %>
       </ul>
