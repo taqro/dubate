@@ -1,82 +1,83 @@
-<h1><%= @user.name %>さんのページです。</h1>
-<%# フォロー数、フォロワー数 %>
-<div class="stas">
-  <%= render 'shared/follow_stats' %>
-</div>
-
-<%# ユーザーID %>
-<div>
-  <p>user_id</p>
-  <%= @user.id %>
-</div>
-
-<%# 勝敗数（それぞれを勝った議論一覧と負けた議論一覧へのリンクにする） %>
-<div class="stas">
-  <%= render 'shared/winorlose_stats' %>
-</div>
-
-<%# フォロー関係 %>
-<%= render 'follow_form' if user_signed_in?  %>
-
-
-
-<%# 参加中の議論一覧（created_user_idかjoinned_user_idにidがあって、かつ、finished_atがnilのdebateの集合）(あとで実装) %>
-
-<%# タブ %>
-<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-  <ul class="flex flex-wrap -mb-px">
-      <li class="mr-2">
-          <a href="#liked-debates" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600hover:border-gray-300">likeした議論一覧</a>
-      </li>
-      <li class="mr-2">
-          <a href="#created-debates" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600hover:border-gray-300">作成した議論一覧</a>
-      </li>
-      <li class="mr-2">
-          <a href="#joinned-debates" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600hover:border-gray-300">参加した議論一覧</a>
-      </li>
-  </ul>
-
-</div>
-
-<%# タブのコンテンツ %>
-<div class="tab-content" id="tabs-tabContent">
-  <%# likeした議論一覧 %>
-  <div class="tab-pane fade show active" id="liked-debates" role="tabpanel" aria-labelledby="liked-debates-tab">
-    <% @user.liked_debates.each do |debate| %>
-      <div>
+<div class="flex justify-center flex-col ">
+  <div class="mx-auto w-2/4 h-full">
+    <div class="border-r border-b border-l border-gray-400  bg-white">
+      <div class="mr-3 ml-3 mb-3">
+        <%= image_tag "ayatsuji2.jpg", class: "w-10 h-10 p-2 rounded-full"%>
         <div>
-          <%= link_to debate.agenda, debate %>
+          <%= @user.name %>さんのページです。
         </div>
+        <%# フォロー数、フォロワー数 %>
+        <div class="stas">
+          <%= render 'shared/follow_stats' %>
+        </div>
+
+        <%# ユーザーID %>
         <div>
-          <%= debate.created_user_id %>
+          <p>user_id</p>
+          <%= @user.id %>
         </div>
+
+        <%# 勝敗数（それぞれを勝った議論一覧と負けた議論一覧へのリンクにする） %>
+        <div class="stas">
+          <%= render 'shared/winorlose_stats' %>
+        </div>
+
+        <%# フォロー関係 %>
+        <%= render 'follow_form' if user_signed_in?  %>
       </div>
-    <% end %>
-  </div>
-  <%# 作成した議論一覧 %>
-  <div class="" id="created-debates" role="tabpanel" aria-labelledby="created-debates-tab">
-    <% Debate.where(created_user_id: @user.id).each do |debate| %>
-      <div>
-        <div>
-          <%= link_to debate.agenda, debate %>
-        </div>
-        <div>
-          <%= debate.created_user_id %>
-        </div>
+    </div>
+
+
+    <%# 参加中の議論一覧（created_user_idかjoinned_user_idにidがあって、かつ、finished_atがnilのdebateの集合）(あとで実装) %>
+
+    <%# タブ（未完成なぜかタブの切替ができない） %>
+    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+      <ul class="flex flex-wrap -mb-px">
+          <li class="mr-2">
+              <a href="#liked-debates" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent     hover:text-gray-600hover:border-gray-300">likeした議論一覧</a>
+          </li>
+          <li class="mr-2">
+              <a href="#created-debates" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent     hover:text-gray-600hover:border-gray-300">作成した議論一覧</a>
+          </li>
+          <li class="mr-2">
+              <a href="#joinned-debates" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent     hover:text-gray-600hover:border-gray-300">参加した議論一覧</a>
+          </li>
+      </ul>
+
+    </div>
+
+    <%# タブのコンテンツ %>
+    <div class="tab-content" id="tabs-tabContent">
+      <%# likeした議論一覧 %>
+      <div class="tab-pane fade show active" id="liked-debates" role="tabpanel" aria-labelledby="liked-debates-tab">
+        <% @user.liked_debates.each do |debate| %>
+          <div>
+            <div>
+              <%= render partial: 'debates/debate', locals: {debate: debate} %>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <%# 参加した議論一覧 %>
-  <div class="tab-pane fade" id="joinned-debates" role="tabpanel" aria-labelledby="joinned-debates-tab">
-    <% Debate.where(joined_user_id: @user.id).each do |debate| %>
-      <div>
-        <div>
-          <%= link_to debate.agenda, debate %>
-        </div>
-        <div>
-          <%= debate.created_user_id %>
-        </div>
+      <%# 作成した議論一覧 %>
+      <div class="" id="created-debates" role="tabpanel" aria-labelledby="created-debates-tab">
+        <% Debate.where(created_user_id: @user.id).each do |debate| %>
+          <div>
+            <div>
+              <%= render partial: 'debates/debate', locals: {debate: debate} %>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+      <%# 参加した議論一覧 %>
+      <div class="tab-pane fade" id="joinned-debates" role="tabpanel" aria-labelledby="joinned-debates-tab">
+        <% Debate.where(joined_user_id: @user.id).each do |debate| %>
+          <div>
+            <div>
+              <%= render partial: 'debates/debate', locals: {debate: debate} %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

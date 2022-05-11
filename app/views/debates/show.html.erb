@@ -18,26 +18,29 @@
       </div>
     </div>
     <%# メイン %>
-    <div id="debate-container" class="w-2/4">
-      <div>
-        <h2>議論作成者</h2>
-        <%= link_to @debate.createdUser.name, @debate.createdUser, class: "hover:underline" %>
-      </div>
-
-      <div>
-        <h2>議論参加者</h2>
-        <% if @debate.isStarted? %>
-          <%= link_to @debate.joinnedUser.name, @debate.joinnedUser, class: "hover:underline" %>
-        <% end %>
-      </div>
-      <div>
-        <h2>議題</h2>
-        <%= @debate.agenda %>
+    <div id="debate-container" class="w-2/4 mx-3">
+      <div class="border-r border-b border-l border-gray-400  bg-white">
+        <div class="mr-3 ml-3 mb-3">
+          <div>
+            <h2>議論作成者</h2>
+            <%= link_to @debate.createdUser.name, @debate.createdUser, class: "hover:underline" %>
+          </div>
+          <div>
+            <h2>議論参加者</h2>
+            <% if @debate.isStarted? %>
+              <%= link_to @debate.joinnedUser.name, @debate.joinnedUser, class: "hover:underline" %>
+            <% end %>
+          </div>
+          <div>
+            <h2>議題</h2>
+            <%= @debate.agenda %>
+          </div>
+        </div>
       </div>
 
       <%# 議論欄  %>
       <h2>議論</h2>
-      <div id='conversations' >
+      <div id='conversations' class="w-full" >
         <%= render partial: 'debates/conversation', collection: @conversations %>
       </div>
 
