@@ -1,7 +1,7 @@
 <div class="relative">
   <div class="flex mb-10">
     <%# 左のサイドバー %>
-    <div class="w-1/4 ">
+    <div class="w-1/4 sticky top-0 h-full">
       <div class="float-right mr-3">
         <%# いいね %>
         <div id="debate_<%= @debate.id %>">
@@ -59,14 +59,15 @@
       </h2>
 
       <%# フッター %>
-      <div class=" bottom-0 w-full text-center mb-6">
+      <div class=" bottom-0 w-full text-center mb-6 sticky">
         <%# conversationの入力フォーム %>
         <%# 議論入力フォーム（議論中、議論参加者にしか表示されない %>
         <% if @debate.debating_user?(current_user) and !@debate.isFinished? %>
           <form name="conversationform" id="conversation-form">
             <div>
-              <input type="text" id="conversation-text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+              <input type="text" id="conversation-text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg     focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="議論を入力してください">
             </div>
+            <%# ボタンをクリックで送信でなく、Enter入力で入力に直す %>
             <div>
               <input type="button" id="conversation-btn" value="送信">
             </div>
@@ -76,15 +77,14 @@
         <%# comment欄、comment入力フォーム(議論終了後にのみ表示) %>
         <% if @debate.status == "after_vote" %>
           <%= form_with model: @comment, local: true do |f| %>
-            <%= f.text_field :content, id: 'comment_content', class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
-            <%= f.button "送信", type: 'button', onclick: 'submit();' %>
+            <%= f.text_field :content, id: 'comment_content', class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", placeholder: "コメントを入力してください" %>
           <% end %>
         <% end %>
       </div>
 
     </div>
     <%# 右のサイドバー %>
-    <div class="w-1/4">
+    <div class="w-1/4 sticky top-0 h-full">
       <%# 降参ボタン %>
       <%# 参加者が揃っているときに議論参加者のみに表示 %>
       <% if @debate.isStarted? and @debate.debating_user?(current_user) %>
