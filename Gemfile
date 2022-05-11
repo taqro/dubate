@@ -44,6 +44,9 @@ group :development, :test do
   # faker
   gem 'faker'
 
+  # bullet(N + 1問題の検知)
+  gem 'bullet'
+
 end
 
 group :development do
