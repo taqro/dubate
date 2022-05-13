@@ -85,84 +85,80 @@
     </div>
     <%# 右のサイドバー %>
     <div class="w-1/4 sticky top-0 h-full">
-      <%# 降参ボタン %>
-      <%# 参加者が揃っているときに議論参加者のみに表示 %>
-      <% if @debate.isStarted? and @debate.debating_user?(current_user) %>
-        <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
-        <% if !@debate.isFinished? and @debate.status == "before_vote" %>
-          <%= button_to "降参", debates_surrender_path(@debate), method: :get, data: { confirm: '本当に降参しますか？' },
-          class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-        <% elsif @debate.status != "before_vote" %>
-          <%# なにも表示しない %>
+      <div class="m-2">
+        <%# 参加者が揃っているとき、つまり議論開始後、議論参加者のみに表示 %>
+        <% if @debate.isStarted? and @debate.debating_user?(current_user) %>
+          <%# 勝敗がついているかどうかで降参、投票ボタンが表示されるかどうかが決まる %>
+          <% if !@debate.isFinished? and @debate.status == "before_vote" %>
+            <%# 降参ボタン %>
+            <%= button_to "降参", debates_surrender_path(@debate), method: :get, data: { confirm: '本当に降参しますか？' },
+            class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg   text-sm px-5 py-2.5 mr-2 mb-2" %>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <%# 投票中 以下ボタン表示 %>
-      <% if @debate.status == 'voting' %>
-        <%# 議論参加者と観戦者で表示を分ける %>
-        <% if @debate.debating_user?(current_user) %>
-          <h2>投票中</h2>
-        <% else %>
-          <% if !(Vote.where(debate_id: @debate.id, voted_user_id: current_user.id).nil?) %>
-            <%# 参加者のどちらかへの投票ボタン すでに投票した観戦者には表示しない%>
-            <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get, class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-            <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get, class: "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
+        <%# 投票中 以下ボタン表示 %>
+        <% if @debate.status == 'voting' %>
+          <%# 議論参加者と観戦者で表示を分ける %>
+          <% if @debate.debating_user?(current_user) %>
+            <h2>投票中</h2>
           <% else %>
-            <h2>投票済み</h2>
+            <% if !(Vote.where(debate_id: @debate.id, voted_user_id: current_user.id).nil?) %>
+              <%# 参加者のどちらかへの投票ボタン すでに投票した観戦者には表示しない%>
+              <%= button_to User.find(@debate.created_user_id).name , debates_vote_created_path(@debate), method: :get, class:  "text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg   text-sm px-5 py-2.5 mr-2 mb-2" %>
+              <%= button_to User.find(@debate.joined_user_id).name , debates_vote_joined_path(@debate), method: :get, class: "text-white  bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
+            <% else %>
+              <h2>投票済み</h2>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
 
-      <%# 勝敗がついたときのみ表示 %>
-      <% if @debate.isFinished? %>
-        <%# 勝者と敗者の表示 %>
-        <h2>Winner</h2>
-        <%= link_to @debate.winUser.name, @debate.winUser, class: "hover:underline" %>
-        <h2>Loser</h2>
-        <%= link_to @debate.loseUser.name, @debate.loseUser, class: "hover:underline" %>
-      <% end %>
+        <%# 勝敗がついたときのみ表示 %>
+        <% if @debate.isFinished? %>
+          <%# 勝者と敗者の表示 %>
+          <h2>Winner</h2>
+          <%= link_to @debate.winUser.name, @debate.winUser, class: "hover:underline" %>
+          <h2>Loser</h2>
+          <%= link_to @debate.loseUser.name, @debate.loseUser, class: "hover:underline" %>
+        <% end %>
 
-      <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
-      <% if !(@vote.nil?) and @debate.debating_user?(current_user) and @debate.status != 'after_vote' %>
-        <%# グラフ %>
-        <%= pie_chart @data%>
-      <% end %>
-
-      <%# 全体の投票終了後 グラフ表示 %>
-      <% if @debate.status == "after_vote" and @debate.isFinished? %>
-        <% if @debate.status == 'after_vote' %>
+        <%# 投票終了後 途中経過グラフ表示 議論参加者には表示しない %>
+        <% if !(@vote.nil?) and @debate.debating_user?(current_user) and @debate.status != 'after_vote' %>
           <%# グラフ %>
-          <%= pie_chart @data %>
+          <%= pie_chart @data%>
         <% end %>
-      <% end %>
 
-      <%# 投票後は表示しない %>
-      <% if @debate.status != "after_vote" %>
-        <div id="remainingtime">
-          <%= render 'debates/timelimit'%>
-        </div>
-      <% end %>
-
-      <%# 議論が始まっているかつ投票前 制限時間の選択 議論参加者のみに表示 %>
-      <% if @debate.isStarted? and @debate.debating_user?(current_user) and @debate.status == 'before_vote' %>
-        <%# 投票の制限時間を選択 %>
-        <div id="vote-form">
-          <%# ajaxを使う場合は、local: false にする %>
-          <%= form_with url: debates_vote_start_path, method: :get, local: true do |f| %>
-            <div class="form-group">
-              <%= f.label '制限時間'%>
-              <%= f.select :limit, [['1分', 60000], ['5分', 300000]],  { include_blank: '制限時間を選択してください'}, { class:   'form-control'  ,    required: true } %>
-            </div>
-            <div>
-              <%= f.submit '投票開始', id: 'vote-start-btn', class: 'btn btn-primary btn-block'%>
-            </div>
+        <%# 全体の投票終了後 グラフ表示 %>
+        <% if @debate.status == "after_vote" and @debate.isFinished? %>
+          <% if @debate.status == 'after_vote' %>
+            <%# グラフ %>
+            <%= pie_chart @data %>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
 
+        <%# 投票後は表示しない %>
+        <% if @debate.status != "after_vote" %>
+          <div id="remainingtime">
+            <%= render 'debates/timelimit'%>
+          </div>
+        <% end %>
 
+        <%# 議論が始まっているかつ投票前 制限時間の選択 議論参加者のみに表示 %>
+        <% if @debate.isStarted? and @debate.debating_user?(current_user) and @debate.status == 'before_vote' %>
+          <%# 投票の制限時間を選択 %>
+          <div id="vote-form">
+            <%# ajaxを使う場合は、local: false にする %>
+            <%= form_with url: debates_vote_start_path, method: :get, local: true do |f| %>
+              <div class="">
+                <%= f.select :limit, [['1分', 60000], ['5分', 300000]],  { include_blank: '制限時間を選択してください'}, { class:     'form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500  focus:border-blue-500 my-3 py-auto pr-7 inline-block'  ,    required: true } %>
+              </div>
+              <div>
+                <%= f.submit '投票開始', id: 'vote-start-btn', class: 'text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5', data: { confirm: '本当に投票を開始しますか？ ' }%>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-
   </div>
 </div>
 

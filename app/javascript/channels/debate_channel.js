@@ -26,17 +26,11 @@ document.addEventListener('turbolinks:load', () => {
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      alert("test");
+
       // data['conversation']がnullでないとき
       if (data['conversation'] != null ){
         const conversations = document.getElementById('conversations');
-      conversations.insertAdjacentHTML('beforeend', data['conversation']);
-      } else {
-        // 制限時間の処理 (debateのstatusがvotingのとき)
-      let status = gon.debate.status;
-      if (status == "voting") {
-        alert("voting now!");
-      }
+        conversations.insertAdjacentHTML('beforeend', data['conversation']);
       }
     },
 
@@ -54,16 +48,7 @@ document.addEventListener('turbolinks:load', () => {
       e.preventDefault();
   });
   }
-
-  // 投票開始
-  // if (document.getElementById("vote-start-btn") != null){
-  //   document.getElementById("vote-start-btn").addEventListener('click', function(e){
-  //     alert("投票開始");
-  //     e.preventDefault();
-  // });
-  // }
 })
-
 
 
 

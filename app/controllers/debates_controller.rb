@@ -78,7 +78,7 @@ class DebatesController < ApplicationController
     end
   end
 
-  #投票を開始する（制限時間のパラメーターをjs側にgonで渡す？）
+  #投票を開始する（制限時間のパラメーターをjs側にgonで渡す？） 制限時間関係の機能は未完成 保留中 あとで作る
   def vote_start
     @debate = Debate.find(params[:id])
     @debate.update!(status: "voting") #投票開始状態
@@ -89,15 +89,7 @@ class DebatesController < ApplicationController
     #投票終了時刻
     @time_limit = vote_start_at + limit
 
-
-    #ここでaction cableのchannelにブロードキャストする？ この処理はJobに書くべき？ jobでrenderの記述の必要あり？
-    ActionCable.server.broadcast 'debate_channel_#{@debate.id}', time_limit: render_time_limit(@time_limit)
-
     redirect_back fallback_location: root_path
-  end
-
-  def render_time_limit(time_limit)
-    ApplicationController.renderer.render partial: 'debates/timelimit', locals: { time_limit: time_limit }
   end
 
   #投票を終了する（winorloseの勝者、敗者のカラムにそれぞれのuser_idを入れるアクションを呼び出す）
