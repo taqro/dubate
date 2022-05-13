@@ -1,16 +1,18 @@
 <% provide(:title, @title) %>
-<div class="mx-auto w-2/4">
-  <div class="border-r border-b border-l border-gray-400">
-    <div class="user_info">
-      <h1><%= @user.name %></h1>
-      <span><%= link_to "view my profile", @user %></span>
+<div class="mx-auto w-2/4 border-r border-l border-black">
+  <div class="border-b border-black ">
+    <div class="mr-3 ml-3 mb-3">
+      <div class="">
+        <div><%= @user.name %></div>
+        <div><%= link_to "view my profile", @user %></div>
+      </div>
+      <div class="stats">
+        <%= render 'shared/winorlose_stats' %>
+      </div>
     </div>
-    <section class="stats">
-      <%= render 'shared/winorlose_stats' %>
-    </section>
   </div>
   <div class="">
-    <h3><%= @title %></h3>
+    <div><%= @title %></div>
     <% if @debates.any? %>
       <ul class="users winorlose">
         <% @debates.each do |debate| %>
@@ -19,7 +21,6 @@
           </div>
         <% end %>
       </ul>
-      <%= paginate @debates %>
     <% end %>
   </div>
 </div>

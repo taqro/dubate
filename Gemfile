@@ -35,7 +35,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
-  # rspec
+  # rspec（テストフレームワーク）
   gem 'rspec-rails'
 
   # factory_bot
@@ -80,19 +80,16 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#Devise
+#Devise（ログイン機能）
 gem 'devise'
 
-#kaminari
-gem 'kaminari'
-
-#chartkick
+#chartkick（チャート表示）
 gem 'chartkick'
 
-#gon
+#gon（RailsからJavaScriptに変数を渡す）
 gem 'gon'
 
-#ransack
+#ransack（検索機能）
 gem 'ransack'
 
 # tailwindcss
