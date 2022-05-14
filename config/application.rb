@@ -13,6 +13,8 @@ module Dubate
 
     # 日本語の言語設定
     config.i18n.default_locale = :ja
+    # パスの設定
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     # 認証トークンをremoteフォームに埋め込む
     config.action_view.embed_authenticity_token_in_remote_forms = true

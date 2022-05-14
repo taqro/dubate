@@ -95,4 +95,10 @@ gem 'ransack'
 # tailwindcss
 # gem 'tailwindcss-rails'
 
+#rails-i18n（日本語化）
+gem 'rails-i18n'
+
+#devise-i18n（deviseの日本語化）
+gem 'devise-i18n'
+
 
