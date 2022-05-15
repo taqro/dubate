@@ -11,6 +11,12 @@ module Dubate
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # タイムゾーンを東京に設定
+    config.time_zone = 'Tokyo'
+
+    # DBでの読み込みのタイムゾーンを東京に設定
+    config.active_record.default_timezone = :local
+
     # 日本語の言語設定
     config.i18n.default_locale = :ja
     # パスの設定
