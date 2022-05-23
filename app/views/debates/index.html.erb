@@ -1,5 +1,5 @@
 <div class="mx-auto w-2/4">
-  <h1>議論一覧</h1>
+  <div class="font-bold text-xl">議論一覧</div>
   <%# 検索 %>
   <%= search_form_for @q do |f| %>
     <div class="relative">
@@ -13,7 +13,8 @@
   <%# 議論一覧 %>
   <div class="mx-auto border-r border-l border-black">
     <% @debates.each do |debate| %>
-      <%= render partial: 'debate', locals: {debate: debate} %>
+      <%# debateComponent %>
+      <%= render(DebateComponent.new(debate: debate)) %>
     <% end %>
   </div>
 </div>

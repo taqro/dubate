@@ -17,7 +17,8 @@
       <ul class="users winorlose">
         <% @debates.each do |debate| %>
           <div>
-            <%= render partial: 'debates/debate', locals: {debate: debate} %>
+            <%# DebateComponent %>
+            <%= render(DebateComponent.new(debate: debate)) %>
           </div>
         <% end %>
       </ul>

@@ -57,7 +57,8 @@
         <% @user.liked_debates.each do |debate| %>
           <div>
             <div>
-              <%= render partial: 'debates/debate', locals: {debate: debate} %>
+            <%# DebateComponent %>
+              <%= render(DebateComponent.new(debate: debate)) %>
             </div>
           </div>
         <% end %>
@@ -67,7 +68,8 @@
         <% Debate.where(created_user_id: @user.id).each do |debate| %>
           <div>
             <div>
-              <%= render partial: 'debates/debate', locals: {debate: debate} %>
+              <%# DebateComponent %>
+              <%= render(DebateComponent.new(debate: debate)) %>
             </div>
           </div>
         <% end %>
@@ -77,7 +79,8 @@
         <% Debate.where(joined_user_id: @user.id).each do |debate| %>
           <div>
             <div>
-              <%= render partial: 'debates/debate', locals: {debate: debate} %>
+            <%# DebateComponent %>
+              <%= render(DebateComponent.new(debate: debate)) %>
             </div>
           </div>
         <% end %>
