@@ -12,10 +12,8 @@
 
   <%# 議論一覧 %>
   <div class="mx-auto border-r border-l border-black">
-    <% @debates.each do |debate| %>
-      <%# debateComponent %>
-      <%= render(DebateComponent.new(debate: debate)) %>
-    <% end %>
+    <%# debateComponent %>
+    <%= render(DebateComponent.with_collection(@debates)) %>
   </div>
 </div>
 

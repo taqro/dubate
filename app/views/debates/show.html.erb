@@ -41,10 +41,8 @@
       <%# 議論欄  %>
       <div class="font-bold text-xl">議論</div>
       <div id='conversations' class="w-full" >
-        <%# 議論Component %>
-        <% @conversations.each do |conversation| %>
-          <%= render(ConversationComponent.new(conversation: conversation)) %>
-        <% end %>
+        <%# ConversationComponent %>
+        <%= render(ConversationComponent.with_collection(@conversations)) %>
       </div>
 
       <%# comment欄、comment入力フォーム(議論終了後にのみ表示) conversationの下に表示する %>
@@ -52,9 +50,7 @@
         <%# コメント欄 %>
         <div class="font-bold text-xl">コメント</div>
         <%# CommentComponent %>
-        <% @comments.each do |comment| %>
-          <%= render(CommentComponent.new(comment: comment)) %>
-        <% end %>
+        <%= render(CommentComponent.with_collection(@comments)) %>
       <% end %>
 
       <div class="font-bold text-xl">

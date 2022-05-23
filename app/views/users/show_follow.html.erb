@@ -7,7 +7,8 @@
         <div><%= link_to "view my profile", @user %></div>
       </div>
       <div class="stats">
-        <%= render 'shared/follow_stats' %>
+        <%# FollowStatsComponent %>
+        <%= render(FollowStatsComponent.new(user: @user)) %>
       </div>
     </div>
   </div>

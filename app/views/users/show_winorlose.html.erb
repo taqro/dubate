@@ -7,7 +7,8 @@
         <div><%= link_to "view my profile", @user %></div>
       </div>
       <div class="stats">
-        <%= render 'shared/winorlose_stats' %>
+        <%# WinOrLoseStatsComponent %>
+        <%= render(WinOrLoseStatsComponent.new(user: @user)) %>
       </div>
     </div>
   </div>
@@ -15,12 +16,8 @@
     <div><%= @title %></div>
     <% if @debates.any? %>
       <ul class="users winorlose">
-        <% @debates.each do |debate| %>
-          <div>
-            <%# DebateComponent %>
-            <%= render(DebateComponent.new(debate: debate)) %>
-          </div>
-        <% end %>
+        <%# DebateComponent %>
+        <%= render(DebateComponent.with_collection(@debates)) %>
       </ul>
     <% end %>
   </div>
