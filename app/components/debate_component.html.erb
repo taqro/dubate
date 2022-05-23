@@ -43,7 +43,7 @@
       <%# 下の方 %>
       <div class="flex bottom-0 justify-between">
         <%# いいね %>
-        <div>
+        <div id="debate_<%= @debate.id %>">
           <%= render partial: "likes/like", locals: {debate: @debate} %>
         </div>
         <%# 削除 %>

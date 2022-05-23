@@ -3,24 +3,22 @@
 <% @debate = debate if !debate.nil? %>
 
 <%# いいね %>
-<div id="debate_<%= @debate.id %>">
-  <div class="flex">
-    <div>
-    <% if current_user.liked?(@debate) %>
-      <%# いいね取り消し %>
-        <%= button_to(debate_likes_path(@debate), method: :delete, remote: true) do %>
-          <i class="fa-solid fa-heart fa-lg m-1"> </i>
-        <% end %>
-    <% else %>
-      <%# いいねする %>
-        <%= button_to(debate_likes_path(@debate), method: :post,remote: true) do %>
-          <i class="fa-regular fa-heart fa-lg m-1"></i>
-        <% end %>
-    <% end%>
-    </div>
-    <%# いいね数 %>
-    <div>
-      <%= @debate.liked_users.count%>
-    </div>
+<div class="flex">
+  <div>
+  <% if current_user.liked?(@debate) %>
+    <%# いいね取り消し %>
+      <%= button_to(debate_likes_path(@debate), method: :delete, remote: true) do %>
+        <i class="fa-solid fa-heart fa-lg m-1"> </i>
+      <% end %>
+  <% else %>
+    <%# いいねする %>
+      <%= button_to(debate_likes_path(@debate), method: :post,remote: true) do %>
+        <i class="fa-regular fa-heart fa-lg m-1"></i>
+      <% end %>
+  <% end%>
+  </div>
+  <%# いいね数 %>
+  <div>
+    <%= @debate.liked_users.count%>
   </div>
 </div>
