@@ -22,41 +22,47 @@
       <div class="border-b border-black">
         <div class="mr-3 ml-3 mb-3">
           <div>
-            <h2>議論作成者</h2>
+            <div class="font-bold text-xl">議論作成者</div>
             <%= link_to @debate.createdUser.name, @debate.createdUser, class: "hover:underline" %>
           </div>
           <div>
-            <h2>議論参加者</h2>
+            <div class="font-bold text-xl">議論参加者</div>
             <% if @debate.isStarted? %>
               <%= link_to @debate.joinnedUser.name, @debate.joinnedUser, class: "hover:underline" %>
             <% end %>
           </div>
           <div>
-            <h2>議題</h2>
+            <div class="font-bold text-xl">議題</div>
             <%= @debate.agenda %>
           </div>
         </div>
       </div>
 
       <%# 議論欄  %>
-      <h2>議論</h2>
+      <div class="font-bold text-xl">議論</div>
       <div id='conversations' class="w-full" >
-        <%= render partial: 'debates/conversation', collection: @conversations %>
+        <%# 議論Component %>
+        <% @conversations.each do |conversation| %>
+          <%= render(ConversationComponent.new(conversation: conversation)) %>
+        <% end %>
       </div>
 
       <%# comment欄、comment入力フォーム(議論終了後にのみ表示) conversationの下に表示する %>
       <% if @debate.status == "after_vote" %>
         <%# コメント欄 %>
-        <h2>コメント</h2>
-        <%= render partial: 'debates/comment', collection: @comments %>
+        <div class="font-bold text-xl">コメント</div>
+        <%# CommentComponent %>
+        <% @comments.each do |comment| %>
+          <%= render(CommentComponent.new(comment: comment)) %>
+        <% end %>
       <% end %>
 
-      <h2>
-      <%# js側で投票のステージを挿入、削除して管理する %>
-      <div id="debate_status">
-        <%= @debate.status %>
+      <div class="font-bold text-xl">
+        <%# js側で投票のステージを挿入、削除して管理する %>
+        <div id="debate_status">
+          <%= @debate.status %>
+        </div>
       </div>
-      </h2>
 
       <%# フッター %>
       <div class=" bottom-0 w-full text-center mb-6 sticky">

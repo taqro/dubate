@@ -1,2 +1,4 @@
-<h1> 議論の新規登録</h1>
-<%= render partial: 'form', locals: {debate: @debate} %>
+<div class="font-bold text-xl"> 議論の新規登録</div>
+<%# FormComponent %>
+<%= render(FormComponent.new(debate: @debate)) %>
+

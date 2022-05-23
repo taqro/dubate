@@ -101,4 +101,5 @@ gem 'rails-i18n'
 #devise-i18n（deviseの日本語化）
 gem 'devise-i18n'
 
-
+# view_component（viewのcomponent化）
+gem "view_component"
