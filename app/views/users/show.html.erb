@@ -11,7 +11,8 @@
         <div>
           <%# フォロー数、フォロワー数 %>
           <div class="stas">
-            <%= render 'shared/follow_stats' %>
+            <%# FollowStatsComponent %>
+            <%= render(FollowStatsComponent.new(user: @user)) %>
           </div>
 
           <%# ユーザーID %>
@@ -22,7 +23,8 @@
 
           <%# 勝敗数（それぞれを勝った議論一覧と負けた議論一覧へのリンクにする） %>
           <div class="stas">
-            <%= render 'shared/winorlose_stats' %>
+            <%# WinOrLoseStatsComponent %>
+            <%= render(WinOrLoseStatsComponent.new(user: @user)) %>
           </div>
 
           <%# フォロー関係 %>
