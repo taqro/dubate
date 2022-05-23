@@ -39,8 +39,11 @@ class DebatesController < ApplicationController
 
   def create
     debate = current_user.create_debates.build(debate_params)
-    debate.save!
-    redirect_to debates_path
+    if debate.save
+      redirect_to debates_path
+    else
+      render :new
+    end
   end
 
   def destroy

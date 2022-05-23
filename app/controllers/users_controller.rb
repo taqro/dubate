@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+
   #フォロー関連
   def following
     @title = "Following"
